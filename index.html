@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MLiMO — Machine Learning in Multi-Omics</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:          #04080F;
+      --bg2:         #080F1C;
+      --card:        #0C1525;
+      --card2:       #111D30;
+      --teal:        #00D4AA;
+      --teal2:       #00B4D8;
+      --teal-glow:   rgba(0,212,170,0.12);
+      --teal-border: rgba(0,212,170,0.22);
+      --text:        #E8EDF8;
+      --muted:       #7A8BA6;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Lora', Georgia, serif; line-height: 1.75; overflow-x: hidden; }
+
+    /* ─── NAV ────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.85rem 3rem;
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+    nav.scrolled { background: rgba(4,8,15,0.94); backdrop-filter: blur(18px); box-shadow: 0 1px 0 var(--teal-border); }
+    .nav-left { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+    .nav-badge { width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--teal); overflow: hidden; flex-shrink: 0; box-shadow: 0 0 10px rgba(0,212,170,0.28); }
+    .nav-badge img { width: 100%; height: 100%; object-fit: cover; }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900; color: var(--teal); letter-spacing: 0.04em; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--teal); }
+    .nav-cta { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); border: 1px solid var(--teal); padding: 0.4rem 1rem; border-radius: 2px; text-decoration: none; transition: background 0.2s, color 0.2s; }
+    .nav-cta:hover { background: var(--teal); color: var(--bg); }
+
+    /* ─── HERO ───────────────────────────────── */
+    #hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; padding: 8rem 2rem 6rem; }
+    #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0,212,170,0.05) 0%, transparent 70%),
+                  linear-gradient(180deg, rgba(4,8,15,0.2) 0%, rgba(4,8,15,0.55) 70%, rgba(4,8,15,1) 100%);
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 900px; display: flex; flex-direction: column; align-items: center; }
+
+    .hero-badge-wrap { margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
+    .hero-badge-ring { position: relative; display: inline-block; width: 128px; height: 128px; }
+    .hero-badge-ring::before {
+      content: ''; position: absolute; inset: -6px; border-radius: 50%;
+      border: 1.5px solid var(--teal);
+      box-shadow: 0 0 28px rgba(0,212,170,0.4), inset 0 0 24px rgba(0,212,170,0.07);
+      animation: ringPulse 3s ease-in-out infinite;
+    }
+    .hero-badge-ring::after { content: ''; position: absolute; inset: -14px; border-radius: 50%; border: 1px solid rgba(0,212,170,0.14); }
+    .hero-badge-img { width: 128px; height: 128px; border-radius: 50%; object-fit: cover; display: block; box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
+
+    .hero-tag { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--teal); margin-bottom: 1.2rem; opacity: 0; animation: fadeUp 0.8s 0.4s forwards; display: flex; align-items: center; gap: 0.8rem; justify-content: center; }
+    .hero-tag span { display: inline-block; width: 28px; height: 1px; background: var(--teal); }
+    h1.hero-title { font-family: 'Playfair Display', serif; font-size: clamp(4.5rem, 11vw, 9rem); font-weight: 900; line-height: 0.9; letter-spacing: -0.02em; color: #fff; opacity: 0; animation: fadeUp 0.9s 0.55s forwards; }
+    h1.hero-title em { font-style: italic; color: var(--teal); }
+    .hero-sub { font-size: clamp(0.98rem, 2vw, 1.18rem); color: var(--muted); max-width: 620px; margin: 1.8rem auto 0; font-style: italic; line-height: 1.8; opacity: 0; animation: fadeUp 0.9s 0.75s forwards; }
+    .hero-buttons { display: flex; gap: 1rem; justify-content: center; margin-top: 2.4rem; opacity: 0; animation: fadeUp 0.9s 0.95s forwards; }
+    .btn-primary { font-family: 'DM Mono', monospace; font-size: 0.73rem; letter-spacing: 0.12em; text-transform: uppercase; background: var(--teal); color: var(--bg); padding: 0.75rem 2rem; border-radius: 2px; text-decoration: none; font-weight: 500; transition: transform 0.2s, box-shadow 0.2s; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,212,170,0.35); }
+    .btn-outline { font-family: 'DM Mono', monospace; font-size: 0.73rem; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid var(--teal-border); color: var(--teal); padding: 0.75rem 2rem; border-radius: 2px; text-decoration: none; transition: background 0.2s, border-color 0.2s; }
+    .btn-outline:hover { background: var(--teal-glow); border-color: var(--teal); }
+    .hero-scroll-hint { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; opacity: 0; animation: fadeIn 1.2s 1.6s forwards; }
+    .hero-scroll-hint span { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+    .scroll-line { width: 1px; height: 44px; background: linear-gradient(to bottom, var(--teal), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+
+    /* ─── PHOTO STRIP ────────────────────────── */
+    #photo-strip { background: var(--bg2); padding: 0; border-top: 1px solid var(--teal-border); border-bottom: 1px solid var(--teal-border); overflow: hidden; position: relative; }
+    #photo-strip::before, #photo-strip::after { content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2; pointer-events: none; }
+    #photo-strip::before { left: 0; background: linear-gradient(to right, var(--bg2), transparent); }
+    #photo-strip::after  { right: 0; background: linear-gradient(to left, var(--bg2), transparent); }
+    .strip-track { display: flex; gap: 6px; padding: 6px 0; width: max-content; animation: stripScroll 34s linear infinite; }
+    .strip-track:hover { animation-play-state: paused; }
+    .strip-img { height: 200px; width: auto; object-fit: cover; border-radius: 3px; flex-shrink: 0; filter: grayscale(20%) brightness(0.82); transition: filter 0.4s; }
+    .strip-img:hover { filter: grayscale(0%) brightness(1); }
+
+    /* ─── SECTIONS ───────────────────────────── */
+    section { padding: 7rem 0; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2.5rem; }
+    .section-label { font-family: 'DM Mono', monospace; font-size: 0.66rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.8rem; }
+    .section-label::after { content: ''; flex: 1; max-width: 56px; height: 1px; background: var(--teal-border); }
+    h2.section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700; line-height: 1.15; color: #fff; margin-bottom: 1.2rem; }
+    h2.section-title em { font-style: italic; color: var(--teal); }
+    .section-desc { color: var(--muted); max-width: 560px; font-size: 1rem; }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .divider { width: 56px; height: 2px; background: linear-gradient(90deg, var(--teal), transparent); margin: 1.2rem 0 2.2rem; }
+
+    /* ─── NEWS ───────────────────────────────── */
+    #news { background: var(--bg); }
+    .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; margin-top: 3rem; }
+    .news-card { background: var(--card); border: 1px solid var(--teal-border); border-radius: 6px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; display: flex; flex-direction: column; }
+    .news-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.4), 0 0 0 1px var(--teal); }
+    .news-card-top { padding: 1.6rem 1.6rem 0; }
+    .news-date { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.7rem; }
+    .news-journal { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; background: rgba(0,212,170,0.1); border: 1px solid var(--teal-border); color: var(--teal); padding: 0.2rem 0.55rem; border-radius: 2px; margin-bottom: 0.9rem; }
+    .news-card h3 { font-family: 'Playfair Display', serif; font-size: 0.98rem; font-weight: 700; color: #E0E8F5; line-height: 1.45; margin-bottom: 0; }
+    .news-card p { font-size: 0.84rem; color: var(--muted); line-height: 1.7; padding: 0.8rem 1.6rem 1.4rem; flex: 1; }
+    .news-card-footer { border-top: 1px solid rgba(255,255,255,0.05); padding: 0.75rem 1.6rem; font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; color: var(--muted); margin-top: auto; }
+
+    /* ─── ABOUT ──────────────────────────────── */
+    #about { background: var(--bg2); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: 3.5rem; }
+    .about-text p { font-size: 1.05rem; color: #C8D4E5; margin-bottom: 1.2rem; line-height: 1.85; }
+    .about-text p strong { color: var(--teal); font-weight: 600; }
+    .about-img-wrap { position: relative; }
+    .about-img-wrap img { width: 100%; border-radius: 4px; box-shadow: 0 24px 64px rgba(0,0,0,0.5); }
+    .about-img-wrap::before { content: ''; position: absolute; inset: -12px -12px auto auto; width: 48px; height: 48px; border-top: 2px solid var(--teal); border-right: 2px solid var(--teal); }
+    .about-img-wrap::after  { content: ''; position: absolute; inset: auto auto -12px -12px; width: 48px; height: 48px; border-bottom: 2px solid var(--teal); border-left: 2px solid var(--teal); }
+    .stats-row { display: flex; gap: 2.5rem; margin-top: 2.5rem; flex-wrap: wrap; }
+    .stat { border-left: 2px solid var(--teal); padding-left: 1rem; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 900; color: #fff; line-height: 1; }
+    .stat-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.2rem; }
+
+    /* ─── RESEARCH ───────────────────────────── */
+    #research { background: var(--bg); }
+    .research-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; margin-top: 3.5rem; border: 1.5px solid var(--teal-border); border-radius: 6px; overflow: hidden; }
+    .research-card { background: var(--card); padding: 2.2rem; transition: background 0.3s; position: relative; overflow: hidden; }
+    .research-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 0% 0%, var(--teal-glow) 0%, transparent 60%); opacity: 0; transition: opacity 0.4s; }
+    .research-card:hover { background: var(--card2); }
+    .research-card:hover::before { opacity: 1; }
+    .research-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+    .research-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 0.7rem; }
+    .research-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+
+    /* ─── PROJECTS ───────────────────────────── */
+    #projects { background: var(--bg2); }
+    .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.4rem; margin-top: 3.5rem; }
+    .project-card { background: var(--card); border: 1px solid var(--teal-border); border-radius: 6px; padding: 1.8rem 2rem; transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; display: flex; flex-direction: column; }
+    .project-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.4), 0 0 0 1px var(--teal); border-color: var(--teal); }
+    .project-year { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.5rem; }
+    .project-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 0.4rem; }
+    .project-orgs { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 0.9rem; }
+    .project-card p { font-size: 0.87rem; color: #8A9BB0; line-height: 1.7; flex: 1; }
+    .project-links { display: flex; gap: 0.5rem; margin-top: 1.2rem; flex-wrap: wrap; }
+    .project-link { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); border: 1px solid var(--teal-border); padding: 0.28rem 0.7rem; border-radius: 2px; text-decoration: none; transition: background 0.2s; }
+    .project-link:hover { background: var(--teal-glow); }
+
+    /* ─── PUBLICATIONS ───────────────────────── */
+    #publications { background: var(--bg); }
+    .pub-list { margin-top: 3rem; }
+    .pub-year-group { margin-bottom: 3rem; }
+    .pub-year-label { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 900; color: var(--teal); margin-bottom: 1.2rem; opacity: 0.55; }
+    .pub-item { display: grid; grid-template-columns: 44px 1fr; gap: 0 1.4rem; align-items: start; padding: 1.2rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); transition: background 0.2s, padding 0.2s, margin 0.2s; border-radius: 4px; }
+    .pub-item:hover { background: var(--card); margin: 0 -1.5rem; padding: 1.2rem 1.5rem; border-bottom-color: transparent; }
+    .pub-num { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--teal); padding-top: 0.15rem; text-align: right; }
+    .pub-title { font-family: 'Playfair Display', serif; font-size: 0.97rem; font-weight: 700; color: #E0E8F5; margin-bottom: 0.28rem; line-height: 1.4; }
+    .pub-journal { color: var(--teal); font-style: italic; font-family: 'Lora', serif; font-size: 0.82rem; }
+    .pub-meta { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); line-height: 1.5; margin-top: 0.12rem; }
+
+    /* ─── PATENTS ────────────────────────────── */
+    #patents { background: var(--bg2); }
+    .patent-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+    .patent-card { background: var(--card); border-radius: 6px; border: 1px solid var(--teal-border); padding: 2rem; position: relative; overflow: hidden; }
+    .patent-card::after { content: '§'; position: absolute; right: 1.5rem; bottom: -0.5rem; font-size: 6rem; color: var(--teal); opacity: 0.04; font-family: 'Playfair Display', serif; font-weight: 900; line-height: 1; }
+    .patent-badge-pill { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(0,212,170,0.1); border: 1px solid var(--teal-border); color: var(--teal); font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.22rem 0.55rem; border-radius: 2px; margin-bottom: 1rem; }
+    .patent-card h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.4; }
+    .patent-num { font-family: 'DM Mono', monospace; font-size: 0.66rem; color: var(--muted); margin-bottom: 0.8rem; }
+    .patent-card p { font-size: 0.84rem; color: var(--muted); line-height: 1.7; }
+
+    /* ─── TEAM ───────────────────────────────── */
+    #team { background: var(--bg); }
+    .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.4rem; margin-top: 3.5rem; }
+    .team-card { border-radius: 6px; overflow: hidden; background: var(--card); border: 1px solid rgba(255,255,255,0.06); transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; }
+    .team-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.45); border-color: var(--teal-border); }
+    .team-photo { width: 100%; aspect-ratio: 1/1; object-fit: cover; object-position: top; display: block; filter: grayscale(25%); transition: filter 0.4s; }
+    .team-card:hover .team-photo { filter: grayscale(0%); }
+    .team-info { padding: 1.2rem; }
+    .team-name { font-family: 'Playfair Display', serif; font-size: 0.97rem; font-weight: 700; color: #fff; margin-bottom: 0.28rem; }
+    .team-role { font-family: 'DM Mono', monospace; font-size: 0.61rem; letter-spacing: 0.08em; color: var(--teal); text-transform: uppercase; }
+    .team-since { font-family: 'DM Mono', monospace; font-size: 0.59rem; color: var(--muted); margin-top: 0.2rem; }
+
+    /* ─── AFFILIATIONS ───────────────────────── */
+    #affiliations { background: var(--bg2); }
+    .affil-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+    .affil-card { background: var(--card); border: 1px solid var(--teal-border); border-radius: 6px; padding: 2rem; }
+    .affil-card h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+    .affil-meta { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--teal); margin-bottom: 0.7rem; letter-spacing: 0.08em; }
+    .affil-card p { font-size: 0.86rem; color: var(--muted); }
+    .affil-card a { font-family: 'DM Mono', monospace; font-size: 0.66rem; color: var(--teal); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem; margin-top: 0.8rem; }
+    .affil-card a:hover { text-decoration: underline; }
+
+    /* ─── TEACHING ───────────────────────────── */
+    #teaching { background: var(--bg); }
+    .teaching-card { background: var(--card); border: 1px solid var(--teal-border); border-radius: 6px; padding: 2.5rem; margin-top: 3rem; display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: start; }
+    .teaching-card h3 { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+    .teaching-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.75; }
+    .teaching-card a { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); border: 1px solid var(--teal-border); padding: 0.6rem 1.2rem; border-radius: 2px; text-decoration: none; white-space: nowrap; transition: background 0.2s; }
+    .teaching-card a:hover { background: var(--teal-glow); }
+
+    /* ─── FUNDING ────────────────────────────── */
+    #funding { background: var(--bg2); padding: 4rem 0; }
+    .funding-header { font-family: 'DM Mono', monospace; font-size: 0.66rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); text-align: center; margin-bottom: 2.5rem; display: flex; align-items: center; justify-content: center; gap: 1.2rem; }
+    .funding-header::before, .funding-header::after { content: ''; flex: 1; max-width: 80px; height: 1px; background: var(--teal-border); }
+    .funding-logos { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 2.5rem 4rem; }
+    .funding-logos img { height: 48px; width: auto; max-width: 160px; object-fit: contain; filter: grayscale(100%) brightness(2) opacity(0.42); transition: filter 0.35s; }
+    .funding-logos img:hover { filter: grayscale(0%) brightness(1) opacity(1); }
+
+    /* ─── CONTACT ────────────────────────────── */
+    #contact { background: var(--bg); }
+    .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3.5rem; }
+    .contact-block h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: #fff; margin-bottom: 1.2rem; }
+    .contact-email { font-size: 0.92rem; color: var(--teal); margin-bottom: 0.5rem; }
+    .contact-email a { color: inherit; text-decoration: none; }
+    .contact-email a:hover { text-decoration: underline; }
+    .github-link { display: inline-flex; align-items: center; gap: 0.6rem; font-family: 'DM Mono', monospace; font-size: 0.78rem; letter-spacing: 0.08em; color: var(--text); background: var(--card); border: 1px solid var(--teal-border); padding: 0.7rem 1.3rem; border-radius: 4px; text-decoration: none; margin-top: 0.6rem; transition: border-color 0.2s, background 0.2s; }
+    .github-link:hover { border-color: var(--teal); background: var(--card2); }
+    .github-link svg { width: 18px; height: 18px; fill: currentColor; }
+
+    /* ─── FOOTER ─────────────────────────────── */
+    footer { background: #020508; border-top: 1px solid rgba(255,255,255,0.04); padding: 2.5rem; text-align: center; }
+    footer p { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; color: var(--muted); }
+    footer span { color: var(--teal); }
+
+    /* ─── KEYFRAMES ──────────────────────────── */
+    @keyframes fadeUp  { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:none; } }
+    @keyframes fadeIn  { from { opacity:0; } to { opacity:1; } }
+    @keyframes scrollPulse { 0%,100%{opacity:.3;transform:scaleY(1);} 50%{opacity:1;transform:scaleY(1.15);} }
+    @keyframes ringPulse {
+      0%,100% { box-shadow: 0 0 20px rgba(0,212,170,.3), inset 0 0 20px rgba(0,212,170,.06); }
+      50%      { box-shadow: 0 0 42px rgba(0,212,170,.55), inset 0 0 30px rgba(0,212,170,.1); }
+    }
+    @keyframes stripScroll { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+    /* ─── RESPONSIVE ─────────────────────────── */
+    @media (max-width: 1024px) {
+      .research-grid { grid-template-columns: repeat(2,1fr); }
+      .team-grid { grid-template-columns: repeat(3,1fr); }
+      .news-grid { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links, .nav-cta { display: none; }
+      .about-grid, .projects-grid, .patent-cards, .affil-grid, .contact-inner { grid-template-columns: 1fr; }
+      .research-grid, .news-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: repeat(2,1fr); }
+      .teaching-card { grid-template-columns: 1fr; }
+      .stats-row { gap: 1.5rem; }
+      .strip-img { height: 140px; }
+    }
+    @media (max-width: 480px) {
+      .team-grid { grid-template-columns: 1fr; }
+      .hero-badge-ring, .hero-badge-img { width: 96px; height: 96px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─────────────────────────────────── -->
+<nav id="main-nav">
+  <a class="nav-left" href="#hero">
+    <div class="nav-badge">
+      <img src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_300,h_300,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/RGmY-tZORChqTR_A" alt="MLiMO badge"/>
+    </div>
+    <span class="nav-logo">MLiMO</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#news">News</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="https://github.com/morillalab" target="_blank">GitHub ↗</a>
+</nav>
+
+<!-- ─── HERO ─────────────────────────────────── -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge-wrap">
+      <div class="hero-badge-ring">
+        <img class="hero-badge-img"
+          src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_300,h_300,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/RGmY-tZORChqTR_A"
+          alt="MLiMO"/>
+      </div>
+    </div>
+    <p class="hero-tag"><span></span>Machine Learning in Multi-Omics<span></span></p>
+    <h1 class="hero-title">ML<em>i</em>MO</h1>
+    <p class="hero-sub">Harnessing topology, deep learning, and integrative multi-omics to unravel the complexity of biological systems — from tumour microenvironments to plant-virus interactions.</p>
+    <div class="hero-buttons">
+      <a class="btn-primary" href="#research">Explore Research</a>
+      <a class="btn-outline" href="#publications">Publications</a>
+    </div>
+  </div>
+  <div class="hero-scroll-hint"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<!-- ─── PHOTO STRIP ──────────────────────────── -->
+<div id="photo-strip">
+  <div class="strip-track">
+    <img class="strip-img" src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_400,c_fill/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/5-m9ZofxY2Em20sa" alt="Lab"/>
+    <img class="strip-img" src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_400,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/6CncKMETfhBCxiTL" alt="Kelly"/>
+    <img class="strip-img" src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_400,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/dCJ6ng4vbPaLBx_c" alt="Adryel"/>
+    <img class="strip-img" src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_400,c_fill/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/EEqjbGPzpikQ0Cln" alt="Research"/>
+    <img class="strip-img" src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_400,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/RUI3i3J3DpGiyj1u" alt="Melissa"/>
+    <img class="strip-img" src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_400,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/jrxG7dkx48PSFWMH" alt="Jose"/>
+    <img class="strip-img" src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_400,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/9mI1t1CrJsaVpBbA" alt="Ana"/>
+    <img class="strip-img" src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_400,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/5UdS8keS17__YVUm" alt="Amadou"/>
+    <img class="strip-img" src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_400,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/D2PHAnPu4h-MsijR" alt="Ali"/>
+    <!-- duplicate set for seamless loop -->
+    <img class="strip-img" src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_400,c_fill/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/5-m9ZofxY2Em20sa" alt="Lab"/>
+    <img class="strip-img" src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_400,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/6CncKMETfhBCxiTL" alt="Kelly"/>
+    <img class="strip-img" src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_400,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/dCJ6ng4vbPaLBx_c" alt="Adryel"/>
+    <img class="strip-img" src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_400,c_fill/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/EEqjbGPzpikQ0Cln" alt="Research"/>
+    <img class="strip-img" src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_400,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/RUI3i3J3DpGiyj1u" alt="Melissa"/>
+    <img class="strip-img" src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_400,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/jrxG7dkx48PSFWMH" alt="Jose"/>
+    <img class="strip-img" src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_400,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/9mI1t1CrJsaVpBbA" alt="Ana"/>
+    <img class="strip-img" src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_400,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/5UdS8keS17__YVUm" alt="Amadou"/>
+    <img class="strip-img" src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_400,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/D2PHAnPu4h-MsijR" alt="Ali"/>
+  </div>
+</div>
+
+<!-- ─── NEWS ─────────────────────────────────── -->
+<section id="news">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Latest updates</p>
+      <h2 class="section-title">Recent<br><em>highlights</em></h2>
+    </div>
+    <div class="news-grid">
+
+      <div class="news-card reveal">
+        <div class="news-card-top">
+          <div class="news-date">April 2026</div>
+          <span class="news-journal">PLOS Digital Health</span>
+          <h3>Early Identification of High-Risk Individuals for Mortality after Lung Transplantation</h3>
+        </div>
+        <p>New publication on topological feature engineering for retrospective cohort risk stratification following lung transplantation. Tran-Dinh, Atchadé, Tanaka, Morilla et al.</p>
+        <div class="news-card-footer">New publication · 2026</div>
+      </div>
+
+      <div class="news-card reveal">
+        <div class="news-card-top">
+          <div class="news-date">March 2026</div>
+          <span class="news-journal">BMC Genomics</span>
+          <h3>Multimodal Learning Reveals Plants' Hidden Sensory Integration Logic</h3>
+        </div>
+        <p>Study combining multimodal deep learning with plant transcriptomics to uncover how plants integrate environmental signals at the molecular level. Vomo-Donfack, León Morcillo, Morilla et al.</p>
+        <div class="news-card-footer">New publication · 2026</div>
+      </div>
+
+      <div class="news-card reveal">
+        <div class="news-card-top">
+          <div class="news-date">March 2026</div>
+          <span class="news-journal">arXiv 2603.04323</span>
+          <h3>PTOPOFL: Privacy-Preserving Personalised Federated Learning via Persistent Homology</h3>
+        </div>
+        <p>New preprint introducing a federated learning framework grounded in persistent homology for privacy-preserving personalised models. <a href="https://arxiv.org/abs/2603.04323" target="_blank" style="color:var(--teal);">View ↗</a></p>
+        <div class="news-card-footer">Preprint · 2026</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABOUT ────────────────────────────────── -->
+<section id="about">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">About the group</p>
+      <h2 class="section-title">Decoding life's<br><em>molecular networks</em></h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>At <strong>MLiMO</strong>, we harness advanced machine learning and integrative multi-omics approaches to unravel the complexity of biological systems. Our interdisciplinary research bridges fundamental mathematics with life sciences.</p>
+        <p>From topological data analysis applied to tumour microenvironments to deep learning models for plant-virus interactions — we develop robust, data-driven methodologies that translate molecular insights into advances for <strong>precision medicine</strong> and <strong>sustainable agriculture</strong>.</p>
+        <div class="stats-row">
+          <div class="stat"><div class="stat-num">27+</div><div class="stat-label">Publications</div></div>
+          <div class="stat"><div class="stat-num">8</div><div class="stat-label">Active Projects</div></div>
+          <div class="stat"><div class="stat-num">2</div><div class="stat-label">Patents</div></div>
+          <div class="stat"><div class="stat-num">7</div><div class="stat-label">Team Members</div></div>
+        </div>
+      </div>
+      <div class="about-img-wrap reveal">
+        <img src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_1200,h_900/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/EEqjbGPzpikQ0Cln" alt="MLiMO Research"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── RESEARCH ─────────────────────────────── -->
+<section id="research">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Research areas</p>
+      <h2 class="section-title">Our scientific<br><em>focus</em></h2>
+    </div>
+    <div class="research-grid reveal">
+      <div class="research-card"><span class="research-icon">🧠</span><h3>Machine Learning &amp; Deep Learning</h3><p>Developing and applying cutting-edge algorithms for biological data analysis and predictive modelling, from transformers to graph neural networks.</p></div>
+      <div class="research-card"><span class="research-icon">🔷</span><h3>Topological Machine Learning</h3><p>Exploring topological and geometric approaches — persistent homology, manifold learning — to unveil robust patterns in high-dimensional multiomics data.</p></div>
+      <div class="research-card"><span class="research-icon">🧬</span><h3>Multiomics Integration</h3><p>Combining genomics, transcriptomics, proteomics, and spatial data to achieve a holistic, systems-level view of biological complexity.</p></div>
+      <div class="research-card"><span class="research-icon">🔬</span><h3>Tumour Microenvironments</h3><p>Investigating tumour–host interaction dynamics, focusing on immune modulation, spatial heterogeneity, and clinical risk stratification.</p></div>
+      <div class="research-card"><span class="research-icon">💻</span><h3>Computational Biology</h3><p>Leveraging statistical, computational, and AI-driven methods to uncover mechanistic insights across human and plant disease systems.</p></div>
+      <div class="research-card"><span class="research-icon">🌱</span><h3>Translational Applications</h3><p>Bridging discoveries to clinical outcomes and sustainable agricultural practices — from precision oncology to plant-pathogen resistance.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROJECTS ──────────────────────────────── -->
+<section id="projects">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Active projects</p>
+      <h2 class="section-title">What we're<br><em>building</em></h2>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card reveal"><div class="project-year">2026 — Present</div><h3>Transcend-id</h3><div class="project-orgs">Integrative Mathematics &amp; Biology</div><p>Approches intégratives des mathématiques (AI), de l'informatique et de la biologie pour la modélisation de systèmes complexes.</p><div class="project-links"></div></div>
+      <div class="project-card reveal"><div class="project-year">2025 — Present</div><h3>MMD-LLC</h3><div class="project-orgs">Infibrex · Université Paris Cité</div><p>Modélisation multimodale et dynamique de l'évolution de la Leucémie Lymphoïde Chronique — multimodal dynamic modelling of CLL evolution.</p><div class="project-links"></div></div>
+      <div class="project-card reveal"><div class="project-year">2024 — Present</div><h3>Polygenic Deep Transport</h3><div class="project-orgs">CNRS · LAGA · MASCOT · IHSM · CSIC</div><p>Research on polygenic inheritance in cancer, inflammatory, and cardiovascular diseases using topological deep learning and optimal transport.</p><div class="project-links"><a class="project-link" href="https://github.com/MorillaLab/PolygenicDeepTransport" target="_blank">↗ GitHub</a></div></div>
+      <div class="project-card reveal"><div class="project-year">2023 — Present</div><h3>S²-PepAnalyst</h3><div class="project-orgs">CNRS · UMA · CSIC</div><p>Advanced web-based tool to predict and classify small signalling peptides (SSPs) in plants, integrating ML with plant-specific datasets.</p><div class="project-links"><a class="project-link" href="https://www.s2-pepanalyst.uma.es" target="_blank">↗ Webtool</a><a class="project-link" href="https://www.biorxiv.org/content/10.1101/2024.08.02.606319v2.abstract" target="_blank">↗ Article</a><a class="project-link" href="https://github.com/MorillaLab/s2-PEPANALYST" target="_blank">↗ Code</a></div></div>
+      <div class="project-card reveal"><div class="project-year">2023 — Present</div><h3>Topo-Spatial-Transcriptomics-TYLCV</h3><div class="project-orgs">UMA · CSIC · IHSM</div><p>Spatial transcriptomics analysis of TYLCV virus in tomato using manifolds integration and topological machine learning.</p><div class="project-links"><a class="project-link" href="https://github.com/MorillaLab/topo-spatial-transcriptomics-tylcv" target="_blank">↗ GitHub</a></div></div>
+      <div class="project-card reveal"><div class="project-year">2022 — Present</div><h3>TopoAttention</h3><div class="project-orgs">CNRS · LAGA · Université Sorbonne Paris Nord</div><p>ML framework enhancing lung transplantation mortality risk prediction by integrating topological data analysis with transformer architectures.</p><div class="project-links"><a class="project-link" href="https://github.com/MorillaLab/TopoTransformers" target="_blank">↗ Code</a></div></div>
+      <div class="project-card reveal"><div class="project-year">2022 — Present</div><h3>GeoTop</h3><div class="project-orgs">CNRS · LAGA · MAP5 · IHSM</div><p>Computational framework for image classification integrating geometric and topological data analysis, applied to biological multiomics datasets.</p><div class="project-links"><a class="project-link" href="https://arxiv.org/abs/2311.16157" target="_blank">↗ Article</a><a class="project-link" href="https://github.com/MorillaLab/GeoTop" target="_blank">↗ Code</a></div></div>
+      <div class="project-card reveal"><div class="project-year">2022 — Present</div><h3>TaelCore</h3><div class="project-orgs">CNRS · LAGA · Université Sorbonne Paris Nord</div><p>Novel dimensionality reduction integrating topological data analysis with ML for enhanced predictive modelling in biomedical contexts.</p><div class="project-links"><a class="project-link" href="https://pypi.org/project/Taelcore/" target="_blank">↗ PyPI</a><a class="project-link" href="https://www.sciencedirect.com/science/article/pii/S0010482524000532" target="_blank">↗ Article</a><a class="project-link" href="https://github.com/MorillaLab/Taelcore" target="_blank">↗ Code</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PUBLICATIONS ──────────────────────────── -->
+<section id="publications">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Scientific output</p>
+      <h2 class="section-title">Selected<br><em>publications</em></h2>
+      <p class="section-desc">27+ peer-reviewed articles across machine learning, mathematical biology, and multi-omics.</p>
+    </div>
+    <div class="pub-list">
+      <div class="pub-year-group reveal">
+        <div class="pub-year-label">2026</div>
+        <div class="pub-item"><div class="pub-num">01</div><div class="pub-content"><div class="pub-title">Early Identification of High-Risk Individuals for Mortality after Lung Transplantation: A Retrospective Cohort Study with Topological Feature Engineering</div><div class="pub-journal">PLOS Digital Health</div><div class="pub-meta">Tran-Dinh, Atchadé, Tanaka, Lortat-Jacob, Castier, Mal, Messika, Mordant, Montravers, Morilla</div></div></div>
+        <div class="pub-item"><div class="pub-num">02</div><div class="pub-content"><div class="pub-title">Multimodal Learning Reveals Plants' Hidden Sensory Integration Logic</div><div class="pub-journal">BMC Genomics</div><div class="pub-meta">Vomo-Donfack, León Morcillo, Ginot, Doblas, Morilla</div></div></div>
+        <div class="pub-item"><div class="pub-num">03</div><div class="pub-content"><div class="pub-title">S²-PepAnalyst: A Web Tool for Predicting Plant Small Signalling Peptides</div><div class="pub-journal">Plant Biotechnology Journal</div><div class="pub-meta">Vomo-Donfack, Abaach, Luna, Ginot, Doblas, Morilla</div></div></div>
+        <div class="pub-item"><div class="pub-num">04</div><div class="pub-content"><div class="pub-title">PTOPOFL: Privacy-Preserving Personalised Federated Learning via Persistent Homology</div><div class="pub-journal">arXiv 2603.04323</div><div class="pub-meta">Vomo-Donfack, Hoszu, Ginot, Morilla &nbsp;·&nbsp; <a href="https://arxiv.org/abs/2603.04323" target="_blank" style="color:var(--teal);">View ↗</a></div></div></div>
+      </div>
+      <div class="pub-year-group reveal">
+        <div class="pub-year-label">2025</div>
+        <div class="pub-item"><div class="pub-num">05</div><div class="pub-content"><div class="pub-title">Arabidopsis lines with modified ascorbate concentrations reveal a link between ascorbate and auxin biosynthesis</div><div class="pub-journal">Plant Physiology</div><div class="pub-meta">Fenech, Zulian, Moya-Cuevas, Arnaud, Morilla, Smirnoff, Botella, Stepanova, Alonso, Martin-Pizarro et al.</div></div></div>
+      </div>
+      <div class="pub-year-group reveal">
+        <div class="pub-year-label">2024</div>
+        <div class="pub-item"><div class="pub-num">06</div><div class="pub-content"><div class="pub-title">Novel dimensionality reduction method, Taelcore, enhances lung transplantation risk prediction</div><div class="pub-journal">Computers in Biology and Medicine</div><div class="pub-meta">Gouiaa, Vomo-Donfack, Tran-Dinh, Morilla</div></div></div>
+      </div>
+      <div class="pub-year-group reveal">
+        <div class="pub-year-label">2023</div>
+        <div class="pub-item"><div class="pub-num">07</div><div class="pub-content"><div class="pub-title">GeoTop: Advancing Image Classification with Geometric-Topological Analysis</div><div class="pub-journal">arXiv preprint 2311.16157</div><div class="pub-meta">Abaach, Morilla</div></div></div>
+        <div class="pub-item"><div class="pub-num">08</div><div class="pub-content"><div class="pub-title">The Genotypic Imperative: Unraveling Disease-Permittivity in Functional Modules of Complex Diseases</div><div class="pub-journal">Mathematics</div><div class="pub-meta">Kaba, Vomo-Donfack, Morilla</div></div></div>
+        <div class="pub-item"><div class="pub-num">09</div><div class="pub-content"><div class="pub-title">Plasma proteome dynamics of COVID-19 severity learnt by a graph convolutional network of multi-scale topology</div><div class="pub-journal">Life Science Alliance</div><div class="pub-meta">Gauthier, Tran-Dinh, Morilla</div></div></div>
+      </div>
+      <div class="pub-year-group reveal">
+        <div class="pub-year-label">2022</div>
+        <div class="pub-item"><div class="pub-num">10</div><div class="pub-content"><div class="pub-title">Metabolic reprogramming of bone marrow stromal cells in chronic lymphocytic leukemia</div><div class="pub-journal">Blood</div><div class="pub-meta">Lazarian, Ferreira, Morilla, Saindoy, Bisio, Dulphy, Balabanian, Thieblemont, Varin-Blank, Ledoux et al.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PATENTS ───────────────────────────────── -->
+<section id="patents">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Intellectual property</p>
+      <h2 class="section-title">Patents &amp;<br><em>innovation</em></h2>
+    </div>
+    <div class="patent-cards reveal">
+      <div class="patent-card">
+        <div class="patent-badge-pill">✓ Issued · Mar 2022</div>
+        <h3>Methods for predicting acute severe colitis treatment response (Kits)</h3>
+        <div class="patent-num">Patent No. 17340534</div>
+        <p>First prediction tool for responses to first- and second-line treatments in acute severe ulcerative colitis. One classifier of fifteen colonic microRNAs plus five biological values at admission achieving 96.6% prediction accuracy for discriminating steroid responders from non-responders.</p>
+        <div class="pub-meta" style="margin-top:0.8rem;">Ogier-Denis, Treton, Bouhnik, Morilla, Laharie</div>
+      </div>
+      <div class="patent-card">
+        <div class="patent-badge-pill">✓ Issued · Jul 2021</div>
+        <h3>Methods for predicting acute severe colitis treatment response (DeepCol Software)</h3>
+        <div class="patent-num">Patent No. US11060147B2</div>
+        <p>DeepCol — an AI-driven method developed by Dr. Ian Morilla for prediction of acute severe colitis treatment response using deep learning.</p>
+        <div class="pub-meta" style="margin-top:0.8rem;">Ogier-Denis, Tréton, Bouhnik, Morilla</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TEAM ─────────────────────────────────── -->
+<section id="team">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">The people</p>
+      <h2 class="section-title">Meet our<br><em>team</em></h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal"><img class="team-photo" src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_600,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/6CncKMETfhBCxiTL" alt="Kelly Vomo-Donfack"/><div class="team-info"><div class="team-name">Kelly Vomo-Donfack</div><div class="team-role">PhD Researcher</div><div class="team-since">Since Sept. 2023</div></div></div>
+      <div class="team-card reveal"><img class="team-photo" src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_600,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/dCJ6ng4vbPaLBx_c" alt="Adryel Hoszu"/><div class="team-info"><div class="team-name">Adryel Hoszu</div><div class="team-role">PhD Researcher</div><div class="team-since">Since Apr. 2026</div></div></div>
+      <div class="team-card reveal"><img class="team-photo" src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_600,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/RUI3i3J3DpGiyj1u" alt="Melissa Aberbache"/><div class="team-info"><div class="team-name">Melissa Aberbache</div><div class="team-role">Bioinformatics &amp; AI Technician</div><div class="team-since">Since Jan. 2026</div></div></div>
+      <div class="team-card reveal"><img class="team-photo" src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_600,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/jrxG7dkx48PSFWMH" alt="José A. Montano"/><div class="team-info"><div class="team-name">José A. Montano</div><div class="team-role">Molecular Biology Technician</div><div class="team-since">Since Jun. 2025</div></div></div>
+      <div class="team-card reveal"><img class="team-photo" src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_600,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/9mI1t1CrJsaVpBbA" alt="Ana M. Luna"/><div class="team-info"><div class="team-name">Ana M. Luna</div><div class="team-role">Molecular Biology Technician</div><div class="team-since">Since 2023</div></div></div>
+      <div class="team-card reveal"><img class="team-photo" src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_600,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/5UdS8keS17__YVUm" alt="Amadou Diallo"/><div class="team-info"><div class="team-name">Amadou Diallo</div><div class="team-role">M2 — Topo. Deep Learning (CLL)</div><div class="team-since">Since Apr. 2026</div></div></div>
+      <div class="team-card reveal"><img class="team-photo" src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_600,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/D2PHAnPu4h-MsijR" alt="Ali Cantez"/><div class="team-info"><div class="team-name">Ali Cantez</div><div class="team-role">M2 — AI Plant-Virus Modelling</div><div class="team-since">Since Apr. 2026</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── AFFILIATIONS ──────────────────────────── -->
+<section id="affiliations">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Institutional ties</p>
+      <h2 class="section-title">Affiliations &amp;<br><em>partnerships</em></h2>
+    </div>
+    <div class="affil-grid reveal">
+      <div class="affil-card">
+        <h3>Instituto de Hortofruticultura Subtropical y Mediterránea "La Mayora"</h3>
+        <div class="affil-meta">UMA–CSIC · Málaga, España · 2023–present</div>
+        <p>Bulevar Louis Pasteur, 49. 29010 Málaga. MLiMO plant-virus interaction research hub.</p>
+      </div>
+      <div class="affil-card">
+        <h3>Laboratoire Analyse, Géométrie et Applications (LAGA) – Institut Galilée</h3>
+        <div class="affil-meta">CNRS · Université Sorbonne Paris Nord · 2018–present</div>
+        <p>99 avenue Jean Baptiste Clément, 93430 Villetaneuse. Équipe Mathématiques pour la Biologie et les Images (MBI).</p>
+        <a href="https://www.math.univ-paris13.fr/accueil/equipes/mbi/" target="_blank">Visit MBI team ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TEACHING ──────────────────────────────── -->
+<section id="teaching">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Education</p>
+      <h2 class="section-title">Teaching &amp;<br><em>courses</em></h2>
+    </div>
+    <div class="teaching-card reveal">
+      <div>
+        <p class="section-label" style="margin-bottom:0.4rem;">2021 — Present · Université Sorbonne Paris Nord</p>
+        <h3>Master de Mathématiques de Données et d'IA</h3>
+        <div class="divider"></div>
+        <p>Introduction à l'Analyse Topologique des Données (TDA) — mettant l'accent sur l'homologie persistante et ses applications en biologie computationnelle. Applications concrètes: reconnaissance de formes, classification de neurones et bactéries par spectroscopie moléculaire, identification de formes de cancer par IRM, en utilisant des approches d'IA avancées.</p>
+      </div>
+      <a href="https://www.math.univ-paris13.fr/masters/M2_TDA.html" target="_blank">View Master ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FUNDING ───────────────────────────────── -->
+<section id="funding">
+  <div class="container">
+    <div class="funding-header">Funding support</div>
+    <div class="funding-logos reveal">
+      <img src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_1200,h_412/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/owFE_gwpfejJHfPf" alt="Funder 1"/>
+      <img src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_1200,h_472/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/B4ZGHBhjEnJlpAOb" alt="Funder 2"/>
+      <img src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_1200,h_904/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/L8UAYgE1LBaeMe3d" alt="Funder 3"/>
+      <img src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_1200,h_574/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/d59SDgpzfsb_MXNJ" alt="Funder 4"/>
+      <img src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_1200,h_362/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/xwNIv2kdffApWTYt" alt="Funder 5"/>
+      <img src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_1200,h_460/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/m6y-40cIbB6WMsDS" alt="Funder 6"/>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ───────────────────────────────── -->
+<section id="contact">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Get in touch</p>
+      <h2 class="section-title">Contact<br><em>us</em></h2>
+    </div>
+    <div class="contact-inner">
+      <div class="contact-block reveal">
+        <h3>Email</h3>
+        <div class="contact-email"><a href="mailto:ian.morilla@ihsm.uma-csic.es">ian.morilla@ihsm.uma-csic.es</a></div>
+        <div class="contact-email"><a href="mailto:morilla@math.univ-paris13.fr">morilla@math.univ-paris13.fr</a></div>
+        <br/>
+        <a class="github-link" href="https://github.com/morillalab" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          github.com/morillalab
+        </a>
+      </div>
+      <div class="contact-block reveal">
+        <h3>Locations</h3>
+        <p style="font-size:.9rem;color:var(--muted);margin-bottom:1.2rem;"><strong style="color:var(--text);">Spain —</strong><br/>IHSM La Mayora, Bulevar Louis Pasteur 49<br/>29010 Málaga, España</p>
+        <p style="font-size:.9rem;color:var(--muted);"><strong style="color:var(--text);">France —</strong><br/>LAGA – Institut Galilée<br/>99 av. Jean Baptiste Clément<br/>93430 Villetaneuse, Paris</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────── -->
+<footer>
+  <p>© 2026 <span>MLiMO</span> — Machine Learning in Multi-Omics · MorillaLab · All rights reserved</p>
+</footer>
+
+<script>
+/* ── CANVAS ANIMATION ─────────────────────────── */
+const canvas = document.getElementById('hero-canvas');
+const ctx    = canvas.getContext('2d');
+function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resize(); window.addEventListener('resize', resize);
+
+class Node {
+  constructor() { this.reset(); }
+  reset() {
+    this.x  = Math.random() * canvas.width;
+    this.y  = Math.random() * canvas.height;
+    this.vx = (Math.random() - 0.5) * 0.3;
+    this.vy = (Math.random() - 0.5) * 0.3;
+    this.r  = Math.random() * 2.2 + 0.8;
+    this.p  = Math.random() * Math.PI * 2;
+    this.ps = 0.014 + Math.random() * 0.014;
+  }
+  step() {
+    this.x += this.vx; this.y += this.vy; this.p += this.ps;
+    if (this.x < 0 || this.x > canvas.width)  this.vx *= -1;
+    if (this.y < 0 || this.y > canvas.height)  this.vy *= -1;
+  }
+  draw() {
+    const g = (Math.sin(this.p) + 1) / 2;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r + g * 1.2, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(0,212,170,${0.35 + g * 0.6})`;
+    ctx.fill();
+  }
+}
+const nodes = Array.from({ length: 65 }, () => new Node());
+function frame() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
+      const d  = Math.sqrt(dx*dx + dy*dy);
+      if (d < 140) {
+        const a = (1 - d / 140) * 0.3;
+        const gr = ctx.createLinearGradient(nodes[i].x, nodes[i].y, nodes[j].x, nodes[j].y);
+        gr.addColorStop(0, `rgba(0,212,170,${a})`);
+        gr.addColorStop(1, `rgba(0,180,216,${a})`);
+        ctx.beginPath(); ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y);
+        ctx.strokeStyle = gr; ctx.lineWidth = 0.7; ctx.stroke();
+      }
+    }
+  }
+  nodes.forEach(n => { n.step(); n.draw(); });
+  requestAnimationFrame(frame);
+}
+frame();
+
+/* ── NAV SCROLL ──────────────────────────────── */
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
+
+/* ── REVEAL ON SCROLL ────────────────────────── */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const siblings = [...e.target.parentElement.querySelectorAll('.reveal')];
+    setTimeout(() => e.target.classList.add('visible'), siblings.indexOf(e.target) * 85);
+    io.unobserve(e.target);
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(r => io.observe(r));
+</script>
+</body>
+</html>
