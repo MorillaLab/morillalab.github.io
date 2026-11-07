@@ -14,8 +14,10 @@
 <meta property="og:url" content="https://morillalab.github.io/">
 <meta property="og:title" content="Morilla Lab (MLiMO): machine learning in multi-omics">
 <meta property="og:description" content="Topology, deep learning and optimal transport for biological data, from lung transplantation and leukaemia to tomato viruses and plant signalling peptides. Málaga and Paris.">
+<meta property="og:image" content="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_300,h_300,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/RGmY-tZORChqTR_A">
 <meta name="twitter:card" content="summary">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B7A6E'/%3E%3Crect x='6' y='8' width='20' height='3.2' rx='1.6' fill='%23fff'/%3E%3Crect x='6' y='14.4' width='13' height='3.2' rx='1.6' fill='%23fff'/%3E%3Crect x='12' y='20.8' width='14' height='3.2' rx='1.6' fill='%23F7B6CE'/%3E%3C/svg%3E">
+<link rel="icon" href="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_300,h_300,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/RGmY-tZORChqTR_A">
+<link rel="apple-touch-icon" href="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_300,h_300,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/RGmY-tZORChqTR_A">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://res.cloudinary.com">
@@ -27,6 +29,7 @@
   "name": "Morilla Lab",
   "alternateName": "MLiMO, Machine Learning in Multi-Omics",
   "url": "https://morillalab.github.io/",
+  "logo": "https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_300,h_300,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/RGmY-tZORChqTR_A",
   "sameAs": ["https://github.com/morillalab"],
   "member": [{
     "@type": "Person",
@@ -156,7 +159,7 @@ sub { font-size: 0.7em; line-height: 0; }
 .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 3.75rem; }
 .brand { display: inline-flex; align-items: center; gap: 0.65rem; color: var(--ink); text-decoration: none; }
 .brand:hover { color: var(--ink); }
-.brand-mark { width: 26px; height: 26px; flex: none; }
+.brand-mark { width: 30px; height: 30px; flex: none; border-radius: 50%; object-fit: cover; background: var(--plate); }
 .brand-name { font-weight: 600; font-size: 1.25rem; letter-spacing: -0.005em; }
 .brand-sub { font-family: var(--sans); font-size: 0.8125rem; color: var(--ink-3); padding-left: 0.65rem; border-left: 1px solid var(--rule); line-height: 1.2; }
 .site-nav ul { list-style: none; display: flex; gap: clamp(0.9rem, 2vw, 1.75rem); }
@@ -282,7 +285,7 @@ a.pub-title:hover { color: var(--teal-strong); text-decoration-color: currentCol
 @media (max-width: 560px) { .year-group { grid-template-columns: 1fr; gap: 0.5rem; } }
 
 /* Team */
-.pi { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: clamp(1.25rem, 3vw, 2.25rem); align-items: start; margin-bottom: 3rem; }
+.pi { margin-bottom: 3rem; }
 .pi h3 { font-size: 1.5rem; }
 .pi .role { font-family: var(--sans); color: var(--ink-2); font-size: 1rem; margin: 0.2rem 0 0.9rem; }
 .pi p { max-width: 38em; }
@@ -294,8 +297,6 @@ a.pub-title:hover { color: var(--teal-strong); text-decoration-color: currentCol
 .person p { margin: 0.15rem 0 0; font-family: var(--sans); font-size: 0.9375rem; line-height: 1.45; color: var(--ink-2); }
 .person .since { color: var(--ink-3); }
 @media (max-width: 560px) {
-  .pi { grid-template-columns: 1fr; }
-  .pi .avatar { width: 9rem; }
   .people { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 1rem; }
 }
 
@@ -352,12 +353,7 @@ a.pub-title:hover { color: var(--teal-strong); text-decoration-color: currentCol
 <header class="site-header">
   <div class="wrap header-inner">
     <a class="brand" href="#top">
-      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-        <rect width="32" height="32" rx="7" fill="#0B7A6E"/>
-        <rect x="6" y="8" width="20" height="3.2" rx="1.6" fill="#FFFFFF"/>
-        <rect x="6" y="14.4" width="13" height="3.2" rx="1.6" fill="#FFFFFF"/>
-        <rect x="12" y="20.8" width="14" height="3.2" rx="1.6" fill="#F7B6CE"/>
-      </svg>
+      <img class="brand-mark" src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_300,h_300,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/RGmY-tZORChqTR_A" alt="" width="30" height="30" decoding="async" onerror="this.remove()">
       <span class="brand-name">Morilla Lab</span>
       <span class="brand-sub">MLiMO</span>
     </a>
@@ -699,7 +695,7 @@ a.pub-title:hover { color: var(--teal-strong); text-decoration-color: currentCol
     <div class="section-head"><h2 id="team-title">Team</h2></div>
     <div class="section-body">
       <div class="pi">
-        <div class="avatar" data-initials="IM"><img src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_400,h_400,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/RGmY-tZORChqTR_A" alt="" width="400" height="400" loading="lazy" decoding="async" onerror="this.remove()"></div>
+        <!-- To add a portrait of Ian Morilla, copy an .avatar block from the team members below and put it here. -->
         <div>
           <h3>Ian Morilla</h3>
           <p class="role">Principal investigator</p>
