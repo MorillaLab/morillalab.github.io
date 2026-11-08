@@ -445,7 +445,7 @@ a.pub-title:hover { text-decoration: underline; text-decoration-thickness: 2px; 
         <div class="step-text">
           <h2><span class="key" aria-hidden="true"></span>Plant biology</h2>
           <p>At IHSM La Mayora we bring the same methods to plants: a cell-type-annotated spatial atlas of tomato leaves infected by tomato yellow leaf curl virus (TYLCV), prediction of small signalling peptides with S²-PepAnalyst, and multimodal models of how tomato roots integrate signals from fungal symbionts.</p>
-          <p class="related">Projects: <a href="#p-tylcv">tylcv-tomato-visium</a>, <a href="#p-s2pep">S²-PepAnalyst</a>.</p>
+          <p class="related">Projects: <a href="#p-tylcv">tylcv-tomato-visium</a>, <a href="#p-plantag">PlantAG</a>, <a href="#p-s2pep">S²-PepAnalyst</a>.</p>
         </div>
       </div>
     </article>
@@ -482,7 +482,7 @@ a.pub-title:hover { text-decoration: underline; text-decoration-thickness: 2px; 
         <time datetime="2026-03">March 2026</time>
         <div>
           <p>Paper in <i>BMC Genomics</i>: multimodal learning shows how fungal symbionts reprogram the way tomato roots integrate sensory signals.</p>
-          <p class="links"><a href="https://doi.org/10.1101/2025.07.25.666865">Preprint</a><a href="https://github.com/MorillaLab/CoMM-BIP">Code</a></p>
+          <p class="links"><a href="https://doi.org/10.1186/s12864-026-12624-y">Read the paper</a><a href="https://github.com/MorillaLab/CoMM-BIP">Code</a></p>
         </div>
       </li>
       <li data-t="topo">
@@ -535,9 +535,17 @@ a.pub-title:hover { text-decoration: underline; text-decoration-thickness: 2px; 
         <h3>Polygenic Deep Transport</h3>
         <p class="meta">2024–present</p>
         <p class="tags"><span data-t="health">Human disease</span><span data-t="topo">Topology &amp; ML</span></p>
-        <p>Topological deep learning and optimal transport to study polygenic inheritance in cancer, inflammatory and cardiovascular disease.</p>
+        <p>Topological deep learning and optimal transport to study polygenic inheritance in cancer, inflammatory and cardiovascular disease. Its code, PolyCLIP-T, combines contrastive learning with topology to find coherent groups of low-penetrance variants in families with multimorbid disorders.</p>
         <p class="partners">With CNRS, LAGA, MASCOT, IHSM and CSIC</p>
-        <!-- github.com/MorillaLab/PolygenicDeepTransport returns 404 (private or renamed). Add the link once the repository is public. -->
+        <p class="links"><a href="https://github.com/MorillaLab/PolyCLIP-T">Code</a></p>
+      </li>
+      <li class="item" id="p-plantag" data-themes="plants topo" data-t="plants">
+        <div class="plate" data-shape="leaf" data-pattern="hex" data-zoom="1.0" data-rot="-4" aria-hidden="true"></div>
+        <h3>PlantAG</h3>
+        <p class="meta">2024–present</p>
+        <p class="tags"><span data-t="plants">Plant biology</span><span data-t="topo">Topology &amp; ML</span></p>
+        <p>Plant Tissue Annotation via Graph Topology. It assigns cell types to plant spatial-transcriptomics spots without a single-cell reference, describing each spot by the shape of the expression landscape around it (persistent homology) and learning the types with a graph convolutional network. Built for the tylcv-tomato-visium atlas.</p>
+        <p class="links"><a href="https://github.com/MorillaLab/PlantAG">Code</a><a href="https://doi.org/10.5281/zenodo.23664403">Zenodo archive</a></p>
       </li>
       <li class="item" id="p-s2pep" data-themes="plants" data-t="plants">
         <div class="plate" data-shape="leaf" data-seed="13" data-zoom="1.0" data-rot="10" aria-hidden="true"></div>
@@ -546,14 +554,14 @@ a.pub-title:hover { text-decoration: underline; text-decoration-thickness: 2px; 
         <p class="tags"><span data-t="plants">Plant biology</span></p>
         <p>A web tool that predicts and classifies small signalling peptides in plants, combining machine learning with plant-specific datasets.</p>
         <p class="partners">With CNRS, UMA and CSIC</p>
-        <p class="links"><a href="https://www.s2-pepanalyst.uma.es">Open the web tool</a><a href="https://www.biorxiv.org/content/10.1101/2024.08.02.606319v2.abstract">Preprint</a><a href="https://github.com/MorillaLab/s2-PEPANALYST">Code</a></p>
+        <p class="links"><a href="https://www.s2-pepanalyst.uma.es">Open the web tool</a><a href="https://doi.org/10.1111/pbi.70536">Paper</a><a href="https://www.biorxiv.org/content/10.1101/2024.08.02.606319v2.abstract">Preprint</a><a href="https://github.com/MorillaLab/s2-PEPANALYST">Code</a></p>
       </li>
       <li class="item" id="p-tylcv" data-themes="plants" data-t="plants">
         <div class="plate" data-shape="leaf" data-seed="17" data-zoom="1.7" data-rot="-35" data-ox="40" data-oy="60" aria-hidden="true"></div>
         <h3>tylcv-tomato-visium</h3>
         <p class="meta">2023–present</p>
         <p class="tags"><span data-t="plants">Plant biology</span></p>
-        <p>Spatial transcriptomics of tomato infected by tomato yellow leaf curl virus, using manifold integration and topological machine learning to map the infection across leaf cell types.</p>
+        <p>Spatial transcriptomics of tomato infected by tomato yellow leaf curl virus, using manifold integration and topological machine learning to map the infection across leaf cell types, annotated with <a href="#p-plantag">PlantAG</a>.</p>
         <p class="partners">With UMA, CSIC and IHSM</p>
         <p class="links"><a href="https://github.com/MorillaLab/tylcv-tomato-visium">Code</a></p>
       </li>
@@ -587,11 +595,9 @@ a.pub-title:hover { text-decoration: underline; text-decoration-thickness: 2px; 
     </ul>
 
     <details class="more-code">
-      <summary>More open-source repositories (7)</summary>
+      <summary>More open-source repositories (5)</summary>
       <ul>
-        <li><a href="https://github.com/MorillaLab/PlantAG">PlantAG</a>: automated cell-type annotation for plant spatial transcriptomics with no reference atlas, coupling Vietoris–Rips persistent homology with a graph convolutional network.</li>
         <li><a href="https://github.com/MorillaLab/PhytoPepBERT">PhytoPepBERT</a>: single-sequence language modelling that learns family-defining structure in plant signalling peptides.</li>
-        <li><a href="https://github.com/MorillaLab/PolyCLIP-T">PolyCLIP-T</a>: contrastive, CLIP-like learning to find low-penetrance polygenic variants in complex diseases.</li>
         <li><a href="https://github.com/MorillaLab/TopoGCN-LT-Insights">TopoGCN-LT-Insights</a>: graph convolutional networks aided by topological data analysis, for lung-transplantation outcomes.</li>
         <li><a href="https://github.com/MorillaLab/RL-TBoost">RL-TBoost</a>: reinforcement learning enhanced by topological data analysis, to predict one-year mortality after lung transplantation.</li>
         <li><a href="https://github.com/MorillaLab/Genetic-Bell">Genetic-Bell</a>: a non-linear model of epistasis.</li>
@@ -673,8 +679,7 @@ a.pub-title:hover { text-decoration: underline; text-decoration-thickness: 2px; 
       <li class="pub" data-type="journal" data-t="plants">
         <span class="pub-year"><span class="key" aria-hidden="true"></span>2026</span>
         <div class="pub-body">
-          <!-- TODO: link this title to the BMC Genomics DOI once known. -->
-          <span class="pub-title">Multimodal learning reveals plants’ hidden sensory integration logic</span>
+          <a class="pub-title" href="https://doi.org/10.1186/s12864-026-12624-y">Multimodal learning reveals plants’ hidden sensory integration logic</a>
           <p class="pub-authors"><b>Vomo-Donfack</b>, León Morcillo, Ginot, Doblas, <b>Morilla</b></p>
           <p class="pub-venue"><i>BMC Genomics</i> 27: 312</p>
           <p class="links"><a href="https://doi.org/10.1101/2025.07.25.666865">Preprint</a><a href="https://github.com/MorillaLab/CoMM-BIP">Code</a></p>
@@ -683,8 +688,7 @@ a.pub-title:hover { text-decoration: underline; text-decoration-thickness: 2px; 
       <li class="pub" data-type="journal" data-t="plants">
         <span class="pub-year"><span class="key" aria-hidden="true"></span>2026</span>
         <div class="pub-body">
-          <!-- TODO: link this title to the Plant Biotechnology Journal DOI once known. -->
-          <span class="pub-title">S²-PepAnalyst: a web tool for predicting plant small signalling peptides</span>
+          <a class="pub-title" href="https://doi.org/10.1111/pbi.70536">S²-PepAnalyst: a web tool for predicting plant small signalling peptides</a>
           <p class="pub-authors"><b>Vomo-Donfack</b>, Abaach, <b>Luna</b>, Ginot, Doblas, <b>Morilla</b></p>
           <p class="pub-venue"><i>Plant Biotechnology Journal</i></p>
           <p class="links"><a href="https://www.s2-pepanalyst.uma.es">Web tool</a><a href="https://www.biorxiv.org/content/10.1101/2024.08.02.606319v2.abstract">Preprint</a><a href="https://github.com/MorillaLab/s2-PEPANALYST">Code</a></p>
@@ -854,19 +858,18 @@ a.pub-title:hover { text-decoration: underline; text-decoration-thickness: 2px; 
     <div class="positions">
       <details class="position">
         <summary>
-          <span class="kind">Postdoctoral researcher</span>
+          <span class="kind">Postdoctoral researcher, 1 year</span>
           <span class="title">Topological deep learning for chronic inflammatory diseases</span>
-          <span class="when">Starting January–February 2027</span>
+          <span class="when">Paris, starting January–February 2027</span>
         </summary>
         <div class="position-body">
-          <p>Develop topological deep-learning methods for chronic inflammatory diseases.</p>
+          <p>Develop topological deep-learning methods for chronic inflammatory diseases, while contributing to several of our projects in parallel. The position is funded for one year by the Transcend-id project and based in Paris, and will likely include a few visits to IHSM La Mayora in Málaga.</p>
           <h4>Profile</h4>
           <ul>
             <li>PhD in mathematics, computer science, bioinformatics or a related field</li>
             <li>Strong background in machine or deep learning, topological data analysis, or both</li>
             <li>Experience with omics data analysis preferred</li>
           </ul>
-          <!-- TODO: add where the post is based (Málaga or Villetaneuse), its duration and its funding. -->
           <a class="btn btn-hot" href="mailto:ian.morilla@ihsm.uma-csic.es?subject=Application%3A%20Postdoc%20-%20Topological%20deep%20learning%20for%20chronic%20inflammatory%20diseases">Apply by email</a>
         </div>
       </details>
@@ -980,7 +983,6 @@ a.pub-title:hover { text-decoration: underline; text-decoration-thickness: 2px; 
 
     <div class="funders-wrap">
       <h3>Funding</h3>
-      <!-- TODO: replace each alt text with the funder's name, e.g. alt="CNRS". -->
       <ul class="funders">
         <li><img src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_1200,h_412/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/owFE_gwpfejJHfPf" alt="Logo of a funding organisation" width="1200" height="412" loading="lazy" decoding="async"></li>
         <li><img src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_1200,h_472/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/B4ZGHBhjEnJlpAOb" alt="Logo of a funding organisation" width="1200" height="472" loading="lazy" decoding="async"></li>
@@ -1207,6 +1209,19 @@ const Shapes = (() => {
     return { pts: out, spacing: h };
   }
 
+  // About N points on a regular hexagonal lattice inside a shape (a spot array).
+  function lattice(name, N) {
+    const inside = rasterCache[name] || (rasterCache[name] = raster(SHAPES[name]));
+    let hits = 0;
+    for (let x = 2.5; x < 1000; x += 5) for (let y = 2.5; y < 1000; y += 5) if (inside(x, y)) hits++;
+    const h = Math.sqrt((2 * hits * 25) / (Math.sqrt(3) * N)), dy = (h * Math.sqrt(3)) / 2;
+    const pts = [];
+    for (let row = 0, y = dy / 2; y < 1000; row++, y += dy) {
+      for (let x = row % 2 ? h : h / 2; x < 1000; x += h) if (inside(x, y)) pts.push(x, y);
+    }
+    return { pts: Float32Array.from(pts), spacing: h };
+  }
+
   // Hilbert index on a 1024 grid, used to pair two clouds that already share a distribution.
   function hilbert(x, y) {
     let d = 0;
@@ -1253,7 +1268,7 @@ const Shapes = (() => {
     return perm;
   }
 
-  return { sample, transport, mulberry32, names: Object.keys(SHAPES) };
+  return { sample, lattice, transport, mulberry32, names: Object.keys(SHAPES) };
 })();
 
 /* ---------- The story: one cloud of dots, transported between our questions ---------- */
@@ -1462,12 +1477,16 @@ const Shapes = (() => {
     const zoom = +plate.dataset.zoom || 1, rot = ((+plate.dataset.rot || 0) * Math.PI) / 180;
     const fx = 500 + (+plate.dataset.ox || 0), fy = 500 + (+plate.dataset.oy || 0);
     const n = Math.min(2600, Math.round(700 * zoom * zoom));
-    const key = plate.dataset.shape + ':' + plate.dataset.seed + ':' + n;
-    if (!cache.has(key)) cache.set(key, Shapes.sample(plate.dataset.shape, n, +plate.dataset.seed || 1));
+    const hex = plate.dataset.pattern === 'hex';
+    const key = plate.dataset.shape + ':' + (hex ? 'hex' : plate.dataset.seed) + ':' + n;
+    if (!cache.has(key)) cache.set(key, hex ? Shapes.lattice(plate.dataset.shape, n) : Shapes.sample(plate.dataset.shape, n, +plate.dataset.seed || 1));
     const { pts, spacing } = cache.get(key);
+    const count = pts.length / 2;
+    const rng = Shapes.mulberry32(+plate.dataset.seed || 7), tone = new Uint8Array(count);
+    for (let i = 0; i < count; i++) tone[i] = Math.min(4, (rng() * 5) | 0);
     const s = (Math.min(w, h) / 1000) * 0.88 * zoom, cos = Math.cos(rot), sin = Math.sin(rot);
     const base = COLOR[plate.closest('[data-t]').dataset.t] || COLOR.topo;
-    const r = Math.max(1.1, Math.min(2.6, spacing * 0.3 * s));
+    const r = Math.max(1.1, Math.min(hex ? 3.4 : 2.6, spacing * (hex ? 0.36 : 0.3) * s));
     const g = canvas.getContext('2d');
     g.setTransform(dpr, 0, 0, dpr, 0, 0);
     for (let b = 0; b < 5; b++) {
@@ -1475,7 +1494,8 @@ const Shapes = (() => {
       const c = f >= 0 ? base.map((v) => v + (255 - v) * f) : base.map((v) => v * (1 + f));
       g.fillStyle = `rgb(${c[0] | 0},${c[1] | 0},${c[2] | 0})`;
       g.beginPath();
-      for (let i = b; i < n; i += 5) {
+      for (let i = 0; i < count; i++) {
+        if (tone[i] !== b) continue;
         const dx = pts[2 * i] - fx, dy = pts[2 * i + 1] - fy;
         const x = w / 2 + (dx * cos - dy * sin) * s, y = h / 2 + (dx * sin + dy * cos) * s;
         if (x < -4 || y < -4 || x > w + 4 || y > h + 4) continue;
