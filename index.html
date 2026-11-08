@@ -4,15 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.add('js');</script>
-<title>Morilla Lab (MLiMO): machine learning in multi-omics</title>
-<meta name="description" content="Morilla Lab (MLiMO) develops topological and deep-learning methods for multi-omics data, applied to human disease and plant biology. Based at IHSM La Mayora (UMA–CSIC), Málaga, and LAGA (CNRS, Université Sorbonne Paris Nord), Paris.">
+<title>Morilla Lab (MLiMO): the shape of biological data</title>
+<meta name="description" content="Morilla Lab (MLiMO) builds topological and geometric machine learning for multi-omics data, applied to human disease and plant biology. Based at IHSM La Mayora (UMA–CSIC), Málaga, and LAGA (CNRS, Université Sorbonne Paris Nord), Paris.">
 <link rel="canonical" href="https://morillalab.github.io/">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#FBFCFB" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0F1917" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#141A44">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://morillalab.github.io/">
-<meta property="og:title" content="Morilla Lab (MLiMO): machine learning in multi-omics">
+<meta property="og:title" content="Morilla Lab (MLiMO): the shape of biological data">
 <meta property="og:description" content="Topology, deep learning and optimal transport for biological data, from lung transplantation and leukaemia to tomato viruses and plant signalling peptides. Málaga and Paris.">
 <meta property="og:image" content="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_300,h_300,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/RGmY-tZORChqTR_A">
 <meta name="twitter:card" content="summary">
@@ -21,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://res.cloudinary.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400..700&amp;family=STIX+Two+Text:ital,wght@0,400..700;1,400..700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&amp;family=STIX+Two+Text:ital,wght@0,400;1,400..600&amp;display=swap">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -31,339 +30,362 @@
   "url": "https://morillalab.github.io/",
   "logo": "https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_300,h_300,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/RGmY-tZORChqTR_A",
   "sameAs": ["https://github.com/morillalab"],
-  "member": [{
-    "@type": "Person",
-    "name": "Ian Morilla",
-    "jobTitle": "Principal investigator",
-    "sameAs": ["https://orcid.org/0000-0002-5100-5990", "https://github.com/morillalab"]
-  }],
+  "member": [{ "@type": "Person", "name": "Ian Morilla", "jobTitle": "Principal investigator", "sameAs": ["https://orcid.org/0000-0002-5100-5990"] }],
   "parentOrganization": [
-    {
-      "@type": "ResearchOrganization",
-      "name": "Instituto de Hortofruticultura Subtropical y Mediterránea La Mayora (IHSM, UMA–CSIC)",
-      "address": { "@type": "PostalAddress", "streetAddress": "Bulevar Louis Pasteur 49", "postalCode": "29010", "addressLocality": "Málaga", "addressCountry": "ES" }
-    },
-    {
-      "@type": "ResearchOrganization",
-      "name": "Laboratoire Analyse, Géométrie et Applications (LAGA), CNRS, Université Sorbonne Paris Nord",
-      "address": { "@type": "PostalAddress", "streetAddress": "99 avenue Jean-Baptiste Clément", "postalCode": "93430", "addressLocality": "Villetaneuse", "addressCountry": "FR" }
-    }
+    { "@type": "ResearchOrganization", "name": "Instituto de Hortofruticultura Subtropical y Mediterránea La Mayora (IHSM, UMA–CSIC)",
+      "address": { "@type": "PostalAddress", "streetAddress": "Bulevar Louis Pasteur 49", "postalCode": "29010", "addressLocality": "Málaga", "addressCountry": "ES" } },
+    { "@type": "ResearchOrganization", "name": "Laboratoire Analyse, Géométrie et Applications (LAGA), CNRS, Université Sorbonne Paris Nord",
+      "address": { "@type": "PostalAddress", "streetAddress": "99 avenue Jean-Baptiste Clément", "postalCode": "93430", "addressLocality": "Villetaneuse", "addressCountry": "FR" } }
   ]
 }
 </script>
 <style>
-/* ---------------------------------------------------------------
-   Tokens. Teal marks components (H0) and links; magenta is kept for
-   loops (H1) in the figure, so the two colours always mean something.
-   --------------------------------------------------------------- */
+/* ------------------------------------------------------------------
+   Colour is data. Aqua = topology & machine learning, coral = human
+   disease, lime = plant biology: the same three colours key the dots,
+   the timeline, the project plates and the filters.
+   ------------------------------------------------------------------ */
 :root {
-  --paper: #FBFCFB;
-  --plate: #EEF3F1;
-  --plate-line: #D3DDD9;
-  --ink: #16201D;
-  --ink-2: #47554F;
-  --ink-3: #5F6D68;
-  --rule: #D7DFDC;
-  --teal: #0B7A6E;
-  --teal-strong: #08655B;
-  --teal-wash: #E1EFEC;
-  --magenta: #B0245A;
-  --on-teal: #FFFFFF;
-  --logo-plate: #FFFFFF;
-  --tri-alpha: 0.17;
+  --field: #141A44;
+  --field-2: #1C2458;
+  --on-field: #EEF0FA;
+  --on-field-2: #B4B9D6;
+  --on-field-3: #959BC2;
+  --paper: #FFFFFF;
+  --mist: #F2F3F8;
+  --ink: #151938;
+  --ink-2: #4A4E6E;
+  --ink-3: #62678A;
+  --rule: #E3E5EF;
+  --aqua: #6FE3D7;  --aqua-ink: #0A7A70;
+  --coral: #FF8A63; --coral-ink: #B5401C;
+  --lime: #C2EA6F;  --lime-ink: #467A14;
 
-  --serif: "STIX Two Text", "STIX Two", STIXGeneral, Georgia, "Times New Roman", serif;
-  --sans: "Hanken Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
-
-  --wrap: 1180px;
-  --pad: clamp(1.25rem, 4vw, 2.5rem);
-  --rail: 13.5rem;
-  --gap: clamp(1.5rem, 4vw, 3.5rem);
+  --sans: "Archivo", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --math: "STIX Two Text", "STIX Two", Georgia, "Times New Roman", serif;
+  --wrap: 1240px;
+  --pad: clamp(1.25rem, 4.5vw, 3rem);
+  --gap: clamp(1.5rem, 4vw, 4rem);
+  --header-h: 4.25rem;
 }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper: #0F1917;
-    --plate: #15221F;
-    --plate-line: #2A3B36;
-    --ink: #E4ECE9;
-    --ink-2: #ABBAB4;
-    --ink-3: #91A19B;
-    --rule: #26362F;
-    --teal: #52CDB7;
-    --teal-strong: #7DDCCB;
-    --teal-wash: #173430;
-    --magenta: #F27DA9;
-    --on-teal: #06231E;
-    --logo-plate: #F4F7F6;
-    --tri-alpha: 0.24;
+  :root {
+    --paper: #0E1230;
+    --mist: #161B42;
+    --ink: #ECEEFA;
+    --ink-2: #B4B9D6;
+    --ink-3: #9096BE;
+    --rule: #262C5A;
+    --aqua-ink: #6FE3D7;
+    --coral-ink: #FF8A63;
+    --lime-ink: #C2EA6F;
   }
 }
-:root[data-theme="dark"] {
-  --paper: #0F1917;
-  --plate: #15221F;
-  --plate-line: #2A3B36;
-  --ink: #E4ECE9;
-  --ink-2: #ABBAB4;
-  --ink-3: #91A19B;
-  --rule: #26362F;
-  --teal: #52CDB7;
-  --teal-strong: #7DDCCB;
-  --teal-wash: #173430;
-  --magenta: #F27DA9;
-  --on-teal: #06231E;
-  --logo-plate: #F4F7F6;
-  --tri-alpha: 0.24;
-}
+[data-t="topo"]   { --c: var(--aqua);  --c-ink: var(--aqua-ink); }
+[data-t="health"] { --c: var(--coral); --c-ink: var(--coral-ink); }
+[data-t="plants"] { --c: var(--lime);  --c-ink: var(--lime-ink); }
 
 /* ---------- Base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-padding-top: 5rem; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-padding-top: calc(var(--header-h) + 1rem); }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 body {
-  margin: 0;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: var(--serif);
-  font-size: 1.125rem;
-  line-height: 1.62;
-  font-kerning: normal;
-  font-variant-ligatures: common-ligatures;
-  text-rendering: optimizeLegibility;
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: 1.125rem; line-height: 1.6;
+  font-kerning: normal; text-rendering: optimizeLegibility;
 }
 img { max-width: 100%; height: auto; display: block; }
-h1, h2, h3, h4 { margin: 0; font-weight: 600; line-height: 1.18; text-wrap: balance; }
+h1, h2, h3, h4 { margin: 0; line-height: 1.1; text-wrap: balance; font-weight: 650; }
 p { margin: 0 0 1em; }
 ul, ol { margin: 0; padding: 0; }
-a { color: var(--teal); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
-a:hover { color: var(--teal-strong); text-decoration-thickness: 2px; }
-:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; border-radius: 2px; }
-abbr[title] { text-decoration: none; }
-code { font-family: var(--mono); font-size: 0.86em; background: var(--plate); border: 1px solid var(--plate-line); border-radius: 4px; padding: 0.05em 0.35em; white-space: nowrap; }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; text-decoration-color: color-mix(in srgb, currentColor 45%, transparent); }
+a:hover { text-decoration-color: currentColor; text-decoration-thickness: 2px; }
+:focus-visible { outline: 2.5px solid var(--coral); outline-offset: 3px; border-radius: 4px; }
 sub { font-size: 0.7em; line-height: 0; }
-.wrap { max-width: var(--wrap); margin-inline: auto; padding-inline: var(--pad); }
-.sans { font-family: var(--sans); }
+code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 0.86em; background: var(--mist); border-radius: 6px; padding: 0.1em 0.4em; white-space: nowrap; }
+.wrap { width: min(100%, var(--wrap)); margin-inline: auto; padding-inline: var(--pad); }
+.wide { font-variation-settings: "wdth" 116; }
+.math { font-family: var(--math); font-style: italic; }
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
-.skip { position: absolute; left: 1rem; top: -4rem; z-index: 100; background: var(--ink); color: var(--paper); font-family: var(--sans); padding: 0.6rem 1rem; border-radius: 4px; }
-.skip:focus { top: 0.75rem; color: var(--paper); }
+.skip { position: absolute; left: 1rem; top: -4rem; z-index: 100; background: var(--coral); color: var(--ink); font-weight: 600; padding: 0.6rem 1rem; border-radius: 999px; }
+.skip:focus { top: 0.75rem; }
+.key { display: inline-block; width: 0.62em; height: 0.62em; border-radius: 50%; background: var(--c, currentColor); vertical-align: 0.06em; margin-right: 0.45em; flex: none; }
+
+/* ---------- Buttons and chips ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  font: 600 1rem/1.2 var(--sans); padding: 0.85rem 1.35rem; border-radius: 999px;
+  border: 1.5px solid currentColor; background: transparent; color: inherit;
+  text-decoration: none; cursor: pointer; transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+.btn:hover { text-decoration: none; }
+.btn-hot { background: var(--coral); border-color: var(--coral); color: #151938; }
+.btn-hot:hover { background: #FFA587; border-color: #FFA587; }
+.btn-ghost:hover { background: color-mix(in srgb, currentColor 10%, transparent); }
+.btn-ink { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.btn-ink:hover { background: var(--ink-2); border-color: var(--ink-2); }
+.btn-small { font-size: 0.9375rem; padding: 0.55rem 1rem; }
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+html:not(.js) .chips { display: none; }
+.chip {
+  display: inline-flex; align-items: center; font: 500 0.9375rem/1 var(--sans);
+  padding: 0.6rem 1rem; border-radius: 999px; border: 1.5px solid var(--rule);
+  background: var(--paper); color: var(--ink-2); cursor: pointer; transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+}
+.chip:hover { border-color: var(--ink-3); color: var(--ink); }
+.chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
 
 /* ---------- Header ---------- */
 .site-header {
-  position: sticky; top: 0; z-index: 50;
-  background: var(--paper);
-  border-bottom: 1px solid var(--rule);
+  position: fixed; inset: 0 0 auto 0; z-index: 60; height: var(--header-h);
+  color: var(--on-field); transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+.site-header.on-light {
+  color: var(--ink); background: var(--paper); box-shadow: 0 1px 0 var(--rule);
 }
 @supports (backdrop-filter: blur(8px)) {
-  .site-header { background: color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter: saturate(1.3) blur(10px); }
+  .site-header.on-light { background: color-mix(in srgb, var(--paper) 86%, transparent); backdrop-filter: blur(14px) saturate(1.4); }
 }
-.header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 3.75rem; }
-.brand { display: inline-flex; align-items: center; gap: 0.65rem; color: var(--ink); text-decoration: none; }
-.brand:hover { color: var(--ink); }
-.brand-mark { width: 30px; height: 30px; flex: none; border-radius: 50%; object-fit: cover; background: var(--plate); }
-.brand-name { font-weight: 600; font-size: 1.25rem; letter-spacing: -0.005em; }
-.brand-sub { font-family: var(--sans); font-size: 0.8125rem; color: var(--ink-3); padding-left: 0.65rem; border-left: 1px solid var(--rule); line-height: 1.2; }
-.site-nav ul { list-style: none; display: flex; gap: clamp(0.9rem, 2vw, 1.75rem); }
-.site-nav a { display: block; font-family: var(--sans); font-size: 0.9375rem; color: var(--ink-2); text-decoration: none; padding: 0.35rem 0; border-bottom: 2px solid transparent; }
-.site-nav a:hover { color: var(--ink); }
-.site-nav a[aria-current="true"] { color: var(--ink); border-bottom-color: var(--teal); }
-.menu-toggle { display: none; font: 600 0.9375rem/1 var(--sans); color: var(--ink); background: transparent; border: 1px solid var(--rule); border-radius: 6px; padding: 0.55rem 0.8rem; cursor: pointer; }
-.menu-toggle:hover { border-color: var(--ink-3); }
-@media (max-width: 880px) {
-  .js .menu-toggle { display: inline-block; }
-  .js .site-nav { display: none; position: absolute; left: 0; right: 0; top: 100%; background: var(--paper); border-bottom: 1px solid var(--rule); box-shadow: 0 12px 24px -16px rgb(0 0 0 / 0.35); }
+.header-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.brand { display: inline-flex; align-items: center; gap: 0.7rem; text-decoration: none; color: inherit; }
+.brand img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; background: var(--field-2); }
+.brand-name { font-size: 1.1875rem; font-weight: 700; letter-spacing: -0.01em; font-variation-settings: "wdth" 112; }
+.brand-sub { font-size: 0.875rem; opacity: 0.72; }
+.site-nav ul { list-style: none; display: flex; gap: clamp(1rem, 2.2vw, 2rem); }
+.site-nav a { display: block; font-size: 0.9375rem; font-weight: 500; text-decoration: none; padding: 0.4rem 0; opacity: 0.78; border-bottom: 2px solid transparent; transition: opacity 0.2s; }
+.site-nav a:hover { opacity: 1; }
+.site-nav a[aria-current="true"] { opacity: 1; border-bottom-color: currentColor; }
+.menu-toggle { display: none; font: 600 0.9375rem/1 var(--sans); color: inherit; background: transparent; border: 1.5px solid currentColor; border-radius: 999px; padding: 0.6rem 1rem; cursor: pointer; }
+@media (max-width: 900px) {
+  .js .menu-toggle { display: inline-block; position: relative; z-index: 2; }
+  .js .site-nav { position: fixed; inset: 0; z-index: 1; background: var(--field); color: var(--on-field); padding: calc(var(--header-h) + 2rem) var(--pad) 2rem; display: none; overflow-y: auto; }
   .js .site-nav.is-open { display: block; }
-  .js .site-nav ul { flex-direction: column; gap: 0; padding: 0.25rem var(--pad) 1rem; }
-  .js .site-nav a { padding: 0.8rem 0; font-size: 1.0625rem; border-bottom: 1px solid var(--rule); }
-  .js .site-nav a[aria-current="true"] { border-bottom-color: var(--rule); box-shadow: inset 3px 0 0 var(--teal); padding-left: 0.75rem; }
-  html:not(.js) .header-inner { flex-wrap: wrap; padding-block: 0.5rem; }
+  .js .site-nav ul { flex-direction: column; gap: 0.25rem; }
+  .js .site-nav a { font-size: clamp(2rem, 9vw, 2.75rem); font-weight: 650; font-variation-settings: "wdth" 116; letter-spacing: -0.02em; opacity: 1; border: 0; padding: 0.3rem 0; }
+  html.menu-open .site-header { color: var(--on-field); background: transparent; box-shadow: none; backdrop-filter: none; }
+  html.menu-open { overflow: hidden; }
+  .brand { position: relative; z-index: 2; }
+  html:not(.js) .site-header { position: absolute; height: auto; padding-block: 0.75rem; }
+  html:not(.js) .header-inner { flex-wrap: wrap; }
   html:not(.js) .site-nav ul { flex-wrap: wrap; gap: 0.25rem 1rem; }
 }
 
-/* ---------- Hero ---------- */
-.hero { padding-block: clamp(2.5rem, 6vw, 4.75rem) clamp(3.5rem, 7vw, 6rem); }
-.hero-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
-.hero h1 { font-size: clamp(2.9rem, 6vw, 4.5rem); letter-spacing: -0.02em; line-height: 1; }
-.hero-sub { font-family: var(--sans); font-size: 1.0625rem; color: var(--ink-2); margin: 0.85rem 0 1.9rem; }
-.lead { font-size: clamp(1.1875rem, 1.55vw, 1.3125rem); line-height: 1.55; max-width: 32em; }
-.hero-sites { font-size: 1rem; line-height: 1.6; color: var(--ink-2); max-width: 32em; }
-.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
-.btn {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  font: 600 1rem/1.2 var(--sans);
-  padding: 0.72rem 1.15rem;
-  border-radius: 6px; border: 1px solid var(--teal);
-  color: var(--teal); background: transparent;
-  text-decoration: none; cursor: pointer;
+/* ---------- The story: one cloud, transported across our questions ---------- */
+.story { position: relative; background: var(--field); color: var(--on-field); }
+.stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.stage-note {
+  position: absolute; right: var(--pad); bottom: clamp(1rem, 3vh, 2rem); z-index: 2;
+  display: flex; align-items: center; gap: 1rem; justify-content: flex-end;
+  font-size: 0.875rem; line-height: 1.4; color: var(--on-field-3); max-width: 30rem; text-align: right;
+  transition: opacity 0.35s;
 }
-.btn:hover { background: var(--teal-wash); color: var(--teal-strong); text-decoration: none; }
-.btn-primary { background: var(--teal); color: var(--on-teal); }
-.btn-primary:hover { background: var(--teal-strong); border-color: var(--teal-strong); color: var(--on-teal); }
-.btn-small { font-size: 0.9375rem; padding: 0.45rem 0.85rem; }
+.stage-note[hidden] { display: flex; opacity: 0; pointer-events: none; }
+html:not(.js) .stage-note { display: none; }
+@media (prefers-reduced-motion: reduce) { .stage-note { display: none !important; } }
+.stage-note .btn { color: var(--on-field); flex: none; }
+.steps { position: relative; margin-top: -100vh; margin-top: -100svh; }
+.step { min-height: 100vh; min-height: 100svh; display: flex; align-items: center; padding-block: calc(var(--header-h) + 2rem) 4rem; }
+.step-text { max-width: min(35rem, 42vw); position: relative; z-index: 0; }
+.hero h1 { font-size: clamp(2.75rem, 6.2vw, 6rem); line-height: 0.95; letter-spacing: -0.035em; font-weight: 700; font-variation-settings: "wdth" 118; margin-bottom: 1.75rem; }
+.hero .lead { font-size: clamp(1.1875rem, 1.6vw, 1.375rem); line-height: 1.5; color: var(--on-field); max-width: 32rem; }
+.hero .sites { font-size: 1rem; color: var(--on-field-2); max-width: 32rem; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
+.theme-step h2 { display: flex; align-items: baseline; font-size: clamp(2.25rem, 4.4vw, 4rem); line-height: 1; letter-spacing: -0.03em; font-variation-settings: "wdth" 116; margin-bottom: 1.5rem; }
+.theme-step h2 .key { width: 0.42em; height: 0.42em; }
+.theme-step p { color: var(--on-field-2); font-size: 1.125rem; }
+.theme-step .related { font-size: 1rem; color: var(--on-field-3); margin: 0; }
+.theme-step .related a { color: var(--on-field); }
+@media (max-width: 899px) {
+  .step { align-items: flex-end; padding-block: 52svh 2.5rem; }
+  .step-text { max-width: none; position: relative; }
+  .step-text::before { content: ""; position: absolute; inset: -3.5rem calc(-1 * var(--pad)) -2.5rem; z-index: -1; background: linear-gradient(to bottom, transparent, var(--field) 3rem); }
+  .hero.step { padding-top: 46svh; }
+  .stage-note { left: var(--pad); right: var(--pad); top: calc(var(--header-h) + 0.25rem); bottom: auto; max-width: none; justify-content: space-between; text-align: left; }
+}
 
-/* ---------- Figure 1: live persistent homology ---------- */
-.ph { margin: 0; background: var(--plate); border: 1px solid var(--plate-line); border-radius: 12px; padding: clamp(0.85rem, 2vw, 1.35rem); }
+/* ---------- Light sections ---------- */
+.section { padding-block: clamp(4.5rem, 10vw, 8.5rem); background: var(--paper); color: var(--ink); }
+.section.mist { background: var(--mist); }
+.section-head { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 1.25rem var(--gap); align-items: end; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+.section-head h2 { font-size: clamp(2.5rem, 5.6vw, 5rem); line-height: 0.96; letter-spacing: -0.035em; font-weight: 700; font-variation-settings: "wdth" 118; }
+.section-head p { color: var(--ink-2); margin: 0; max-width: 34rem; }
+.section-head .chips { grid-column: 1 / -1; }
+@media (max-width: 800px) { .section-head { grid-template-columns: 1fr; } }
+.links { display: flex; flex-wrap: wrap; gap: 0.35rem 1.15rem; font-size: 0.9375rem; font-weight: 500; margin: 0.5rem 0 0; }
+.meta { font-size: 0.9375rem; color: var(--ink-3); margin: 0; }
+
+/* Latest: a real timeline, nodes coloured by theme */
+.timeline { list-style: none; position: relative; max-width: 58rem; }
+.timeline::before { content: ""; position: absolute; left: 9.35rem; top: 0.7rem; bottom: 0.7rem; width: 2px; background: var(--rule); }
+.timeline li { position: relative; display: grid; grid-template-columns: 8rem minmax(0, 1fr); gap: 3rem; padding-bottom: 2.25rem; }
+.timeline li:last-child { padding-bottom: 0; }
+.timeline li::before { content: ""; position: absolute; left: calc(9.35rem - 6px); top: 0.45rem; width: 14px; height: 14px; border-radius: 50%; background: var(--c, var(--paper)); border: 2px solid var(--c, var(--ink-3)); box-shadow: 0 0 0 5px var(--paper); }
+.timeline time { font-size: 0.9375rem; font-weight: 500; color: var(--ink-3); padding-top: 0.1rem; font-variant-numeric: tabular-nums; }
+.timeline p { margin: 0; }
+.timeline p + .links { margin-top: 0.45rem; }
+@media (max-width: 640px) {
+  .timeline::before { left: 6px; }
+  .timeline li { grid-template-columns: 1fr; gap: 0.2rem; padding-left: 2.25rem; }
+  .timeline li::before { left: 0; }
+}
+
+/* Projects: a catalogue of specimen plates */
+.catalog { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(2.5rem, 4vw, 3.5rem) clamp(1.25rem, 2.5vw, 2.25rem); }
+.item { min-width: 0; }
+.plate { position: relative; aspect-ratio: 4 / 3; border-radius: 18px; background: var(--field); overflow: hidden; margin-bottom: 1.25rem; }
+.plate canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.item:hover .plate canvas { transform: scale(1.04); }
+@media (prefers-color-scheme: dark) { .plate { background: #0B0E27; box-shadow: 0 0 0 1px var(--rule); } }
+@media (prefers-reduced-motion: reduce) { .plate canvas { transition: none; } .item:hover .plate canvas { transform: none; } }
+.item h3 { font-size: 1.5rem; letter-spacing: -0.015em; font-variation-settings: "wdth" 110; }
+.item .meta { margin: 0.25rem 0 0.75rem; }
+.item p { font-size: 1rem; line-height: 1.55; margin-bottom: 0.6rem; }
+.item .partners { color: var(--ink-3); font-size: 0.9375rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; font-size: 0.875rem; font-weight: 500; color: var(--ink-2); margin-bottom: 0.6rem !important; }
+.tags span { display: inline-flex; align-items: center; }
+.tags span::before { content: ""; width: 0.6em; height: 0.6em; border-radius: 50%; background: var(--c-ink); margin-right: 0.4em; }
+.more-code { margin-top: clamp(3rem, 5vw, 4rem); border-top: 1px solid var(--rule); padding-top: 1.5rem; }
+.more-code summary { font-weight: 600; cursor: pointer; }
+.more-code ul { list-style: none; margin-top: 1.25rem; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem var(--gap); }
+.more-code li { font-size: 1rem; color: var(--ink-2); }
+.more-code li a { font-weight: 600; color: var(--ink); }
+@media (max-width: 1060px) { .catalog { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .catalog, .more-code ul { grid-template-columns: 1fr; } }
+
+/* Live demo */
+.demo-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--gap); align-items: start; }
+.demo-copy p { color: var(--ink-2); max-width: 30rem; }
+.demo-copy h2 { font-size: clamp(2.5rem, 5vw, 4.25rem); line-height: 0.98; letter-spacing: -0.035em; font-weight: 700; font-variation-settings: "wdth" 118; margin-bottom: 1.5rem; }
+@media (max-width: 900px) { .demo-grid { grid-template-columns: 1fr; } }
+.ph { --teal: var(--aqua-ink); --magenta: var(--coral-ink); --plate: var(--paper); --plate-line: var(--rule); --tri-alpha: 0.17;
+  margin: 0; background: var(--paper); border-radius: 22px; padding: clamp(1rem, 2.4vw, 1.6rem); box-shadow: 0 0 0 1px var(--rule); }
 .ph-stage { position: relative; aspect-ratio: 16 / 10; }
 .ph-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-.ph-barcode { display: block; width: 100%; height: 190px; margin-top: 0.5rem; }
+.ph-barcode { display: block; width: 100%; height: 214px; margin-top: 0.5rem; }
 .ph-slider { display: grid; grid-template-columns: var(--ph-label, 34px) minmax(0, 1fr); align-items: center; }
-.ph-slider label { font-style: italic; font-size: 1.125rem; color: var(--ink-2); }
+.ph-slider label { font-family: var(--math); font-style: italic; font-size: 1.125rem; color: var(--ink-2); }
 .ph-range { -webkit-appearance: none; appearance: none; width: 100%; height: 30px; margin: 0; background: transparent; cursor: pointer; }
-.ph-range:focus-visible { outline-offset: 0; }
-.ph-range::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; background: var(--plate-line); }
-.ph-range::-moz-range-track { height: 4px; border-radius: 2px; background: var(--plate-line); }
+.ph-range::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; background: var(--rule); }
+.ph-range::-moz-range-track { height: 4px; border-radius: 2px; background: var(--rule); }
 .ph-range::-webkit-slider-thumb { -webkit-appearance: none; box-sizing: border-box; width: 18px; height: 18px; margin-top: -7px; border-radius: 50%; background: var(--paper); border: 2px solid var(--ink); }
 .ph-range::-moz-range-thumb { box-sizing: border-box; width: 18px; height: 18px; border-radius: 50%; background: var(--paper); border: 2px solid var(--ink); }
-.ph-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.25rem; margin-top: 0.6rem; font-family: var(--sans); font-size: 0.9375rem; color: var(--ink-2); }
-.ph-stats { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; margin-right: auto; }
+.ph-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1.25rem; margin-top: 0.6rem; font-size: 0.9375rem; color: var(--ink-2); }
+.ph-stats { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; margin: 0 auto 0 0; }
 .ph-stats span { white-space: nowrap; }
-.ph-stats b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
-.ph-stats i { font-family: var(--serif); font-size: 1.05em; color: var(--ink); }
+.ph-stats b { color: var(--ink); font-weight: 650; font-variant-numeric: tabular-nums; }
+.ph-stats i { font-family: var(--math); font-size: 1.08em; color: var(--ink); }
 .ph-buttons { display: flex; gap: 0.5rem; }
-.ph figcaption { margin-top: 1rem; font-size: 0.9375rem; line-height: 1.55; color: var(--ink-2); }
-.ph figcaption strong { color: var(--ink); font-weight: 600; }
-.ph noscript p { font-family: var(--sans); font-size: 0.9375rem; margin: 0.75rem 0 0; }
-
-/* ---------- Sections ---------- */
-.section { padding-block: clamp(3.5rem, 8vw, 6rem); border-top: 1px solid var(--rule); }
-.section-grid { display: grid; grid-template-columns: var(--rail) minmax(0, 1fr); gap: var(--gap); }
-.section-head h2 { position: sticky; top: 5.25rem; font-size: clamp(1.75rem, 2.6vw, 2.25rem); letter-spacing: -0.01em; }
-.section-body { min-width: 0; }
-.intro { color: var(--ink-2); max-width: 38em; margin-bottom: 2.25rem; }
-.sub-head { font-family: var(--sans); font-size: 1rem; font-weight: 600; color: var(--ink-2); margin: 2.75rem 0 1.25rem; }
-.sub-head:first-child { margin-top: 0; }
-.meta { font-family: var(--sans); font-size: 0.9375rem; line-height: 1.5; color: var(--ink-3); }
-.links { display: flex; flex-wrap: wrap; gap: 0.35rem 1.1rem; font-family: var(--sans); font-size: 0.9375rem; margin: 0.4rem 0 0; }
-@media (max-width: 880px) {
-  .section-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-  .section-head h2 { position: static; }
-  .hero-grid { grid-template-columns: 1fr; }
-}
-
-/* Latest */
-.dated { list-style: none; }
-.dated > li { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: 1rem; padding: 1rem 0; border-top: 1px solid var(--rule); }
-.dated > li:first-child { border-top: 0; padding-top: 0; }
-.dated time, .dated .when { font-family: var(--sans); font-size: 0.9375rem; color: var(--ink-3); padding-top: 0.2rem; font-variant-numeric: tabular-nums; }
-.dated p { margin: 0; max-width: 40em; }
-.dated .links { margin-top: 0.35rem; }
-.dated h4 { font-size: 1.1875rem; margin-bottom: 0.2rem; }
-.dated .meta { margin: 0 0 0.5rem; }
-@media (max-width: 560px) { .dated > li { grid-template-columns: 1fr; gap: 0.15rem; } }
-
-/* Research */
-.themes { display: grid; gap: 2.5rem; }
-.theme h3 { font-size: 1.375rem; margin-bottom: 0.6rem; }
-.theme p { max-width: 40em; }
-.theme .related { font-family: var(--sans); font-size: 0.9375rem; color: var(--ink-3); margin: 0; }
-
-/* Projects */
-.projects { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 var(--gap); }
-.project { padding: 1.4rem 0 1.6rem; border-top: 1px solid var(--rule); }
-.project h3 { font-size: 1.3125rem; }
-.project .meta { margin: 0.15rem 0 0.6rem; }
-.project p { margin-bottom: 0.5rem; }
-.project .partners { font-family: var(--sans); font-size: 0.9375rem; color: var(--ink-3); }
-.more-code { margin-top: 2rem; border-top: 1px solid var(--rule); padding-top: 1.25rem; }
-.more-code summary { font-family: var(--sans); font-size: 1rem; font-weight: 600; color: var(--ink); cursor: pointer; }
-.more-code ul { list-style: none; margin-top: 1rem; display: grid; gap: 0.8rem; }
-.more-code li { max-width: 44em; font-size: 1rem; }
-.more-code li a { font-family: var(--sans); font-weight: 600; }
-@media (max-width: 1040px) { .projects { grid-template-columns: 1fr; } }
+.ph figcaption { margin-top: 0.9rem; font-size: 0.875rem; color: var(--ink-3); }
+.ph noscript p { font-size: 0.9375rem; margin: 0.75rem 0 0; }
 
 /* Publications */
-.year-group { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr); gap: 1rem; padding-top: 1.4rem; border-top: 1px solid var(--rule); }
-.year-group + .year-group { margin-top: 0.4rem; }
-.year-group > h3 { font-family: var(--sans); font-size: 0.9375rem; font-weight: 600; color: var(--ink-3); padding-top: 0.2rem; }
-.pubs { list-style: none; }
-.pub { margin-bottom: 1.5rem; max-width: 44em; }
-.pub-title { display: inline; font-size: 1.125rem; font-weight: 600; line-height: 1.4; color: var(--ink); text-decoration-color: var(--rule); }
-a.pub-title:hover { color: var(--teal-strong); text-decoration-color: currentColor; }
-.pub-authors, .pub-venue { font-size: 1rem; line-height: 1.5; color: var(--ink-2); margin: 0.3rem 0 0; }
+.pubs { list-style: none; border-top: 1px solid var(--rule); }
+.pub { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: 1.5rem; padding: 1.6rem 0; border-bottom: 1px solid var(--rule); }
+.pub-year { display: flex; align-items: baseline; font-weight: 600; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.pub-year .key { background: var(--c-ink, var(--ink-3)); }
+.pub-body { max-width: 50rem; }
+.pub-title { font-size: 1.25rem; line-height: 1.35; font-weight: 600; letter-spacing: -0.01em; text-decoration: none; }
+a.pub-title:hover { text-decoration: underline; text-decoration-thickness: 2px; }
+.pub-authors, .pub-venue, .pub-note { font-size: 1rem; line-height: 1.5; color: var(--ink-2); margin: 0.35rem 0 0; }
 .pub-venue { margin-top: 0.1rem; }
-.pub-authors b { color: var(--ink); font-weight: 600; }
-.pub-note { font-size: 1rem; line-height: 1.5; color: var(--ink-2); margin: 0.4rem 0 0; }
-@media (max-width: 560px) { .year-group { grid-template-columns: 1fr; gap: 0.5rem; } }
+.pub-authors b { color: var(--ink); font-weight: 650; }
+@media (max-width: 640px) { .pub { grid-template-columns: 1fr; gap: 0.4rem; } }
 
-/* Team */
-.pi { margin-bottom: 3rem; }
-.pi h3 { font-size: 1.5rem; }
-.pi .role { font-family: var(--sans); color: var(--ink-2); font-size: 1rem; margin: 0.2rem 0 0.9rem; }
-.pi p { max-width: 38em; }
-.avatar { position: relative; aspect-ratio: 1; border-radius: 4px; overflow: hidden; background: var(--plate); display: grid; place-items: center; }
-.avatar::before { content: attr(data-initials); font-size: 1.75rem; color: var(--ink-3); letter-spacing: 0.02em; }
-.avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
-.people { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr)); gap: 1.75rem 1.5rem; }
-.person h4 { font-size: 1.0625rem; margin-top: 0.75rem; }
-.person p { margin: 0.15rem 0 0; font-family: var(--sans); font-size: 0.9375rem; line-height: 1.45; color: var(--ink-2); }
+/* People */
+.pi { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 1.5rem var(--gap); padding-bottom: clamp(3rem, 6vw, 4.5rem); margin-bottom: clamp(3rem, 6vw, 4.5rem); border-bottom: 1px solid var(--rule); }
+.pi h3 { font-size: clamp(2.25rem, 4vw, 3.25rem); line-height: 1; letter-spacing: -0.03em; font-weight: 700; font-variation-settings: "wdth" 116; }
+.pi .role { font-size: 1.125rem; color: var(--ink-2); margin-top: 0.6rem; }
+.pi-bio p { color: var(--ink-2); max-width: 38rem; }
+.group + .group { margin-top: clamp(2.5rem, 5vw, 3.5rem); }
+.group h3 { font-size: 1.125rem; font-weight: 600; color: var(--ink-2); margin-bottom: 1.25rem; }
+.people { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: 2rem 1.5rem; }
+.portrait { position: relative; aspect-ratio: 1; border-radius: 18px; overflow: hidden; background: var(--mist); display: grid; place-items: center; margin-bottom: 0.9rem; }
+.portrait::before { content: attr(data-initials); font-size: 2rem; font-weight: 600; color: var(--ink-3); font-variation-settings: "wdth" 116; }
+.portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.person:hover .portrait img { transform: scale(1.04); }
+@media (prefers-reduced-motion: reduce) { .portrait img { transition: none; } .person:hover .portrait img { transform: none; } }
+.person h4 { font-size: 1.1875rem; letter-spacing: -0.01em; }
+.person p { font-size: 0.9375rem; line-height: 1.45; color: var(--ink-2); margin: 0.25rem 0 0; }
 .person .since { color: var(--ink-3); }
-@media (max-width: 560px) {
-  .people { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 1rem; }
-}
+@media (max-width: 800px) { .pi { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .people { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 1rem; } }
 
-/* Join us */
-.positions { display: grid; gap: 0; border-bottom: 1px solid var(--rule); }
-.position { border-top: 1px solid var(--rule); }
-.position summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.25rem 1rem; padding: 1.15rem 0; }
+/* Join us, on the field */
+.join { background: var(--field); color: var(--on-field); }
+.join .section-head h2 { color: var(--on-field); }
+.join .section-head p { color: var(--on-field-2); }
+.positions { border-top: 1px solid rgb(255 255 255 / 0.14); }
+.position { border-bottom: 1px solid rgb(255 255 255 / 0.14); }
+.position summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.3rem 1.5rem; padding: 1.6rem 0; }
 .position summary::-webkit-details-marker { display: none; }
-.position summary::after { content: "+"; grid-column: 2; grid-row: 1 / span 3; align-self: center; font-family: var(--sans); font-size: 1.5rem; line-height: 1; color: var(--teal); width: 1.5rem; text-align: center; }
-.position[open] summary::after { content: "\2212"; }
-.position .kind, .position .where { font-family: var(--sans); font-size: 0.9375rem; color: var(--ink-3); }
-.position .title { font-size: 1.25rem; font-weight: 600; line-height: 1.3; color: var(--ink); }
-.position summary:hover .title { color: var(--teal-strong); }
-.position-body { padding: 0 0 1.5rem; max-width: 40em; }
-.position-body h4 { font-family: var(--sans); font-size: 0.9375rem; color: var(--ink-2); margin: 1rem 0 0.4rem; }
+.position .kind { font-size: 0.9375rem; color: var(--on-field-3); }
+.position .title { font-size: clamp(1.375rem, 2.6vw, 2rem); line-height: 1.15; font-weight: 650; letter-spacing: -0.02em; font-variation-settings: "wdth" 112; }
+.position .when { font-size: 0.9375rem; color: var(--on-field-2); }
+.position summary::after { content: ""; grid-column: 2; grid-row: 1 / span 3; align-self: center; width: 2.75rem; height: 2.75rem; border-radius: 50%; border: 1.5px solid rgb(255 255 255 / 0.3);
+  background: linear-gradient(var(--on-field), var(--on-field)) center / 14px 2px no-repeat, linear-gradient(var(--on-field), var(--on-field)) center / 2px 14px no-repeat; transition: transform 0.3s; }
+.position[open] summary::after { background: linear-gradient(var(--on-field), var(--on-field)) center / 14px 2px no-repeat; transform: rotate(180deg); }
+.position summary:hover .title { color: var(--coral); }
+.position-body { padding: 0 0 2rem; max-width: 44rem; color: var(--on-field-2); }
+.position-body h4 { font-size: 0.9375rem; color: var(--on-field); margin: 1.25rem 0 0.5rem; }
 .position-body ul { padding-left: 1.2em; }
-.position-body li { margin-bottom: 0.25rem; }
-.position-body .btn { margin-top: 1.25rem; }
+.position-body li { margin-bottom: 0.3rem; }
+.position-body a:not(.btn) { color: var(--on-field); }
+.position-body .btn { margin-top: 1.4rem; }
 
 /* Teaching and events */
-.entry h4 { font-size: 1.1875rem; margin: 0.15rem 0 0.45rem; }
-.entry p { max-width: 40em; }
-
-/* Funding */
-.funders { list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
-.funders li { background: var(--logo-plate); border: 1px solid var(--rule); border-radius: 6px; padding: 0.7rem 1rem; }
-.funders img { height: 46px; width: auto; max-width: 11rem; object-fit: contain; }
+.te-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem var(--gap); }
+.te-grid h3 { font-size: 1.125rem; font-weight: 600; color: var(--ink-2); margin-bottom: 1.25rem; }
+.entry + .entry { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--rule); }
+.entry h4 { font-size: 1.375rem; letter-spacing: -0.015em; font-variation-settings: "wdth" 108; margin: 0.35rem 0 0.6rem; }
+.entry p { font-size: 1rem; color: var(--ink-2); }
+@media (max-width: 800px) { .te-grid { grid-template-columns: 1fr; } }
 
 /* Contact */
-.sites { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem var(--gap); }
-.site h3 { font-size: 1.375rem; margin-bottom: 0.15rem; }
-.site address { font-style: normal; margin: 0.75rem 0; }
-.elsewhere { margin-top: 2.5rem; color: var(--ink-2); }
-@media (max-width: 680px) { .sites { grid-template-columns: 1fr; } }
+.cities { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem var(--gap); }
+.city h3 { font-size: clamp(3rem, 7vw, 6rem); line-height: 0.9; letter-spacing: -0.04em; font-weight: 700; font-variation-settings: "wdth" 120; margin-bottom: 1.25rem; }
+.city address { font-style: normal; color: var(--ink-2); margin-bottom: 0.9rem; }
+.city .meta { margin-bottom: 0.75rem; }
+.city a { font-weight: 600; }
+.elsewhere { margin-top: clamp(2.5rem, 5vw, 3.5rem); color: var(--ink-2); }
+.funders-wrap { margin-top: clamp(3rem, 6vw, 4.5rem); padding-top: 2rem; border-top: 1px solid var(--rule); }
+.funders-wrap h3 { font-size: 1.125rem; font-weight: 600; color: var(--ink-2); margin-bottom: 1.25rem; }
+.funders { list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 0.9rem; }
+.funders li { background: #FFFFFF; border-radius: 12px; padding: 0.75rem 1.1rem; box-shadow: 0 0 0 1px var(--rule); }
+.funders img { height: 44px; width: auto; max-width: 11rem; object-fit: contain; }
+@media (max-width: 700px) { .cities { grid-template-columns: 1fr; } }
 
 /* Footer */
-.site-footer { border-top: 1px solid var(--rule); padding-block: 2rem 2.5rem; font-family: var(--sans); font-size: 0.9375rem; color: var(--ink-3); }
+.site-footer { background: var(--field); color: var(--on-field-2); padding-block: 2.5rem; font-size: 0.9375rem; }
+.footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
 .site-footer p { margin: 0; }
+.site-footer a { color: var(--on-field); }
 
-/* Print: a clean reference sheet */
 @media print {
-  .site-header, .skip, .ph-controls, .ph-slider, .actions, .menu-toggle { display: none !important; }
-  .section { border-top: 0; padding-block: 1.5rem; }
-  .section-grid { grid-template-columns: 1fr; gap: 0.5rem; }
-  .section-head h2 { position: static; }
-  .position-body { display: block; }
-  a { color: inherit; }
+  .site-header, .stage, .actions, .chips, .ph-controls, .ph-slider, .menu-toggle { display: none !important; }
+  .story, .join, .site-footer { background: none; color: #000; }
+  .steps { margin-top: 0; }
+  .step { min-height: 0; padding: 1rem 0; }
 }
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="site-header">
+<header class="site-header" id="site-header">
   <div class="wrap header-inner">
     <a class="brand" href="#top">
-      <img class="brand-mark" src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_300,h_300,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/RGmY-tZORChqTR_A" alt="" width="30" height="30" decoding="async" onerror="this.remove()">
+      <img src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_300,h_300,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/RGmY-tZORChqTR_A" alt="" width="32" height="32" decoding="async" onerror="this.remove()">
       <span class="brand-name">Morilla Lab</span>
       <span class="brand-sub">MLiMO</span>
     </a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
     <nav class="site-nav" id="site-nav" aria-label="Sections">
       <ul>
-        <li><a href="#research">Research</a></li>
+        <li><a href="#topology">Research</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#publications">Publications</a></li>
-        <li><a href="#team">Team</a></li>
+        <li><a href="#people">People</a></li>
         <li><a href="#join">Join us</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -373,21 +395,221 @@ a.pub-title:hover { color: var(--teal-strong); text-decoration-color: currentCol
 
 <main id="main">
 
-<!-- ============================ HERO ============================ -->
-<section class="hero" id="top" aria-labelledby="hero-title">
-  <div class="wrap hero-grid">
-    <div class="hero-text">
-      <h1 id="hero-title">Morilla Lab</h1>
-      <p class="hero-sub">Machine Learning in Multi-Omics (MLiMO)</p>
-      <p class="lead">We build machine-learning methods that read the shape of biological data, with topology, deep learning and optimal transport, and we apply them to human disease and plant biology: from lung-transplant outcomes and leukaemia to tomato viruses and plant signalling peptides.</p>
-      <p class="hero-sites">Based in Málaga at IHSM La Mayora (UMA–CSIC) and in Paris at LAGA (CNRS, Université Sorbonne Paris Nord).</p>
-      <div class="actions">
-        <a class="btn btn-primary" href="#research">Our research</a>
-        <a class="btn" href="#join">Open positions</a>
+<!-- ======== THE STORY: one cloud of dots, transported between our questions ======== -->
+<section class="story" data-surface="dark" aria-label="Introduction and research themes">
+  <div class="stage">
+    <canvas id="stage-canvas" aria-hidden="true"></canvas>
+    <div class="stage-note" id="stage-note">
+      <span>Each dot moves to its next place along an approximate optimal-transport map.</span>
+      <button class="btn btn-ghost btn-small" id="replay" type="button">Replay</button>
+    </div>
+  </div>
+
+  <div class="steps">
+    <div class="step hero" id="top" data-shape="leaf">
+      <div class="wrap">
+        <div class="step-text">
+          <h1>The shape of data, from lungs to leaves.</h1>
+          <p class="lead">Morilla Lab builds topological and geometric machine learning for multi-omics data, and puts it to work on human disease and plant biology.</p>
+          <p class="sites">Machine Learning in Multi-Omics (MLiMO), in Málaga at IHSM La Mayora (UMA–CSIC) and in Paris at LAGA (CNRS, Université Sorbonne Paris Nord).</p>
+          <div class="actions">
+            <a class="btn btn-hot" href="#topology">Explore our research</a>
+            <a class="btn btn-ghost" href="#join">Open positions</a>
+          </div>
+        </div>
       </div>
     </div>
 
-    <figure class="ph" id="ph" aria-labelledby="ph-cap">
+    <article class="step theme-step" id="topology" data-shape="rings" data-t="topo">
+      <div class="wrap">
+        <div class="step-text">
+          <h2><span class="key" aria-hidden="true"></span>Topology and machine learning</h2>
+          <p>Persistent homology, manifold learning and optimal transport describe the shape of data in ways that survive noise and changes of scale. We build them into transformers, graph networks and autoencoders, and into privacy-preserving federated learning across hospitals.</p>
+          <p class="related">Projects: <a href="#p-taelcore">TaelCore</a>, <a href="#p-geotop">GeoTop</a>, <a href="#p-topoattention">TopoAttention</a>, <a href="#p-polygenic">Polygenic Deep Transport</a>. Preprint: <a href="https://arxiv.org/abs/2603.04323">PTOPOFL</a>. Or <a href="#demo">try persistent homology in your browser</a>.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="step theme-step" id="health" data-shape="lungs" data-t="health">
+      <div class="wrap">
+        <div class="step-text">
+          <h2><span class="key" aria-hidden="true"></span>Human disease</h2>
+          <p>With clinical partners we model patient data to predict outcomes and explain disease: mortality risk after lung transplantation, COVID-19 severity from the plasma proteome, treatment response in acute severe ulcerative colitis, the evolution of chronic lymphocytic leukaemia and its bone-marrow microenvironment, and polygenic inheritance in cancer, inflammatory and cardiovascular disease.</p>
+          <p class="related">Projects: <a href="#p-topoattention">TopoAttention</a>, <a href="#p-taelcore">TaelCore</a>, <a href="#p-mmd">MMD-LLC</a>, <a href="#p-polygenic">Polygenic Deep Transport</a>.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="step theme-step" id="plants" data-shape="leaf" data-t="plants">
+      <div class="wrap">
+        <div class="step-text">
+          <h2><span class="key" aria-hidden="true"></span>Plant biology</h2>
+          <p>At IHSM La Mayora we bring the same methods to plants: a cell-type-annotated spatial atlas of tomato leaves infected by tomato yellow leaf curl virus (TYLCV), prediction of small signalling peptides with S²-PepAnalyst, and multimodal models of how tomato roots integrate signals from fungal symbionts.</p>
+          <p class="related">Projects: <a href="#p-tylcv">tylcv-tomato-visium</a>, <a href="#p-s2pep">S²-PepAnalyst</a>.</p>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ======== LATEST ======== -->
+<section class="section" id="latest" data-surface="light" aria-labelledby="latest-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="latest-title">Latest</h2>
+      <p>Papers, preprints and new people. Dots follow the colours of our three themes.</p>
+    </div>
+    <ol class="timeline">
+      <li data-t="topo">
+        <time datetime="2026-11">November 2026</time>
+        <div>
+          <p>Paper in <i>Array</i>: GeoTop combines persistent homology with Lipschitz–Killing curvatures to classify medical images such as skin lesions.</p>
+          <p class="links"><a href="https://www.sciencedirect.com/science/article/pii/S259000562600740X">Read the paper</a><a href="https://github.com/MorillaLab/GeoTop">Code</a></p>
+        </div>
+      </li>
+      <li data-t="health">
+        <time datetime="2026-05">May 2026</time>
+        <div>
+          <p>Paper in <i>PLOS Digital Health</i>: topological feature engineering for the early identification of lung-transplant recipients at high risk of mortality.</p>
+          <p class="links"><a href="https://doi.org/10.1371/journal.pdig.0001050">Read the paper</a></p>
+        </div>
+      </li>
+      <li>
+        <time datetime="2026-04">April 2026</time>
+        <div><p>Adryel Hoszu joins as a PhD researcher. Amadou Diallo and Ali Cantez start their Master’s internships, on topological deep learning for chronic lymphocytic leukaemia and on AI models of plant–virus interactions.</p></div>
+      </li>
+      <li data-t="plants">
+        <time datetime="2026-03">March 2026</time>
+        <div>
+          <p>Paper in <i>BMC Genomics</i>: multimodal learning shows how fungal symbionts reprogram the way tomato roots integrate sensory signals.</p>
+          <p class="links"><a href="https://doi.org/10.1101/2025.07.25.666865">Preprint</a><a href="https://github.com/MorillaLab/CoMM-BIP">Code</a></p>
+        </div>
+      </li>
+      <li data-t="topo">
+        <time datetime="2026-03">March 2026</time>
+        <div>
+          <p>New preprint: PTOPOFL, privacy-preserving personalised federated learning via persistent homology.</p>
+          <p class="links"><a href="https://arxiv.org/abs/2603.04323">arXiv:2603.04323</a><a href="https://github.com/MorillaLab/TopoFederatedL">Code</a></p>
+        </div>
+      </li>
+      <li>
+        <time datetime="2026-01">January 2026</time>
+        <div><p>Melissa Aberbache joins as bioinformatics and AI technician.</p></div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ======== PROJECTS ======== -->
+<section class="section mist" id="projects" data-surface="light" aria-labelledby="projects-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="projects-title">Projects and software</h2>
+      <p>Funded projects and the open-source tools that come out of them. Our code is on <a href="https://github.com/morillalab">GitHub</a>.</p>
+      <div class="chips" role="group" aria-label="Filter projects by theme" data-filter="catalog">
+        <button class="chip" type="button" data-f="all" aria-pressed="true">All</button>
+        <button class="chip" type="button" data-f="topo" aria-pressed="false" data-t="topo"><span class="key" aria-hidden="true"></span>Topology &amp; ML</button>
+        <button class="chip" type="button" data-f="health" aria-pressed="false" data-t="health"><span class="key" aria-hidden="true"></span>Human disease</button>
+        <button class="chip" type="button" data-f="plants" aria-pressed="false" data-t="plants"><span class="key" aria-hidden="true"></span>Plant biology</button>
+      </div>
+    </div>
+
+    <ul class="catalog" id="catalog">
+      <li class="item" id="p-transcend" data-themes="topo" data-t="topo">
+        <div class="plate" data-shape="rings" data-seed="3" data-zoom="1.05" data-rot="0" aria-hidden="true"></div>
+        <h3>Transcend-id</h3>
+        <p class="meta">2026–present</p>
+        <p class="tags"><span data-t="topo">Topology &amp; ML</span></p>
+        <p>Integrative approaches from mathematics (AI), computer science and biology for modelling complex systems.</p>
+      </li>
+      <li class="item" id="p-mmd" data-themes="health" data-t="health">
+        <div class="plate" data-shape="cells" data-seed="5" data-zoom="1.1" data-rot="0" aria-hidden="true"></div>
+        <h3>MMD-LLC</h3>
+        <p class="meta">2025–present</p>
+        <p class="tags"><span data-t="health">Human disease</span></p>
+        <p>Multimodal, dynamic modelling of how chronic lymphocytic leukaemia (CLL) evolves.</p>
+        <p class="partners">With Infibrex and Université Paris Cité</p>
+      </li>
+      <li class="item" id="p-polygenic" data-themes="health topo" data-t="health">
+        <div class="plate" data-shape="helix" data-seed="9" data-zoom="1.08" data-rot="0" aria-hidden="true"></div>
+        <h3>Polygenic Deep Transport</h3>
+        <p class="meta">2024–present</p>
+        <p class="tags"><span data-t="health">Human disease</span><span data-t="topo">Topology &amp; ML</span></p>
+        <p>Topological deep learning and optimal transport to study polygenic inheritance in cancer, inflammatory and cardiovascular disease.</p>
+        <p class="partners">With CNRS, LAGA, MASCOT, IHSM and CSIC</p>
+        <!-- github.com/MorillaLab/PolygenicDeepTransport returns 404 (private or renamed). Add the link once the repository is public. -->
+      </li>
+      <li class="item" id="p-s2pep" data-themes="plants" data-t="plants">
+        <div class="plate" data-shape="leaf" data-seed="13" data-zoom="1.0" data-rot="10" aria-hidden="true"></div>
+        <h3>S²-PepAnalyst</h3>
+        <p class="meta">2023–present</p>
+        <p class="tags"><span data-t="plants">Plant biology</span></p>
+        <p>A web tool that predicts and classifies small signalling peptides in plants, combining machine learning with plant-specific datasets.</p>
+        <p class="partners">With CNRS, UMA and CSIC</p>
+        <p class="links"><a href="https://www.s2-pepanalyst.uma.es">Open the web tool</a><a href="https://www.biorxiv.org/content/10.1101/2024.08.02.606319v2.abstract">Preprint</a><a href="https://github.com/MorillaLab/s2-PEPANALYST">Code</a></p>
+      </li>
+      <li class="item" id="p-tylcv" data-themes="plants" data-t="plants">
+        <div class="plate" data-shape="leaf" data-seed="17" data-zoom="1.7" data-rot="-35" data-ox="40" data-oy="60" aria-hidden="true"></div>
+        <h3>tylcv-tomato-visium</h3>
+        <p class="meta">2023–present</p>
+        <p class="tags"><span data-t="plants">Plant biology</span></p>
+        <p>Spatial transcriptomics of tomato infected by tomato yellow leaf curl virus, using manifold integration and topological machine learning to map the infection across leaf cell types.</p>
+        <p class="partners">With UMA, CSIC and IHSM</p>
+        <p class="links"><a href="https://github.com/MorillaLab/tylcv-tomato-visium">Code</a></p>
+      </li>
+      <li class="item" id="p-topoattention" data-themes="health topo" data-t="health">
+        <div class="plate" data-shape="lungs" data-seed="21" data-zoom="1.0" data-rot="0" aria-hidden="true"></div>
+        <h3>TopoAttention</h3>
+        <p class="meta">2022–present</p>
+        <p class="tags"><span data-t="health">Human disease</span><span data-t="topo">Topology &amp; ML</span></p>
+        <p>Combines topological data analysis with transformer architectures to improve the prediction of mortality risk after lung transplantation.</p>
+        <p class="partners">With CNRS, LAGA and Université Sorbonne Paris Nord</p>
+        <p class="links"><a href="https://doi.org/10.1371/journal.pdig.0001050">Paper</a><a href="https://github.com/MorillaLab/TopoAttention">Code</a></p>
+      </li>
+      <li class="item" id="p-geotop" data-themes="topo health" data-t="topo">
+        <div class="plate" data-shape="rings" data-seed="25" data-zoom="1.85" data-rot="0" data-ox="-150" data-oy="-150" aria-hidden="true"></div>
+        <h3>GeoTop</h3>
+        <p class="meta">2022–present</p>
+        <p class="tags"><span data-t="topo">Topology &amp; ML</span><span data-t="health">Human disease</span></p>
+        <p>Image classification that combines persistent homology with Lipschitz–Killing curvatures, applied to medical images such as skin lesions.</p>
+        <p class="partners">With CNRS, LAGA, MAP5 and IHSM</p>
+        <p class="links"><a href="https://www.sciencedirect.com/science/article/pii/S259000562600740X">Paper</a><a href="https://arxiv.org/abs/2311.16157">Preprint</a><a href="https://github.com/MorillaLab/GeoTop">Code</a></p>
+      </li>
+      <li class="item" id="p-taelcore" data-themes="topo health" data-t="health">
+        <div class="plate" data-shape="lungs" data-seed="29" data-zoom="1.9" data-rot="0" data-ox="150" data-oy="40" aria-hidden="true"></div>
+        <h3>TaelCore</h3>
+        <p class="meta">2022–present</p>
+        <p class="tags"><span data-t="topo">Topology &amp; ML</span><span data-t="health">Human disease</span></p>
+        <p>Dimensionality reduction that combines topological data analysis with machine learning, for better risk prediction in biomedicine. Install with <code>pip install taelcore</code>.</p>
+        <p class="partners">With CNRS, LAGA and Université Sorbonne Paris Nord</p>
+        <p class="links"><a href="https://www.sciencedirect.com/science/article/pii/S0010482524000532">Paper</a><a href="https://pypi.org/project/Taelcore/">PyPI</a><a href="https://github.com/MorillaLab/Taelcore">Code</a></p>
+      </li>
+    </ul>
+
+    <details class="more-code">
+      <summary>More open-source repositories (7)</summary>
+      <ul>
+        <li><a href="https://github.com/MorillaLab/PlantAG">PlantAG</a>: automated cell-type annotation for plant spatial transcriptomics with no reference atlas, coupling Vietoris–Rips persistent homology with a graph convolutional network.</li>
+        <li><a href="https://github.com/MorillaLab/PhytoPepBERT">PhytoPepBERT</a>: single-sequence language modelling that learns family-defining structure in plant signalling peptides.</li>
+        <li><a href="https://github.com/MorillaLab/PolyCLIP-T">PolyCLIP-T</a>: contrastive, CLIP-like learning to find low-penetrance polygenic variants in complex diseases.</li>
+        <li><a href="https://github.com/MorillaLab/TopoGCN-LT-Insights">TopoGCN-LT-Insights</a>: graph convolutional networks aided by topological data analysis, for lung-transplantation outcomes.</li>
+        <li><a href="https://github.com/MorillaLab/RL-TBoost">RL-TBoost</a>: reinforcement learning enhanced by topological data analysis, to predict one-year mortality after lung transplantation.</li>
+        <li><a href="https://github.com/MorillaLab/Genetic-Bell">Genetic-Bell</a>: a non-linear model of epistasis.</li>
+        <li><a href="https://github.com/MorillaLab/multimorbidity-SEM">multimorbidity-SEM</a>: structural equation modelling of the links between women’s cancers and cardiovascular and chronic inflammatory diseases.</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<!-- ======== LIVE DEMO ======== -->
+<section class="section" id="demo" data-surface="light" aria-labelledby="demo-title">
+  <div class="wrap demo-grid">
+    <div class="demo-copy">
+      <h2 id="demo-title">Persistent homology, live</h2>
+      <p>Much of our work starts from one idea. Join points that are closer than a scale <span class="math">ε</span>, fill in triangles, and watch which connected components and loops appear and disappear as <span class="math">ε</span> grows.</p>
+      <p>The barcode records each one as a bar. Long bars tend to be real structure; short bars, noise. Drag the slider, or press Play.</p>
+    </div>
+    <figure class="ph" id="ph" aria-label="Interactive persistent homology figure">
       <div class="ph-stage">
         <canvas id="ph-cloud" role="img" aria-label="A synthetic point cloud, two noisy rings and a few stray points, with its Vietoris–Rips complex drawn at the current scale."></canvas>
       </div>
@@ -397,361 +619,222 @@ a.pub-title:hover { color: var(--teal-strong); text-decoration-color: currentCol
         <input class="ph-range" id="ph-eps" type="range" min="0" max="2" step="0.005" value="0.62">
       </div>
       <div class="ph-controls">
-        <p class="ph-stats" style="margin:0">
+        <p class="ph-stats">
           <span><i>ε</i> = <b id="ph-eps-out">0.62</b></span>
           <span><b id="ph-b0">1</b> <span id="ph-b0-word">component</span> (<i>β</i><sub>0</sub>)</span>
           <span><b id="ph-b1">2</b> <span id="ph-b1-word">loops</span> (<i>β</i><sub>1</sub>)</span>
         </p>
         <div class="ph-buttons">
-          <button class="btn btn-small" id="ph-play" type="button" aria-pressed="false">Play</button>
-          <button class="btn btn-small" id="ph-new" type="button">New sample</button>
+          <button class="btn btn-ink btn-small" id="ph-play" type="button" aria-pressed="false">Play</button>
+          <button class="btn btn-ghost btn-small" id="ph-new" type="button">New sample</button>
         </div>
       </div>
-      <figcaption id="ph-cap"><strong>Figure 1.</strong> Persistent homology, the idea behind much of our work. Drag <i>ε</i>: points closer than <i>ε</i> are joined, and a triangle fills in once all three of its sides are present (a Vietoris–Rips complex). The barcode records when connected components (<i>H</i><sub>0</sub>) merge and when loops (<i>H</i><sub>1</sub>) open and close; loops alive at the current scale are traced in colour. Long bars tend to be real structure, short bars noise. Synthetic data.</figcaption>
+      <figcaption>A Vietoris–Rips filtration on synthetic data, computed in your browser. Loops alive at the current scale are traced in colour.</figcaption>
       <noscript><p>This figure is interactive and needs JavaScript.</p></noscript>
     </figure>
   </div>
 </section>
 
-<!-- ============================ LATEST ============================ -->
-<section class="section" id="latest" aria-labelledby="latest-title">
-  <div class="wrap section-grid">
-    <div class="section-head"><h2 id="latest-title">Latest</h2></div>
-    <div class="section-body">
-      <ol class="dated">
-        <li>
-          <time datetime="2026-11">November 2026</time>
-          <div>
-            <p>Paper in <i>Array</i>: GeoTop, which combines persistent homology with Lipschitz–Killing curvatures to classify medical images such as skin lesions.</p>
-            <p class="links"><a href="https://www.sciencedirect.com/science/article/pii/S259000562600740X">Read the paper</a><a href="https://github.com/MorillaLab/GeoTop">Code</a></p>
-          </div>
-        </li>
-        <li>
-          <time datetime="2026-05">May 2026</time>
-          <div>
-            <p>Paper in <i>PLOS Digital Health</i>: topological feature engineering for the early identification of lung-transplant recipients at high risk of mortality.</p>
-            <p class="links"><a href="https://doi.org/10.1371/journal.pdig.0001050">Read the paper</a></p>
-          </div>
-        </li>
-        <li>
-          <time datetime="2026-04">April 2026</time>
-          <div><p>Adryel Hoszu joins as a PhD researcher. Amadou Diallo and Ali Cantez start their Master’s internships, on topological deep learning for chronic lymphocytic leukaemia and on AI models of plant–virus interactions.</p></div>
-        </li>
-        <li>
-          <time datetime="2026-03">March 2026</time>
-          <div>
-            <p>Paper in <i>BMC Genomics</i>: multimodal learning shows how fungal symbionts reprogram the way tomato roots integrate sensory signals.</p>
-            <p class="links"><a href="https://doi.org/10.1101/2025.07.25.666865">Preprint</a><a href="https://github.com/MorillaLab/CoMM-BIP">Code</a></p>
-          </div>
-        </li>
-        <li>
-          <time datetime="2026-03">March 2026</time>
-          <div>
-            <p>New preprint: PTOPOFL, privacy-preserving personalised federated learning via persistent homology.</p>
-            <p class="links"><a href="https://arxiv.org/abs/2603.04323">arXiv:2603.04323</a><a href="https://github.com/MorillaLab/TopoFederatedL">Code</a></p>
-          </div>
-        </li>
-        <li>
-          <time datetime="2026-01">January 2026</time>
-          <div><p>Melissa Aberbache joins as bioinformatics and AI technician.</p></div>
-        </li>
-      </ol>
-    </div>
-  </div>
-</section>
-
-<!-- ============================ RESEARCH ============================ -->
-<section class="section" id="research" aria-labelledby="research-title">
-  <div class="wrap section-grid">
-    <div class="section-head"><h2 id="research-title">Research</h2></div>
-    <div class="section-body">
-      <p class="intro">Our methods come from topology and machine learning; our questions come from medicine and plant science. The same tools travel between the two.</p>
-      <div class="themes">
-        <article class="theme">
-          <h3>Topology and geometry for machine learning</h3>
-          <p>Persistent homology, manifold learning and optimal transport describe the shape of data in ways that survive noise and changes of scale. We turn those descriptions into features and layers for deep-learning models, such as transformers, graph networks and autoencoders, and into privacy-preserving federated learning across hospitals.</p>
-          <p class="related">Projects: <a href="#taelcore">TaelCore</a>, <a href="#geotop">GeoTop</a>, <a href="#topoattention">TopoAttention</a>, <a href="#polygenic">Polygenic Deep Transport</a>. Preprint: <a href="https://arxiv.org/abs/2603.04323">PTOPOFL</a>.</p>
-        </article>
-        <article class="theme">
-          <h3>Human disease and clinical prediction</h3>
-          <p>With clinical partners we model patient data to predict outcomes and explain disease: mortality risk after lung transplantation, COVID-19 severity from the plasma proteome, treatment response in acute severe ulcerative colitis, the evolution of chronic lymphocytic leukaemia and its bone-marrow microenvironment, and polygenic inheritance in cancer, inflammatory and cardiovascular disease.</p>
-          <p class="related">Projects: <a href="#topoattention">TopoAttention</a>, <a href="#taelcore">TaelCore</a>, <a href="#mmd-llc">MMD-LLC</a>, <a href="#polygenic">Polygenic Deep Transport</a>.</p>
-        </article>
-        <article class="theme">
-          <h3>Plant biology and plant–virus interactions</h3>
-          <p>At IHSM La Mayora we bring the same methods to plants: a cell-type-annotated spatial atlas of tomato leaves infected by tomato yellow leaf curl virus (TYLCV), prediction of small signalling peptides with S²-PepAnalyst, and multimodal models of how tomato roots integrate signals from fungal symbionts.</p>
-          <p class="related">Projects: <a href="#tylcv">Topo-Spatial-Transcriptomics-TYLCV</a>, <a href="#s2pep">S²-PepAnalyst</a>.</p>
-        </article>
+<!-- ======== PUBLICATIONS ========
+     To add a paper, copy one <li class="pub"> block. data-type is journal, preprint or patent;
+     data-t is the theme colour (topo, health or plants). Lab members go in <b>…</b>. -->
+<section class="section mist" id="publications" data-surface="light" aria-labelledby="pubs-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="pubs-title">Publications</h2>
+      <p>More than 27 peer-reviewed articles across machine learning, mathematical biology and multi-omics. A selection, with current lab members in bold; there is more on <a href="https://orcid.org/0000-0002-5100-5990">ORCID</a>.</p>
+      <div class="chips" role="group" aria-label="Filter publications by type" data-filter="pubs">
+        <button class="chip" type="button" data-f="all" aria-pressed="true">All</button>
+        <button class="chip" type="button" data-f="journal" aria-pressed="false">Journal papers</button>
+        <button class="chip" type="button" data-f="preprint" aria-pressed="false">Preprints</button>
+        <button class="chip" type="button" data-f="patent" aria-pressed="false">Patents</button>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ============================ PROJECTS ============================ -->
-<section class="section" id="projects" aria-labelledby="projects-title">
-  <div class="wrap section-grid">
-    <div class="section-head"><h2 id="projects-title">Projects</h2></div>
-    <div class="section-body">
-      <p class="intro">Funded projects and the software that comes out of them. Our code is open on <a href="https://github.com/morillalab">GitHub</a>.</p>
-      <ul class="projects">
-        <li class="project" id="transcend">
-          <h3>Transcend-id</h3>
-          <p class="meta">2026–present</p>
-          <p>Integrative approaches from mathematics (AI), computer science and biology for modelling complex systems.</p>
-        </li>
-        <li class="project" id="mmd-llc">
-          <h3>MMD-LLC</h3>
-          <p class="meta">2025–present</p>
-          <p>Multimodal, dynamic modelling of how chronic lymphocytic leukaemia (CLL) evolves.</p>
-          <p class="partners">With Infibrex and Université Paris Cité</p>
-        </li>
-        <li class="project" id="polygenic">
-          <h3>Polygenic Deep Transport</h3>
-          <p class="meta">2024–present</p>
-          <p>Topological deep learning and optimal transport to study polygenic inheritance in cancer, inflammatory and cardiovascular disease.</p>
-          <p class="partners">With CNRS, LAGA, MASCOT, IHSM and CSIC</p>
-          <!-- The previous link, github.com/MorillaLab/PolygenicDeepTransport, returns 404 (private or renamed). Add the repository link here once it is public. -->
-        </li>
-        <li class="project" id="s2pep">
-          <h3>S²-PepAnalyst</h3>
-          <p class="meta">2023–present</p>
-          <p>A web tool that predicts and classifies small signalling peptides in plants, combining machine learning with plant-specific datasets.</p>
-          <p class="partners">With CNRS, UMA and CSIC</p>
-          <p class="links"><a href="https://www.s2-pepanalyst.uma.es">Open the web tool</a><a href="https://www.biorxiv.org/content/10.1101/2024.08.02.606319v2.abstract">Preprint</a><a href="https://github.com/MorillaLab/s2-PEPANALYST">Code</a></p>
-        </li>
-        <li class="project" id="tylcv">
-          <h3>Topo-Spatial-Transcriptomics-TYLCV</h3>
-          <p class="meta">2023–present</p>
-          <p>Spatial transcriptomics of tomato infected by tomato yellow leaf curl virus, using manifold integration and topological machine learning to map the infection across leaf cell types.</p>
-          <p class="partners">With UMA, CSIC and IHSM</p>
-          <p class="links"><a href="https://github.com/MorillaLab/tylcv-tomato-visium">Code</a></p>
-        </li>
-        <li class="project" id="topoattention">
-          <h3>TopoAttention</h3>
-          <p class="meta">2022–present</p>
-          <p>Combines topological data analysis with transformer architectures to improve the prediction of mortality risk after lung transplantation.</p>
-          <p class="partners">With CNRS, LAGA and Université Sorbonne Paris Nord</p>
-          <p class="links"><a href="https://doi.org/10.1371/journal.pdig.0001050">Paper</a><a href="https://github.com/MorillaLab/TopoAttention">Code</a></p>
-        </li>
-        <li class="project" id="geotop">
-          <h3>GeoTop</h3>
-          <p class="meta">2022–present</p>
-          <p>Image classification that combines geometric and topological data analysis, applied to biological and multi-omics datasets.</p>
-          <p class="partners">With CNRS, LAGA, MAP5 and IHSM</p>
-          <p class="links"><a href="https://www.sciencedirect.com/science/article/pii/S259000562600740X">Paper</a><a href="https://arxiv.org/abs/2311.16157">Preprint</a><a href="https://github.com/MorillaLab/GeoTop">Code</a></p>
-        </li>
-        <li class="project" id="taelcore">
-          <h3>TaelCore</h3>
-          <p class="meta">2022–present</p>
-          <p>Dimensionality reduction that combines topological data analysis with machine learning, for better predictive models in biomedicine. Install with <code>pip install taelcore</code>.</p>
-          <p class="partners">With CNRS, LAGA and Université Sorbonne Paris Nord</p>
-          <p class="links"><a href="https://www.sciencedirect.com/science/article/pii/S0010482524000532">Paper</a><a href="https://pypi.org/project/Taelcore/">PyPI</a><a href="https://github.com/MorillaLab/Taelcore">Code</a></p>
-        </li>
-      </ul>
-
-      <details class="more-code">
-        <summary>More open-source repositories (7)</summary>
-        <ul>
-          <li><a href="https://github.com/MorillaLab/PlantAG">PlantAG</a>: automated cell-type annotation for plant spatial transcriptomics with no reference atlas, coupling Vietoris–Rips persistent homology with a graph convolutional network.</li>
-          <li><a href="https://github.com/MorillaLab/PhytoPepBERT">PhytoPepBERT</a>: single-sequence language modelling that learns family-defining structure in plant signalling peptides.</li>
-          <li><a href="https://github.com/MorillaLab/PolyCLIP-T">PolyCLIP-T</a>: contrastive, CLIP-like learning to find low-penetrance polygenic variants in complex diseases.</li>
-          <li><a href="https://github.com/MorillaLab/TopoGCN-LT-Insights">TopoGCN-LT-Insights</a>: graph convolutional networks aided by topological data analysis, for lung-transplantation outcomes.</li>
-          <li><a href="https://github.com/MorillaLab/RL-TBoost">RL-TBoost</a>: reinforcement learning enhanced by topological data analysis, to predict one-year mortality after lung transplantation.</li>
-          <li><a href="https://github.com/MorillaLab/Genetic-Bell">Genetic-Bell</a>: a non-linear model of epistasis.</li>
-          <li><a href="https://github.com/MorillaLab/multimorbidity-SEM">multimorbidity-SEM</a>: structural equation modelling of the links between women’s cancers and cardiovascular and chronic inflammatory diseases.</li>
-        </ul>
-      </details>
-    </div>
-  </div>
-</section>
-
-<!-- ============================ PUBLICATIONS ============================
-     To add a paper, copy one <li class="pub"> block into the right year.
-     Lab members are in <b>…</b>. Link the title to the DOI of the published version. -->
-<section class="section" id="publications" aria-labelledby="pubs-title">
-  <div class="wrap section-grid">
-    <div class="section-head"><h2 id="pubs-title">Publications</h2></div>
-    <div class="section-body">
-      <p class="intro">More than 27 peer-reviewed articles across machine learning, mathematical biology and multi-omics. A selection follows, with current lab members in bold; there is more on <a href="https://orcid.org/0000-0002-5100-5990">ORCID</a>.</p>
-
-      <div class="year-group">
-        <h3>2026</h3>
-        <ul class="pubs">
-          <li class="pub">
-            <a class="pub-title" href="https://www.sciencedirect.com/science/article/pii/S259000562600740X">GeoTop: advancing image classification with geometric–topological analysis</a>
-            <p class="pub-authors">Abaach, <b>Morilla</b></p>
-            <p class="pub-venue"><i>Array</i></p>
-            <p class="links"><a href="https://arxiv.org/abs/2311.16157">Preprint</a><a href="https://github.com/MorillaLab/GeoTop">Code</a></p>
-          </li>
-          <li class="pub">
-            <a class="pub-title" href="https://doi.org/10.1371/journal.pdig.0001050">Early identification of high-risk individuals for mortality after lung transplantation: a retrospective cohort study with topological feature engineering</a>
-            <p class="pub-authors">Tran-Dinh, Atchadé, Tanaka, Lortat-Jacob, Castier, Mal, Messika, Mordant, Montravers, <b>Morilla</b></p>
-            <p class="pub-venue"><i>PLOS Digital Health</i> 5(5)</p>
-            <p class="links"><a href="https://github.com/MorillaLab/TopoAttention">Code</a></p>
-          </li>
-          <li class="pub">
-            <!-- TODO: link this title to the BMC Genomics DOI once known. -->
-            <span class="pub-title">Multimodal learning reveals plants’ hidden sensory integration logic</span>
-            <p class="pub-authors"><b>Vomo-Donfack</b>, León Morcillo, Ginot, Doblas, <b>Morilla</b></p>
-            <p class="pub-venue"><i>BMC Genomics</i> 27: 312</p>
-            <p class="links"><a href="https://doi.org/10.1101/2025.07.25.666865">Preprint</a><a href="https://github.com/MorillaLab/CoMM-BIP">Code</a></p>
-          </li>
-          <li class="pub">
-            <!-- TODO: link this title to the Plant Biotechnology Journal DOI once known. -->
-            <span class="pub-title">S²-PepAnalyst: a web tool for predicting plant small signalling peptides</span>
-            <p class="pub-authors"><b>Vomo-Donfack</b>, Abaach, <b>Luna</b>, Ginot, Doblas, <b>Morilla</b></p>
-            <p class="pub-venue"><i>Plant Biotechnology Journal</i></p>
-            <p class="links"><a href="https://www.s2-pepanalyst.uma.es">Web tool</a><a href="https://www.biorxiv.org/content/10.1101/2024.08.02.606319v2.abstract">Preprint</a><a href="https://github.com/MorillaLab/s2-PEPANALYST">Code</a></p>
-          </li>
-          <li class="pub">
-            <a class="pub-title" href="https://arxiv.org/abs/2603.04323">PTOPOFL: privacy-preserving personalised federated learning via persistent homology</a>
-            <p class="pub-authors"><b>Vomo-Donfack</b>, <b>Hoszu</b>, Ginot, <b>Morilla</b></p>
-            <p class="pub-venue">Preprint, arXiv:2603.04323</p>
-            <p class="links"><a href="https://github.com/MorillaLab/TopoFederatedL">Code</a></p>
-          </li>
-        </ul>
-      </div>
-
-      <div class="year-group">
-        <h3>2025</h3>
-        <ul class="pubs">
-          <li class="pub">
-            <a class="pub-title" href="https://doi.org/10.1093/plphys/kiaf667"><i>Arabidopsis</i> lines with modified ascorbate concentrations reveal a link between ascorbate and auxin biosynthesis</a>
-            <p class="pub-authors">Fenech, Zulian, Moya-Cuevas, Arnaud, <b>Morilla</b>, Smirnoff, Botella, Stepanova, Alonso, Martín-Pizarro, Amorim-Silva</p>
-            <p class="pub-venue"><i>Plant Physiology</i> 200(2): kiaf667</p>
-          </li>
-        </ul>
-      </div>
-
-      <div class="year-group">
-        <h3>2024</h3>
-        <ul class="pubs">
-          <li class="pub">
-            <a class="pub-title" href="https://www.sciencedirect.com/science/article/pii/S0010482524000532">Novel dimensionality reduction method, Taelcore, enhances lung transplantation risk prediction</a>
-            <p class="pub-authors">Gouiaa, <b>Vomo-Donfack</b>, Tran-Dinh, <b>Morilla</b></p>
-            <p class="pub-venue"><i>Computers in Biology and Medicine</i> 169</p>
-            <p class="links"><a href="https://pypi.org/project/Taelcore/">PyPI</a><a href="https://github.com/MorillaLab/Taelcore">Code</a></p>
-          </li>
-        </ul>
-      </div>
-
-      <div class="year-group">
-        <h3>2023</h3>
-        <ul class="pubs">
-          <li class="pub">
-            <a class="pub-title" href="https://doi.org/10.3390/math11244916">The genotypic imperative: unraveling disease-permittivity in functional modules of complex diseases</a>
-            <p class="pub-authors">Kaba, <b>Vomo-Donfack</b>, <b>Morilla</b></p>
-            <p class="pub-venue"><i>Mathematics</i> 11(24): 4916</p>
-          </li>
-          <li class="pub">
-            <a class="pub-title" href="https://doi.org/10.26508/lsa.202201624">Plasma proteome dynamics of COVID-19 severity learnt by a graph convolutional network of multi-scale topology</a>
-            <p class="pub-authors">Gauthier, Tran-Dinh, <b>Morilla</b></p>
-            <p class="pub-venue"><i>Life Science Alliance</i> 6(5): e202201624</p>
-          </li>
-        </ul>
-      </div>
-
-      <div class="year-group">
-        <h3>2022</h3>
-        <ul class="pubs">
-          <li class="pub">
-            <a class="pub-title" href="https://doi.org/10.1182/blood-2022-158450">Metabolic reprogramming of bone marrow stromal cells in chronic lymphocytic leukemia</a>
-            <p class="pub-authors">Lazarian, Ferreira, <b>Morilla</b>, Saindoy, Bisio, Dulphy, Balabanian, Thieblemont, Varin-Blank, Ledoux, et al.</p>
-            <p class="pub-venue"><i>Blood</i> 140 (Suppl. 1): 6996–6997. Meeting abstract.</p>
-          </li>
-        </ul>
-      </div>
-
-      <h3 class="sub-head" id="patents">Patents</h3>
-      <div class="year-group">
-        <h3>2022</h3>
-        <ul class="pubs">
-          <li class="pub">
-            <a class="pub-title" href="https://patents.google.com/patent/US20220098665A1">Methods for predicting acute severe colitis treatment response</a>
-            <p class="pub-venue">US patent application 17/340,534, published as US 2022/0098665 A1 on 31 March 2022</p>
-            <p class="pub-authors">Ogier-Denis, Treton, Bouhnik, <b>Morilla</b>, Laharie, Wainrib, Uzzan</p>
-            <p class="pub-note">Covers predicting whether a patient with acute severe colitis will respond to anti-TNFα treatment (infliximab), with kits for the measurement.</p>
-          </li>
-        </ul>
-      </div>
-      <div class="year-group">
-        <h3>2021</h3>
-        <ul class="pubs">
-          <li class="pub">
-            <a class="pub-title" href="https://patents.google.com/patent/US11060147">Methods for predicting acute severe colitis treatment response</a>
-            <p class="pub-venue">US patent 11,060,147 B2, granted 13 July 2021</p>
-            <p class="pub-authors">Ogier-Denis, Treton, Bouhnik, <b>Morilla</b>, Laharie, Wainrib, Uzzan</p>
-            <p class="pub-note">Predicts response to first- and second-line treatment (corticosteroids, then infliximab or cyclosporine) in acute severe ulcerative colitis from colonic microRNA levels. Implemented as the DeepCol software.</p>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================ TEAM ============================ -->
-<section class="section" id="team" aria-labelledby="team-title">
-  <div class="wrap section-grid">
-    <div class="section-head"><h2 id="team-title">Team</h2></div>
-    <div class="section-body">
-      <div class="pi">
-        <!-- To add a portrait of Ian Morilla, copy an .avatar block from the team members below and put it here. -->
-        <div>
-          <h3>Ian Morilla</h3>
-          <p class="role">Principal investigator</p>
-          <p>Ian Morilla leads MLiMO at IHSM La Mayora (UMA–CSIC, Málaga) and holds a research position at LAGA, Institut Galilée (CNRS, Université Sorbonne Paris Nord). His work connects topological data analysis, deep learning and integrative multi-omics, in human disease and in plant biology. He has authored more than 27 peer-reviewed articles and is a co-inventor on US patent filings for AI-based prediction of treatment response.</p>
-          <p class="links"><a href="mailto:ian.morilla@ihsm.uma-csic.es">Email (Málaga)</a><a href="mailto:morilla@math.univ-paris13.fr">Email (Paris)</a><a href="https://orcid.org/0000-0002-5100-5990">ORCID</a><a href="https://github.com/morillalab">GitHub</a></p>
+    <ol class="pubs" id="pubs">
+      <li class="pub" data-type="journal" data-t="topo">
+        <span class="pub-year"><span class="key" aria-hidden="true"></span>2026</span>
+        <div class="pub-body">
+          <a class="pub-title" href="https://www.sciencedirect.com/science/article/pii/S259000562600740X">GeoTop: advancing image classification with geometric–topological analysis</a>
+          <p class="pub-authors">Abaach, <b>Morilla</b></p>
+          <p class="pub-venue"><i>Array</i></p>
+          <p class="links"><a href="https://arxiv.org/abs/2311.16157">Preprint</a><a href="https://github.com/MorillaLab/GeoTop">Code</a></p>
         </div>
-      </div>
+      </li>
+      <li class="pub" data-type="journal" data-t="health">
+        <span class="pub-year"><span class="key" aria-hidden="true"></span>2026</span>
+        <div class="pub-body">
+          <a class="pub-title" href="https://doi.org/10.1371/journal.pdig.0001050">Early identification of high-risk individuals for mortality after lung transplantation: a retrospective cohort study with topological feature engineering</a>
+          <p class="pub-authors">Tran-Dinh, Atchadé, Tanaka, Lortat-Jacob, Castier, Mal, Messika, Mordant, Montravers, <b>Morilla</b></p>
+          <p class="pub-venue"><i>PLOS Digital Health</i> 5(5)</p>
+          <p class="links"><a href="https://github.com/MorillaLab/TopoAttention">Code</a></p>
+        </div>
+      </li>
+      <li class="pub" data-type="journal" data-t="plants">
+        <span class="pub-year"><span class="key" aria-hidden="true"></span>2026</span>
+        <div class="pub-body">
+          <!-- TODO: link this title to the BMC Genomics DOI once known. -->
+          <span class="pub-title">Multimodal learning reveals plants’ hidden sensory integration logic</span>
+          <p class="pub-authors"><b>Vomo-Donfack</b>, León Morcillo, Ginot, Doblas, <b>Morilla</b></p>
+          <p class="pub-venue"><i>BMC Genomics</i> 27: 312</p>
+          <p class="links"><a href="https://doi.org/10.1101/2025.07.25.666865">Preprint</a><a href="https://github.com/MorillaLab/CoMM-BIP">Code</a></p>
+        </div>
+      </li>
+      <li class="pub" data-type="journal" data-t="plants">
+        <span class="pub-year"><span class="key" aria-hidden="true"></span>2026</span>
+        <div class="pub-body">
+          <!-- TODO: link this title to the Plant Biotechnology Journal DOI once known. -->
+          <span class="pub-title">S²-PepAnalyst: a web tool for predicting plant small signalling peptides</span>
+          <p class="pub-authors"><b>Vomo-Donfack</b>, Abaach, <b>Luna</b>, Ginot, Doblas, <b>Morilla</b></p>
+          <p class="pub-venue"><i>Plant Biotechnology Journal</i></p>
+          <p class="links"><a href="https://www.s2-pepanalyst.uma.es">Web tool</a><a href="https://www.biorxiv.org/content/10.1101/2024.08.02.606319v2.abstract">Preprint</a><a href="https://github.com/MorillaLab/s2-PEPANALYST">Code</a></p>
+        </div>
+      </li>
+      <li class="pub" data-type="preprint" data-t="topo">
+        <span class="pub-year"><span class="key" aria-hidden="true"></span>2026</span>
+        <div class="pub-body">
+          <a class="pub-title" href="https://arxiv.org/abs/2603.04323">PTOPOFL: privacy-preserving personalised federated learning via persistent homology</a>
+          <p class="pub-authors"><b>Vomo-Donfack</b>, <b>Hoszu</b>, Ginot, <b>Morilla</b></p>
+          <p class="pub-venue">Preprint, arXiv:2603.04323</p>
+          <p class="links"><a href="https://github.com/MorillaLab/TopoFederatedL">Code</a></p>
+        </div>
+      </li>
+      <li class="pub" data-type="journal" data-t="plants">
+        <span class="pub-year"><span class="key" aria-hidden="true"></span>2025</span>
+        <div class="pub-body">
+          <a class="pub-title" href="https://doi.org/10.1093/plphys/kiaf667"><i>Arabidopsis</i> lines with modified ascorbate concentrations reveal a link between ascorbate and auxin biosynthesis</a>
+          <p class="pub-authors">Fenech, Zulian, Moya-Cuevas, Arnaud, <b>Morilla</b>, Smirnoff, Botella, Stepanova, Alonso, Martín-Pizarro, Amorim-Silva</p>
+          <p class="pub-venue"><i>Plant Physiology</i> 200(2): kiaf667</p>
+        </div>
+      </li>
+      <li class="pub" data-type="journal" data-t="health">
+        <span class="pub-year"><span class="key" aria-hidden="true"></span>2024</span>
+        <div class="pub-body">
+          <a class="pub-title" href="https://www.sciencedirect.com/science/article/pii/S0010482524000532">Novel dimensionality reduction method, Taelcore, enhances lung transplantation risk prediction</a>
+          <p class="pub-authors">Gouiaa, <b>Vomo-Donfack</b>, Tran-Dinh, <b>Morilla</b></p>
+          <p class="pub-venue"><i>Computers in Biology and Medicine</i> 169</p>
+          <p class="links"><a href="https://pypi.org/project/Taelcore/">PyPI</a><a href="https://github.com/MorillaLab/Taelcore">Code</a></p>
+        </div>
+      </li>
+      <li class="pub" data-type="journal" data-t="health">
+        <span class="pub-year"><span class="key" aria-hidden="true"></span>2023</span>
+        <div class="pub-body">
+          <a class="pub-title" href="https://doi.org/10.3390/math11244916">The genotypic imperative: unraveling disease-permittivity in functional modules of complex diseases</a>
+          <p class="pub-authors">Kaba, <b>Vomo-Donfack</b>, <b>Morilla</b></p>
+          <p class="pub-venue"><i>Mathematics</i> 11(24): 4916</p>
+        </div>
+      </li>
+      <li class="pub" data-type="journal" data-t="health">
+        <span class="pub-year"><span class="key" aria-hidden="true"></span>2023</span>
+        <div class="pub-body">
+          <a class="pub-title" href="https://doi.org/10.26508/lsa.202201624">Plasma proteome dynamics of COVID-19 severity learnt by a graph convolutional network of multi-scale topology</a>
+          <p class="pub-authors">Gauthier, Tran-Dinh, <b>Morilla</b></p>
+          <p class="pub-venue"><i>Life Science Alliance</i> 6(5): e202201624</p>
+        </div>
+      </li>
+      <li class="pub" data-type="journal" data-t="health">
+        <span class="pub-year"><span class="key" aria-hidden="true"></span>2022</span>
+        <div class="pub-body">
+          <a class="pub-title" href="https://doi.org/10.1182/blood-2022-158450">Metabolic reprogramming of bone marrow stromal cells in chronic lymphocytic leukemia</a>
+          <p class="pub-authors">Lazarian, Ferreira, <b>Morilla</b>, Saindoy, Bisio, Dulphy, Balabanian, Thieblemont, Varin-Blank, Ledoux, et al.</p>
+          <p class="pub-venue"><i>Blood</i> 140 (Suppl. 1): 6996–6997. Meeting abstract.</p>
+        </div>
+      </li>
+      <li class="pub" data-type="patent" data-t="health">
+        <span class="pub-year"><span class="key" aria-hidden="true"></span>2022</span>
+        <div class="pub-body">
+          <a class="pub-title" href="https://patents.google.com/patent/US20220098665A1">Methods for predicting acute severe colitis treatment response</a>
+          <p class="pub-venue">US patent application 17/340,534, published as US 2022/0098665 A1 on 31 March 2022</p>
+          <p class="pub-authors">Ogier-Denis, Treton, Bouhnik, <b>Morilla</b>, Laharie, Wainrib, Uzzan</p>
+          <p class="pub-note">Covers predicting whether a patient with acute severe colitis will respond to anti-TNFα treatment (infliximab), with kits for the measurement.</p>
+        </div>
+      </li>
+      <li class="pub" data-type="patent" data-t="health">
+        <span class="pub-year"><span class="key" aria-hidden="true"></span>2021</span>
+        <div class="pub-body">
+          <a class="pub-title" href="https://patents.google.com/patent/US11060147">Methods for predicting acute severe colitis treatment response</a>
+          <p class="pub-venue">US patent 11,060,147 B2, granted 13 July 2021</p>
+          <p class="pub-authors">Ogier-Denis, Treton, Bouhnik, <b>Morilla</b>, Laharie, Wainrib, Uzzan</p>
+          <p class="pub-note">Predicts response to first- and second-line treatment (corticosteroids, then infliximab or cyclosporine) in acute severe ulcerative colitis from colonic microRNA levels. Implemented as the DeepCol software.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
 
-      <h3 class="sub-head">Doctoral researchers</h3>
+<!-- ======== PEOPLE ======== -->
+<section class="section" id="people" data-surface="light" aria-labelledby="people-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="people-title">People</h2>
+      <p>A small team of mathematicians, computer scientists and biologists, working across two sites.</p>
+    </div>
+
+    <div class="pi">
+      <div>
+        <!-- To add a portrait of Ian Morilla, copy a .portrait block from the team members below and put it here. -->
+        <h3>Ian Morilla</h3>
+        <p class="role">Principal investigator</p>
+      </div>
+      <div class="pi-bio">
+        <p>Ian Morilla leads MLiMO at IHSM La Mayora (UMA–CSIC, Málaga) and holds a research position at LAGA, Institut Galilée (CNRS, Université Sorbonne Paris Nord). His work connects topological data analysis, deep learning and integrative multi-omics, in human disease and in plant biology. He has authored more than 27 peer-reviewed articles and is a co-inventor on US patent filings for AI-based prediction of treatment response.</p>
+        <p class="links"><a href="mailto:ian.morilla@ihsm.uma-csic.es">Email (Málaga)</a><a href="mailto:morilla@math.univ-paris13.fr">Email (Paris)</a><a href="https://orcid.org/0000-0002-5100-5990">ORCID</a><a href="https://github.com/morillalab">GitHub</a></p>
+      </div>
+    </div>
+
+    <div class="group">
+      <h3>Doctoral researchers</h3>
       <ul class="people">
         <li class="person">
-          <div class="avatar" data-initials="KV"><img src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_600,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/6CncKMETfhBCxiTL" alt="" width="600" height="600" loading="lazy" decoding="async" onerror="this.remove()"></div>
+          <div class="portrait" data-initials="KV"><img src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_600,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/6CncKMETfhBCxiTL" alt="" width="600" height="600" loading="lazy" decoding="async" onerror="this.remove()"></div>
           <h4>Kelly Vomo-Donfack</h4>
           <p>PhD researcher</p>
           <p class="since">Since September 2023</p>
         </li>
         <li class="person">
-          <div class="avatar" data-initials="AH"><img src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_600,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/dCJ6ng4vbPaLBx_c" alt="" width="600" height="600" loading="lazy" decoding="async" onerror="this.remove()"></div>
+          <div class="portrait" data-initials="AH"><img src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_600,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/dCJ6ng4vbPaLBx_c" alt="" width="600" height="600" loading="lazy" decoding="async" onerror="this.remove()"></div>
           <h4>Adryel Hoszu</h4>
           <p>PhD researcher</p>
           <p class="since">Since April 2026</p>
         </li>
       </ul>
+    </div>
 
-      <h3 class="sub-head">Technicians</h3>
+    <div class="group">
+      <h3>Technicians</h3>
       <ul class="people">
         <li class="person">
-          <div class="avatar" data-initials="MA"><img src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_600,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/RUI3i3J3DpGiyj1u" alt="" width="600" height="600" loading="lazy" decoding="async" onerror="this.remove()"></div>
+          <div class="portrait" data-initials="MA"><img src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_600,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/RUI3i3J3DpGiyj1u" alt="" width="600" height="600" loading="lazy" decoding="async" onerror="this.remove()"></div>
           <h4>Melissa Aberbache</h4>
           <p>Bioinformatics and AI technician</p>
           <p class="since">Since January 2026</p>
         </li>
         <li class="person">
-          <div class="avatar" data-initials="JM"><img src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_600,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/jrxG7dkx48PSFWMH" alt="" width="600" height="600" loading="lazy" decoding="async" onerror="this.remove()"></div>
+          <div class="portrait" data-initials="JM"><img src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_600,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/jrxG7dkx48PSFWMH" alt="" width="600" height="600" loading="lazy" decoding="async" onerror="this.remove()"></div>
           <h4>José A. Montano</h4>
           <p>Molecular biology technician</p>
           <p class="since">Since June 2025</p>
         </li>
         <li class="person">
-          <div class="avatar" data-initials="AL"><img src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_600,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/9mI1t1CrJsaVpBbA" alt="" width="600" height="600" loading="lazy" decoding="async" onerror="this.remove()"></div>
+          <div class="portrait" data-initials="AL"><img src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_600,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/9mI1t1CrJsaVpBbA" alt="" width="600" height="600" loading="lazy" decoding="async" onerror="this.remove()"></div>
           <h4>Ana M. Luna</h4>
           <p>Molecular biology technician</p>
           <p class="since">Since 2023</p>
         </li>
       </ul>
+    </div>
 
-      <h3 class="sub-head">Master’s students</h3>
+    <div class="group">
+      <h3>Master’s students</h3>
       <ul class="people">
         <li class="person">
-          <div class="avatar" data-initials="AD"><img src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_600,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/5UdS8keS17__YVUm" alt="" width="600" height="600" loading="lazy" decoding="async" onerror="this.remove()"></div>
+          <div class="portrait" data-initials="AD"><img src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_600,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/5UdS8keS17__YVUm" alt="" width="600" height="600" loading="lazy" decoding="async" onerror="this.remove()"></div>
           <h4>Amadou Diallo</h4>
           <p>M2 internship: topological deep learning for CLL</p>
           <p class="since">Since April 2026</p>
         </li>
         <li class="person">
-          <div class="avatar" data-initials="AC"><img src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_600,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/D2PHAnPu4h-MsijR" alt="" width="600" height="600" loading="lazy" decoding="async" onerror="this.remove()"></div>
+          <div class="portrait" data-initials="AC"><img src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_600,h_600,c_fill,g_face/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/D2PHAnPu4h-MsijR" alt="" width="600" height="600" loading="lazy" decoding="async" onerror="this.remove()"></div>
           <h4>Ali Cantez</h4>
           <p>M2 internship: AI modelling of plant–virus interactions</p>
           <p class="since">Since April 2026</p>
@@ -761,124 +844,142 @@ a.pub-title:hover { color: var(--teal-strong); text-decoration-color: currentCol
   </div>
 </section>
 
-<!-- ============================ JOIN US ============================ -->
-<section class="section" id="join" aria-labelledby="join-title">
-  <div class="wrap section-grid">
-    <div class="section-head"><h2 id="join-title">Join us</h2></div>
-    <div class="section-body">
-      <p class="intro">We are a small, collaborative group working between mathematics, computation and the life sciences, across two sites. If you want to develop new methods and test them on real biological and clinical problems, we would like to hear from you.</p>
-      <div class="positions">
-        <details class="position">
-          <summary>
-            <span class="kind">Postdoctoral researcher</span>
-            <span class="title">Topological deep learning for chronic inflammatory diseases</span>
-            <span class="where">Starting January–February 2027</span>
-          </summary>
-          <div class="position-body">
-            <p>Develop topological deep-learning methods for chronic inflammatory diseases.</p>
-            <!-- TODO: add where the post is based (Málaga or Villetaneuse), its duration and its funding. -->
-            <h4>Profile</h4>
-            <ul>
-              <li>PhD in mathematics, computer science, bioinformatics or a related field</li>
-              <li>Strong background in machine or deep learning, topological data analysis, or both</li>
-              <li>Experience with omics data analysis preferred</li>
-            </ul>
-            <a class="btn btn-primary" href="mailto:ian.morilla@ihsm.uma-csic.es?subject=Application%3A%20Postdoc%20-%20Topological%20deep%20learning%20for%20chronic%20inflammatory%20diseases">Apply by email</a>
-          </div>
-        </details>
-        <details class="position">
-          <summary>
-            <span class="kind">PhD position</span>
-            <span class="title">AI methods for multi-omics integration</span>
-            <span class="where">Within the Transcend-id and Polygenic Deep Transport projects</span>
-          </summary>
-          <div class="position-body">
-            <p>Develop integrative deep-learning and optimal-transport methods to understand complex polygenic diseases from multi-omics data.</p>
-            <h4>Profile</h4>
-            <ul>
-              <li>Master’s degree in mathematics, AI or computational biology</li>
-              <li>Programming experience in Python (PyTorch or JAX)</li>
-              <li>Interest in biological applications</li>
-              <li>Bilingual French–English or Spanish–English is a plus</li>
-            </ul>
-            <a class="btn btn-primary" href="mailto:ian.morilla@ihsm.uma-csic.es?subject=Application%3A%20PhD%20-%20AI%20methods%20for%20multi-omics%20integration">Apply by email</a>
-          </div>
-        </details>
-        <details class="position">
-          <summary>
-            <span class="kind">Master’s internship (M2), 4 months</span>
-            <span class="title">Federated learning with persistent homology</span>
-            <span class="where">Extending the PTOPOFL framework</span>
-          </summary>
-          <div class="position-body">
-            <p>Extend <a href="https://arxiv.org/abs/2603.04323">PTOPOFL</a> (<a href="https://github.com/MorillaLab/TopoFederatedL">code</a>) to new clinical use cases: privacy-preserving federated learning, with pipelines that extract topological features across distributed hospital datasets.</p>
-            <h4>Profile</h4>
-            <ul>
-              <li>Enrolled in an M2 (or equivalent) in mathematics, data science or computer science</li>
-              <li>Familiarity with machine-learning frameworks (PyTorch)</li>
-              <li>Enthusiasm for mathematical foundations</li>
-            </ul>
-            <a class="btn btn-primary" href="mailto:ian.morilla@ihsm.uma-csic.es?subject=Application%3A%20M2%20internship%20-%20Federated%20learning%20with%20persistent%20homology">Apply by email</a>
-          </div>
-        </details>
-        <details class="position">
-          <summary>
-            <span class="kind">Open call</span>
-            <span class="title">Visiting researchers and collaborators</span>
-            <span class="where">Any career stage, in Spain or France</span>
-          </summary>
-          <div class="position-body">
-            <p>We welcome visiting researchers, sabbatical stays and new collaborative projects. If your work touches on topology, machine learning, multi-omics or computational biology, get in touch, whether for a short visit or a longer partnership.</p>
-            <a class="btn btn-primary" href="mailto:ian.morilla@ihsm.uma-csic.es?subject=Visit%20or%20collaboration">Get in touch</a>
-          </div>
-        </details>
+<!-- ======== JOIN US ======== -->
+<section class="section join" id="join" data-surface="dark" aria-labelledby="join-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="join-title">Join us</h2>
+      <p>We work between mathematics, computation and the life sciences. If you want to build new methods and test them on real biological and clinical problems, we would like to hear from you.</p>
+    </div>
+    <div class="positions">
+      <details class="position">
+        <summary>
+          <span class="kind">Postdoctoral researcher</span>
+          <span class="title">Topological deep learning for chronic inflammatory diseases</span>
+          <span class="when">Starting January–February 2027</span>
+        </summary>
+        <div class="position-body">
+          <p>Develop topological deep-learning methods for chronic inflammatory diseases.</p>
+          <h4>Profile</h4>
+          <ul>
+            <li>PhD in mathematics, computer science, bioinformatics or a related field</li>
+            <li>Strong background in machine or deep learning, topological data analysis, or both</li>
+            <li>Experience with omics data analysis preferred</li>
+          </ul>
+          <!-- TODO: add where the post is based (Málaga or Villetaneuse), its duration and its funding. -->
+          <a class="btn btn-hot" href="mailto:ian.morilla@ihsm.uma-csic.es?subject=Application%3A%20Postdoc%20-%20Topological%20deep%20learning%20for%20chronic%20inflammatory%20diseases">Apply by email</a>
+        </div>
+      </details>
+      <details class="position">
+        <summary>
+          <span class="kind">PhD position</span>
+          <span class="title">AI methods for multi-omics integration</span>
+          <span class="when">Within the Transcend-id and Polygenic Deep Transport projects</span>
+        </summary>
+        <div class="position-body">
+          <p>Develop integrative deep-learning and optimal-transport methods to understand complex polygenic diseases from multi-omics data.</p>
+          <h4>Profile</h4>
+          <ul>
+            <li>Master’s degree in mathematics, AI or computational biology</li>
+            <li>Programming experience in Python (PyTorch or JAX)</li>
+            <li>Interest in biological applications</li>
+            <li>Bilingual French–English or Spanish–English is a plus</li>
+          </ul>
+          <a class="btn btn-hot" href="mailto:ian.morilla@ihsm.uma-csic.es?subject=Application%3A%20PhD%20-%20AI%20methods%20for%20multi-omics%20integration">Apply by email</a>
+        </div>
+      </details>
+      <details class="position">
+        <summary>
+          <span class="kind">Master’s internship (M2), 4 months</span>
+          <span class="title">Federated learning with persistent homology</span>
+          <span class="when">Extending the PTOPOFL framework</span>
+        </summary>
+        <div class="position-body">
+          <p>Extend <a href="https://arxiv.org/abs/2603.04323">PTOPOFL</a> (<a href="https://github.com/MorillaLab/TopoFederatedL">code</a>) to new clinical use cases: privacy-preserving federated learning, with pipelines that extract topological features across distributed hospital datasets.</p>
+          <h4>Profile</h4>
+          <ul>
+            <li>Enrolled in an M2 (or equivalent) in mathematics, data science or computer science</li>
+            <li>Familiarity with machine-learning frameworks (PyTorch)</li>
+            <li>Enthusiasm for mathematical foundations</li>
+          </ul>
+          <a class="btn btn-hot" href="mailto:ian.morilla@ihsm.uma-csic.es?subject=Application%3A%20M2%20internship%20-%20Federated%20learning%20with%20persistent%20homology">Apply by email</a>
+        </div>
+      </details>
+      <details class="position">
+        <summary>
+          <span class="kind">Open call</span>
+          <span class="title">Visiting researchers and collaborators</span>
+          <span class="when">Any career stage, in Spain or France</span>
+        </summary>
+        <div class="position-body">
+          <p>We welcome visiting researchers, sabbatical stays and new collaborative projects. If your work touches on topology, machine learning, multi-omics or computational biology, get in touch, whether for a short visit or a longer partnership.</p>
+          <a class="btn btn-hot" href="mailto:ian.morilla@ihsm.uma-csic.es?subject=Visit%20or%20collaboration">Get in touch</a>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ======== TEACHING AND EVENTS ======== -->
+<section class="section" id="teaching" data-surface="light" aria-labelledby="teaching-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="teaching-title">Teaching and events</h2>
+    </div>
+    <div class="te-grid">
+      <div>
+        <h3>Teaching</h3>
+        <div class="entry">
+          <p class="meta">Since 2021, Université Sorbonne Paris Nord</p>
+          <h4 lang="fr">Master de Mathématiques de Données et d’IA</h4>
+          <p>An introduction to topological data analysis, centred on persistent homology and its uses in computational biology: shape recognition, classifying neurons and bacteria from molecular spectroscopy, and identifying forms of cancer from MRI, with modern AI methods.</p>
+          <p class="links"><a href="https://www.math.univ-paris13.fr/masters/M2_TDA.html">Course page</a></p>
+        </div>
+      </div>
+      <div>
+        <h3>Schools and workshops</h3>
+        <div class="entry">
+          <p class="meta">2026, Oviedo, Spain. Role: lecturer.</p>
+          <h4><span lang="es">Escuela de Verano en Bioinformática Avanzada</span> (BCB Hub)</h4>
+          <p>A five-day advanced course for people who want to keep up with recent advances in bioinformatics data analysis and with open challenges in machine learning.</p>
+          <p class="links"><a href="https://github.com/MorillaLab/BCB_CSIC_summer_school_2026">Course materials</a></p>
+        </div>
+        <div class="entry">
+          <p class="meta">2026, Paris. Role: co-organiser.</p>
+          <h4>Immuno-Informatics Summer School</h4>
+          <p>With IHM, Université Paris Cité and InFibrex (InIdex). Deep-learning methods for integrating heterogeneous multi-omics data in human disease, including spatial transcriptomics, single-cell RNA-seq, proteomics and epigenomics, with an emphasis on reproducibility and open benchmarking.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================ TEACHING AND EVENTS ============================ -->
-<section class="section" id="teaching" aria-labelledby="teaching-title">
-  <div class="wrap section-grid">
-    <div class="section-head"><h2 id="teaching-title">Teaching and events</h2></div>
-    <div class="section-body">
-      <h3 class="sub-head">Teaching</h3>
-      <div class="entry">
-        <p class="meta">Since 2021, Université Sorbonne Paris Nord</p>
-        <h4 lang="fr">Master de Mathématiques de Données et d’IA</h4>
-        <p>An introduction to topological data analysis, centred on persistent homology and its uses in computational biology: shape recognition, classifying neurons and bacteria from molecular spectroscopy, and identifying forms of cancer from MRI, with modern AI methods.</p>
-        <p class="links"><a href="https://www.math.univ-paris13.fr/masters/M2_TDA.html">Course page</a></p>
-      </div>
-
-      <h3 class="sub-head">Schools and workshops</h3>
-      <ol class="dated">
-        <li>
-          <span class="when">2026</span>
-          <div>
-            <h4 lang="es">Escuela de Verano en Bioinformática Avanzada</h4>
-            <p class="meta">BCB Hub summer school, Oviedo, Spain. Role: lecturer.</p>
-            <p>A five-day advanced course for people who want to keep up with recent advances in bioinformatics data analysis and with open challenges in machine learning.</p>
-            <p class="links"><a href="https://github.com/MorillaLab/BCB_CSIC_summer_school_2026">Course materials</a></p>
-          </div>
-        </li>
-        <li>
-          <span class="when">2026</span>
-          <div>
-            <h4>Immuno-Informatics Summer School</h4>
-            <p class="meta">IHM, Université Paris Cité and InFibrex (InIdex), Paris. Role: co-organiser.</p>
-            <p>Deep-learning methods for integrating heterogeneous multi-omics data in human disease, including spatial transcriptomics, single-cell RNA-seq, proteomics and epigenomics, with an emphasis on reproducibility and open benchmarking.</p>
-          </div>
-        </li>
-      </ol>
+<!-- ======== CONTACT ======== -->
+<section class="section mist" id="contact" data-surface="light" aria-labelledby="contact-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="contact-title">Contact</h2>
+      <p>Write to Ian Morilla at either site.</p>
     </div>
-  </div>
-</section>
+    <div class="cities">
+      <div class="city">
+        <h3>Málaga</h3>
+        <p class="meta">Since 2023</p>
+        <address><span lang="es">Instituto de Hortofruticultura Subtropical y Mediterránea “La Mayora”</span> (IHSM, UMA–CSIC)<br>Bulevar Louis Pasteur 49<br>29010 Málaga, Spain</address>
+        <p><a href="mailto:ian.morilla@ihsm.uma-csic.es">ian.morilla@ihsm.uma-csic.es</a></p>
+      </div>
+      <div class="city">
+        <h3>Paris</h3>
+        <p class="meta">Since 2018</p>
+        <address><span lang="fr">Laboratoire Analyse, Géométrie et Applications</span> (LAGA), Institut Galilée<br>CNRS, Université Sorbonne Paris Nord<br>99 avenue Jean-Baptiste Clément<br>93430 Villetaneuse, France</address>
+        <p><a href="mailto:morilla@math.univ-paris13.fr">morilla@math.univ-paris13.fr</a></p>
+        <p class="meta">Part of the <a href="https://www.math.univ-paris13.fr/accueil/equipes/mbi/"><span lang="fr">Mathématiques pour la Biologie et les Images</span> (MBI) team</a>.</p>
+      </div>
+    </div>
+    <p class="elsewhere">Our code is on <a href="https://github.com/morillalab">GitHub</a>, and publications are listed on <a href="https://orcid.org/0000-0002-5100-5990">ORCID</a>.</p>
 
-<!-- ============================ FUNDING ============================ -->
-<section class="section" id="funding" aria-labelledby="funding-title">
-  <div class="wrap section-grid">
-    <div class="section-head"><h2 id="funding-title">Funding</h2></div>
-    <div class="section-body">
+    <div class="funders-wrap">
+      <h3>Funding</h3>
       <!-- TODO: replace each alt text with the funder's name, e.g. alt="CNRS". -->
       <ul class="funders">
         <li><img src="https://res.cloudinary.com/allen-cld01/image/upload/f_auto,q_auto,w_1200,h_412/fac-poc/EfEQkT1IdobnXakZ6zV45FBZ6iw2/owFE_gwpfejJHfPf" alt="Logo of a funding organisation" width="1200" height="412" loading="lazy" decoding="async"></li>
@@ -892,73 +993,553 @@ a.pub-title:hover { color: var(--teal-strong); text-decoration-color: currentCol
   </div>
 </section>
 
-<!-- ============================ CONTACT ============================ -->
-<section class="section" id="contact" aria-labelledby="contact-title">
-  <div class="wrap section-grid">
-    <div class="section-head"><h2 id="contact-title">Contact</h2></div>
-    <div class="section-body">
-      <div class="sites">
-        <div class="site">
-          <h3>Málaga</h3>
-          <p class="meta">Since 2023</p>
-          <address><span lang="es">Instituto de Hortofruticultura Subtropical y Mediterránea “La Mayora”</span> (IHSM, UMA–CSIC)<br>Bulevar Louis Pasteur 49<br>29010 Málaga, Spain</address>
-          <p><a href="mailto:ian.morilla@ihsm.uma-csic.es">ian.morilla@ihsm.uma-csic.es</a></p>
-        </div>
-        <div class="site">
-          <h3>Paris</h3>
-          <p class="meta">Since 2018</p>
-          <address><span lang="fr">Laboratoire Analyse, Géométrie et Applications</span> (LAGA), Institut Galilée<br>CNRS, Université Sorbonne Paris Nord<br>99 avenue Jean-Baptiste Clément<br>93430 Villetaneuse, France</address>
-          <p><a href="mailto:morilla@math.univ-paris13.fr">morilla@math.univ-paris13.fr</a></p>
-          <p>Part of the <a href="https://www.math.univ-paris13.fr/accueil/equipes/mbi/"><span lang="fr">Mathématiques pour la Biologie et les Images</span> (MBI) team</a>.</p>
-        </div>
-      </div>
-      <p class="elsewhere">Our code is on <a href="https://github.com/morillalab">GitHub</a>, and publications are listed on <a href="https://orcid.org/0000-0002-5100-5990">ORCID</a>.</p>
-    </div>
-  </div>
-</section>
-
 </main>
 
-<footer class="site-footer">
-  <div class="wrap"><p>© 2026 Morilla Lab, Machine Learning in Multi-Omics (MLiMO).</p></div>
+<footer class="site-footer" data-surface="dark">
+  <div class="wrap footer-inner">
+    <p>© 2026 Morilla Lab, Machine Learning in Multi-Omics (MLiMO).</p>
+    <p><a href="https://github.com/morillalab">GitHub</a> &nbsp; <a href="https://orcid.org/0000-0002-5100-5990">ORCID</a></p>
+  </div>
 </footer>
 
 <script>
-/* ---------- Navigation: mobile menu and current section ---------- */
+/* ---------- Header: colour follows the surface beneath it; current section; mobile menu ---------- */
 (() => {
   'use strict';
-  const toggle = document.querySelector('.menu-toggle');
+  const root = document.documentElement;
+  const header = document.getElementById('site-header');
+  const toggle = header.querySelector('.menu-toggle');
   const nav = document.getElementById('site-nav');
+
   const setOpen = (open) => {
     nav.classList.toggle('is-open', open);
+    root.classList.toggle('menu-open', open);
     toggle.setAttribute('aria-expanded', String(open));
     toggle.textContent = open ? 'Close' : 'Menu';
   };
-  if (toggle && nav) {
-    toggle.addEventListener('click', () => setOpen(!nav.classList.contains('is-open')));
-    nav.addEventListener('click', (e) => { if (e.target.closest('a')) setOpen(false); });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && nav.classList.contains('is-open')) { setOpen(false); toggle.focus(); }
+  toggle.addEventListener('click', () => setOpen(!nav.classList.contains('is-open')));
+  nav.addEventListener('click', (e) => { if (e.target.closest('a')) setOpen(false); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && nav.classList.contains('is-open')) { setOpen(false); toggle.focus(); }
+  });
+  const wide = window.matchMedia('(min-width: 901px)');
+  if (wide.addEventListener) wide.addEventListener('change', (m) => { if (m.matches) setOpen(false); });
+
+  const surfaces = [...document.querySelectorAll('[data-surface]')];
+  const links = [...nav.querySelectorAll('a[href^="#"]')];
+  // "Research" spans the three theme steps; every other link spans its own section.
+  const ranges = links.map((a) => {
+    const id = a.getAttribute('href').slice(1);
+    return id === 'topology' ? [document.getElementById('topology'), document.getElementById('plants')] : [document.getElementById(id), document.getElementById(id)];
+  });
+
+  let ticking = false;
+  function update() {
+    ticking = false;
+    const mid = header.offsetHeight / 2;
+    let surface = 'dark';
+    for (const s of surfaces) {
+      const r = s.getBoundingClientRect();
+      if (r.top <= mid && r.bottom > mid) { surface = s.dataset.surface; break; }
+    }
+    header.classList.toggle('on-light', surface === 'light');
+
+    const line = window.innerHeight * 0.4;
+    links.forEach((a, i) => {
+      const [first, last] = ranges[i];
+      const on = first && last && first.getBoundingClientRect().top <= line && last.getBoundingClientRect().bottom > line;
+      if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
     });
   }
-
-  const links = [...document.querySelectorAll('.site-nav a[href^="#"]')];
-  const byId = new Map(links.map((a) => [a.getAttribute('href').slice(1), a]));
-  const sections = [...byId.keys()].map((id) => document.getElementById(id)).filter(Boolean);
-  if (!('IntersectionObserver' in window) || !sections.length) return;
-  const visible = new Set();
-  const io = new IntersectionObserver((entries) => {
-    for (const en of entries) {
-      if (en.isIntersecting) visible.add(en.target.id); else visible.delete(en.target.id);
-    }
-    const current = sections.find((s) => visible.has(s.id));
-    links.forEach((a) => a.removeAttribute('aria-current'));
-    if (current) byId.get(current.id).setAttribute('aria-current', 'true');
-  }, { rootMargin: '-30% 0px -60% 0px' });
-  sections.forEach((s) => io.observe(s));
+  window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  window.addEventListener('resize', update);
+  update();
 })();
 
-/* ---------- Figure 1: persistent homology of a point cloud ----------
+/* Shapes and transport for the particle story.
+   All coordinates live in a 1000 x 1000 box (y down). */
+const Shapes = (() => {
+  'use strict';
+
+  function mulberry32(a) {
+    return function () {
+      a |= 0; a = (a + 0x6D2B79F5) | 0;
+      let t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  const P = (d) => new Path2D(d);
+  const line = (pts) => 'M' + pts.map((p) => p.join(' ')).join(' L');
+
+  // --- Lungs: two lobes, trachea and main bronchi; lobar bronchi carved out as negative space.
+  const RIGHT_LUNG = 'M 405 168 C 340 170 262 238 228 350 C 192 462 168 640 176 790 C 178 830 190 856 214 858 C 286 806 380 782 452 812 C 468 700 458 590 446 500 C 438 420 446 300 432 216 C 424 184 416 168 405 168 Z';
+  const LEFT_LUNG = 'M 595 168 C 660 170 738 238 772 350 C 808 462 832 640 824 790 C 822 830 810 856 786 858 C 732 820 676 806 628 822 C 648 760 676 700 646 640 C 616 586 560 566 554 500 C 562 420 554 300 568 216 C 576 184 584 168 595 168 Z';
+  const TRACHEA = 'M 479 330 L 479 84 Q 479 62 500 62 Q 521 62 521 84 L 521 330 Z';
+  const lungs = {
+    name: 'lungs',
+    paint(g) {
+      g.fill(P(RIGHT_LUNG)); g.fill(P(LEFT_LUNG)); g.fill(P(TRACHEA));
+      g.lineWidth = 30; g.stroke(P('M 500 318 L 442 420')); g.stroke(P('M 500 318 L 558 420'));
+    },
+    cut(g) {
+      g.lineWidth = 15;
+      [
+        [[442, 432], [380, 360], [320, 290]], [[380, 360], [346, 404]],
+        [[444, 450], [350, 486], [246, 540]],
+        [[446, 466], [386, 576], [318, 712]], [[386, 576], [286, 624]], [[318, 712], [262, 786]],
+        [[558, 432], [620, 360], [680, 290]], [[620, 360], [654, 404]],
+        [[556, 450], [630, 512], [724, 568]],
+        [[554, 466], [610, 590], [684, 724]], [[610, 590], [728, 650]],
+      ].forEach((pts) => g.stroke(P(line(pts))));
+    },
+  };
+
+  // --- Leaf: ovate blade with a petiole; midrib and secondary veins carved out. Rotated for movement.
+  const BLADE = 'M 500 125 C 600 215 745 330 752 510 C 758 680 640 815 500 862 C 360 815 242 680 248 510 C 255 330 400 215 500 125 Z';
+  const VEINS = [[770, 168], [682, 228], [594, 250], [506, 250], [418, 232], [330, 192], [248, 124]];
+  const leaf = {
+    name: 'leaf',
+    rotate: -24,
+    paint(g) {
+      g.fill(P(BLADE));
+      g.lineWidth = 22; g.stroke(P('M 500 850 Q 506 910 494 968'));
+    },
+    cut(g) {
+      g.lineWidth = 16; g.stroke(P('M 500 848 L 500 205'));
+      g.lineWidth = 11;
+      for (const [y, w] of VEINS) {
+        g.stroke(P(`M 500 ${y} Q ${500 - 0.45 * w} ${y - 20} ${500 - 0.86 * w} ${y - 92}`));
+        g.stroke(P(`M 500 ${y} Q ${500 + 0.45 * w} ${y - 20} ${500 + 0.86 * w} ${y - 92}`));
+      }
+    },
+  };
+
+  // --- Two loops, like the ones persistent homology detects in the live figure further down.
+  const rings = {
+    name: 'rings',
+    paint(g) {
+      g.beginPath(); g.arc(360, 560, 285, 0, Math.PI * 2); g.arc(360, 560, 188, 0, Math.PI * 2, true); g.fill();
+      g.beginPath(); g.arc(792, 338, 150, 0, Math.PI * 2); g.arc(792, 338, 92, 0, Math.PI * 2, true); g.fill();
+    },
+  };
+
+  // --- Cells (for the leukaemia project): round cells with a visible nuclear envelope.
+  const CELLS = [[300, 360, 150], [600, 300, 120], [760, 560, 140], [430, 640, 130], [180, 640, 95], [820, 250, 80], [560, 820, 90]];
+  const cells = {
+    name: 'cells',
+    paint(g) { for (const [x, y, r] of CELLS) { g.beginPath(); g.arc(x, y, r, 0, Math.PI * 2); g.fill(); } },
+    cut(g) {
+      g.lineWidth = 19;
+      for (const [x, y, r] of CELLS) { g.beginPath(); g.arc(x + r * 0.08, y - r * 0.06, r * 0.66, 0, Math.PI * 2); g.stroke(); }
+    },
+  };
+
+  // --- Double helix (for the polygenic project): two strands and their base pairs.
+  const helix = {
+    name: 'helix',
+    rotate: -32,
+    paint(g) {
+      const strand = (phase) => {
+        g.beginPath();
+        for (let k = 0; k <= 120; k++) {
+          const t = k / 120, x = 120 + 760 * t, y = 520 + 165 * Math.sin(2 * Math.PI * 2 * t + phase);
+          if (k) g.lineTo(x, y); else g.moveTo(x, y);
+        }
+        g.lineWidth = 44; g.stroke();
+      };
+      strand(0); strand(Math.PI);
+      g.lineWidth = 15;
+      for (let k = 1; k < 24; k++) {
+        const t = k / 24, x = 120 + 760 * t, y1 = 520 + 165 * Math.sin(2 * Math.PI * 2 * t), y2 = 520 - 165 * Math.sin(2 * Math.PI * 2 * t);
+        if (Math.abs(y1 - y2) > 60) { g.beginPath(); g.moveTo(x, y1); g.lineTo(x, y2); g.stroke(); }
+      }
+    },
+  };
+
+  const SHAPES = { lungs, leaf, rings, cells, helix };
+
+  // Rasterise a shape once, then answer inside/outside by pixel lookup.
+  function raster(shape, R = 600) {
+    const c = document.createElement('canvas');
+    c.width = c.height = R;
+    const g = c.getContext('2d', { willReadFrequently: true });
+    g.scale(R / 1000, R / 1000);
+    if (shape.rotate) { g.translate(500, 520); g.rotate((shape.rotate * Math.PI) / 180); g.translate(-500, -520); }
+    g.fillStyle = g.strokeStyle = '#fff'; g.lineCap = 'round'; g.lineJoin = 'round';
+    shape.paint(g);
+    if (shape.cut) { g.globalCompositeOperation = 'destination-out'; shape.cut(g); }
+    const data = g.getImageData(0, 0, R, R).data;
+    return (x, y) => {
+      const ix = (x * R / 1000) | 0, iy = (y * R / 1000) | 0;
+      return ix >= 0 && iy >= 0 && ix < R && iy < R && data[(iy * R + ix) * 4 + 3] > 127;
+    };
+  }
+
+  const rasterCache = {};
+
+  // N evenly spread points inside a shape: jittered grid, then trimmed to exactly N.
+  function sample(name, N, seed = 7) {
+    const rng = mulberry32(seed);
+    const out = new Float32Array(N * 2);
+    if (name === 'noise') {
+      for (let i = 0; i < N; i++) { out[2 * i] = 40 + rng() * 920; out[2 * i + 1] = 40 + rng() * 920; }
+      return { pts: out, spacing: Math.sqrt(920 * 920 / N) };
+    }
+    const inside = rasterCache[name] || (rasterCache[name] = raster(SHAPES[name]));
+    let hits = 0;
+    for (let x = 2.5; x < 1000; x += 5) for (let y = 2.5; y < 1000; y += 5) if (inside(x, y)) hits++;
+    let h = Math.sqrt((hits * 25) / N);
+    let cand = [];
+    for (let attempt = 0; attempt < 6; attempt++) {
+      cand = [];
+      for (let x = h / 2; x < 1000; x += h) for (let y = h / 2; y < 1000; y += h) {
+        const jx = x + (rng() - 0.5) * h * 0.72, jy = y + (rng() - 0.5) * h * 0.72;
+        if (inside(jx, jy)) cand.push(jx, jy);
+      }
+      if (cand.length / 2 >= N) break;
+      h *= 0.97;
+    }
+    const n = cand.length / 2, idx = Array.from({ length: n }, (_, i) => i);
+    for (let i = n - 1; i > 0; i--) { const j = (rng() * (i + 1)) | 0; [idx[i], idx[j]] = [idx[j], idx[i]]; }
+    for (let k = 0; k < N; k++) { out[2 * k] = cand[2 * idx[k]]; out[2 * k + 1] = cand[2 * idx[k] + 1]; }
+    return { pts: out, spacing: h };
+  }
+
+  // Hilbert index on a 1024 grid, used to pair two clouds that already share a distribution.
+  function hilbert(x, y) {
+    let d = 0;
+    for (let s = 512; s > 0; s >>= 1) {
+      const rx = (x & s) > 0 ? 1 : 0, ry = (y & s) > 0 ? 1 : 0;
+      d += s * s * ((3 * rx) ^ ry);
+      if (ry === 0) { if (rx === 1) { x = s - 1 - x; y = s - 1 - y; } const t = x; x = y; y = t; }
+    }
+    return d;
+  }
+
+  // Approximate optimal transport: sliced distribution transfer (iterated 1-D matchings along
+  // random orthogonal axes) moves the source cloud onto the target distribution; the moved
+  // cloud is then paired one-to-one with the target points along a Hilbert curve.
+  // Returns perm with perm[i] = index of the target point assigned to particle i.
+  function transport(src, dst, iters = 26, seed = 1) {
+    const rng = mulberry32(seed);
+    const N = src.length / 2;
+    const cur = Float32Array.from(src);
+    const pa = new Float32Array(N), pb = new Float32Array(N), ia = new Uint32Array(N);
+    for (let it = 0; it < iters; it++) {
+      const th = rng() * Math.PI;
+      for (const [dx, dy] of [[Math.cos(th), Math.sin(th)], [-Math.sin(th), Math.cos(th)]]) {
+        for (let i = 0; i < N; i++) {
+          pa[i] = cur[2 * i] * dx + cur[2 * i + 1] * dy;
+          pb[i] = dst[2 * i] * dx + dst[2 * i + 1] * dy;
+          ia[i] = i;
+        }
+        ia.sort((a, b) => pa[a] - pa[b]);
+        pb.sort();
+        for (let k = 0; k < N; k++) {
+          const i = ia[k], d = pb[k] - pa[i];
+          cur[2 * i] += d * dx; cur[2 * i + 1] += d * dy;
+        }
+      }
+    }
+    const key = (arr, i) => hilbert(Math.max(0, Math.min(1023, arr[2 * i] * 1.023 | 0)), Math.max(0, Math.min(1023, arr[2 * i + 1] * 1.023 | 0)));
+    const ka = new Float64Array(N), kb = new Float64Array(N);
+    for (let i = 0; i < N; i++) { ka[i] = key(cur, i); kb[i] = key(dst, i); }
+    const oa = Array.from({ length: N }, (_, i) => i).sort((a, b) => ka[a] - ka[b]);
+    const ob = Array.from({ length: N }, (_, i) => i).sort((a, b) => kb[a] - kb[b]);
+    const perm = new Uint32Array(N);
+    for (let k = 0; k < N; k++) perm[oa[k]] = ob[k];
+    return perm;
+  }
+
+  return { sample, transport, mulberry32, names: Object.keys(SHAPES) };
+})();
+
+/* ---------- The story: one cloud of dots, transported between our questions ---------- */
+(() => {
+  'use strict';
+  const canvas = document.getElementById('stage-canvas');
+  if (!canvas || !canvas.getContext || typeof Shapes === 'undefined') return;
+  const story = canvas.closest('.story');
+  const note = document.getElementById('stage-note');
+  const replayBtn = document.getElementById('replay');
+  const steps = [...document.querySelectorAll('.story .step[data-shape]')];
+  const heroStep = steps[0];
+  const ctx = canvas.getContext('2d');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer = window.matchMedia('(pointer: fine)').matches;
+  const N = window.matchMedia('(max-width: 899px)').matches ? 1300 : 2200;
+
+  const COLOR = { noise: [149, 155, 194], rings: [111, 227, 215], lungs: [255, 138, 99], leaf: [194, 234, 111] };
+  const library = {};
+  const shapeOf = (name) => library[name] || (library[name] = Shapes.sample(name, N, 11));
+
+  const from = new Float32Array(2 * N), to = new Float32Array(2 * N), cur = new Float32Array(2 * N);
+  const lag = new Float32Array(N);
+  const byTone = [[], [], [], [], []];
+  { const rng = Shapes.mulberry32(99); for (let i = 0; i < N; i++) byTone[Math.min(4, (rng() * 5) | 0)].push(i); }
+
+  const noise = shapeOf('noise');
+  cur.set(noise.pts); from.set(noise.pts); to.set(noise.pts);
+  let target = 'noise';
+  let colFrom = COLOR.noise, colTo = COLOR.noise, colNow = COLOR.noise;
+  let radFrom = noise.spacing * 0.3, radTo = radFrom, radNow = radFrom;
+  let t0 = 0, dur = 1, moving = false, seed = 1, onArrive = null;
+
+  /* Layout: the shapes sit to the right of the text on wide screens, above it on narrow ones. */
+  let W = 1, H = 1, dpr = 1, scale = 1, ox = 0, oy = 0;
+  function layout() {
+    const r = canvas.getBoundingClientRect();
+    W = Math.max(1, r.width); H = Math.max(1, r.height);
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+    const top = 68;
+    let rx, ry, rw, rh;
+    if (W >= 900) {
+      const text = heroStep.querySelector('.step-text').getBoundingClientRect();
+      rx = Math.max(W * 0.44, text.right + 48); rw = W - rx - Math.max(24, W * 0.03);
+      ry = top + H * 0.03; rh = H - ry - H * 0.11;
+    } else {
+      rx = W * 0.05; rw = W * 0.9; ry = top + 52; rh = H * 0.5 - ry;
+    }
+    scale = Math.min(rw, rh) / 1000;
+    ox = rx + (rw - 1000 * scale) / 2; oy = ry + (rh - 1000 * scale) / 2;
+    request();
+  }
+
+  /* Pointer: dots part gently around a mouse cursor. */
+  let px = 0, py = 0, pull = 0, pullTo = 0;
+  if (finePointer && !reduce) {
+    story.addEventListener('pointermove', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      const r = canvas.getBoundingClientRect();
+      px = e.clientX - r.left; py = e.clientY - r.top; pullTo = 1; request();
+    });
+    story.addEventListener('pointerleave', () => { pullTo = 0; request(); });
+  }
+
+  const ease = (u) => (u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2);
+  const mix = (a, b, k) => [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k, a[2] + (b[2] - a[2]) * k];
+
+  function draw(now) {
+    let u = 1;
+    if (moving) u = Math.min(1, (now - t0) / dur);
+    for (let i = 0; i < N; i++) {
+      let p = 1;
+      if (moving) { p = (u - lag[i]) / 0.7; p = p <= 0 ? 0 : p >= 1 ? 1 : ease(p); }
+      cur[2 * i] = from[2 * i] + (to[2 * i] - from[2 * i]) * p;
+      cur[2 * i + 1] = from[2 * i + 1] + (to[2 * i + 1] - from[2 * i + 1]) * p;
+    }
+    const k = moving ? ease(u) : 1;
+    colNow = mix(colFrom, colTo, k);
+    radNow = radFrom + (radTo - radFrom) * k;
+    pull += (pullTo - pull) * 0.18;
+    if (Math.abs(pullTo - pull) < 0.01) pull = pullTo;
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    const r = Math.max(1.1, Math.min(3, radNow * scale));
+    const R = 110, R2 = R * R, push = 30 * pull;
+    for (let b = 0; b < 5; b++) {
+      const f = (b - 2) * 0.12;
+      const c = f >= 0 ? colNow.map((v) => v + (255 - v) * f) : colNow.map((v) => v * (1 + f));
+      ctx.fillStyle = `rgb(${c[0] | 0},${c[1] | 0},${c[2] | 0})`;
+      ctx.beginPath();
+      for (const i of byTone[b]) {
+        let x = ox + cur[2 * i] * scale, y = oy + cur[2 * i + 1] * scale;
+        if (push > 0.3) {
+          const dx = x - px, dy = y - py, d2 = dx * dx + dy * dy;
+          if (d2 < R2 && d2 > 0.01) { const d = Math.sqrt(d2), s = (1 - d / R) * (1 - d / R) * push / d; x += dx * s; y += dy * s; }
+        }
+        ctx.moveTo(x + r, y); ctx.arc(x, y, r, 0, 6.2832);
+      }
+      ctx.fill();
+    }
+    if (moving && u >= 1) {
+      moving = false;
+      const done = onArrive; onArrive = null;
+      if (done) done();
+    }
+  }
+
+  let raf = 0, visible = true;
+  function loop(now) {
+    raf = 0;
+    draw(now);
+    if (visible && (moving || pull !== pullTo)) raf = requestAnimationFrame(loop);
+  }
+  function request() { if (!raf && visible) raf = requestAnimationFrame(loop); }
+
+  /* Transport the cloud to a shape: pair dots with target points, then move each along a straight line. */
+  function go(name, ms = 1800, then = null) {
+    const dest = shapeOf(name);
+    onArrive = then;
+    if (reduce || ms === 0) {
+      from.set(dest.pts); to.set(dest.pts); cur.set(dest.pts);
+      colFrom = colTo = colNow = COLOR[name]; radFrom = radTo = radNow = dest.spacing * 0.3;
+      target = name; moving = false; request();
+      if (then) then();
+      return;
+    }
+    if (name === target && !moving) { if (then) then(); return; }
+    target = name;
+    from.set(cur);
+    const perm = Shapes.transport(cur, dest.pts, 22, seed++);
+    let mx = 0, my = 0;
+    for (let i = 0; i < N; i++) {
+      const j = perm[i];
+      to[2 * i] = dest.pts[2 * j]; to[2 * i + 1] = dest.pts[2 * j + 1];
+      mx += to[2 * i] - from[2 * i]; my += to[2 * i + 1] - from[2 * i + 1];
+    }
+    // Dots at the front of the flow leave first, so the cloud streams rather than teleports.
+    const len = Math.hypot(mx, my) || 1, ux = mx / len, uy = my / len;
+    let lo = Infinity, hi = -Infinity;
+    for (let i = 0; i < N; i++) { const q = from[2 * i] * ux + from[2 * i + 1] * uy; lag[i] = q; if (q < lo) lo = q; if (q > hi) hi = q; }
+    for (let i = 0; i < N; i++) lag[i] = 0.3 * (1 - (lag[i] - lo) / ((hi - lo) || 1));
+    colFrom = colNow; colTo = COLOR[name];
+    radFrom = radNow; radTo = dest.spacing * 0.3;
+    t0 = performance.now(); dur = ms; moving = true;
+    request();
+  }
+
+  /* One orchestrated moment on arrival: noise, then lungs, then leaves, as the headline says. */
+  let introTimer = 0, active = heroStep;
+  function intro(startFromNoise) {
+    clearTimeout(introTimer);
+    const toLeaf = () => { introTimer = setTimeout(() => { if (active === heroStep) go('leaf', 1800); }, 700); };
+    if (startFromNoise) go('lungs', 1900, toLeaf); else go('lungs', 1500, toLeaf);
+  }
+  replayBtn.addEventListener('click', () => { if (active === heroStep) intro(false); });
+
+  function activate(step) {
+    if (step === active && target !== 'noise') return;
+    active = step;
+    note.hidden = step !== heroStep;
+    clearTimeout(introTimer);
+    go(step.dataset.shape, 1700);
+  }
+  const io = new IntersectionObserver((entries) => {
+    for (const en of entries) if (en.isIntersecting) activate(en.target);
+  }, { rootMargin: '-45% 0px -45% 0px' });
+
+  new IntersectionObserver((entries) => {
+    visible = entries[0].isIntersecting;
+    if (visible) request(); else if (raf) { cancelAnimationFrame(raf); raf = 0; }
+  }).observe(story);
+
+  if ('ResizeObserver' in window) new ResizeObserver(layout).observe(canvas);
+  else window.addEventListener('resize', layout);
+  layout();
+
+  const start = () => {
+    const atTop = heroStep.getBoundingClientRect().bottom > window.innerHeight * 0.5;
+    if (atTop && !reduce) intro(true);
+    else if (atTop) go('leaf', 0);
+    steps.forEach((s) => io.observe(s));
+  };
+  const fontsReady = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+  Promise.race([fontsReady, new Promise((r) => setTimeout(r, 900))]).then(() => setTimeout(start, 250));
+})();
+
+/* ---------- Project plates: each project drawn in the dots of its theme ---------- */
+(() => {
+  'use strict';
+  if (typeof Shapes === 'undefined') return;
+  const plates = [...document.querySelectorAll('.plate[data-shape]')];
+  if (!plates.length) return;
+  const COLOR = { topo: [111, 227, 215], health: [255, 138, 99], plants: [194, 234, 111] };
+  const cache = new Map();
+
+  function render(plate) {
+    let canvas = plate.querySelector('canvas');
+    if (!canvas) { canvas = document.createElement('canvas'); canvas.setAttribute('aria-hidden', 'true'); plate.appendChild(canvas); }
+    const { width: w, height: h } = plate.getBoundingClientRect();
+    if (!w || !h) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+    canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%';
+    const zoom = +plate.dataset.zoom || 1, rot = ((+plate.dataset.rot || 0) * Math.PI) / 180;
+    const fx = 500 + (+plate.dataset.ox || 0), fy = 500 + (+plate.dataset.oy || 0);
+    const n = Math.min(2600, Math.round(700 * zoom * zoom));
+    const key = plate.dataset.shape + ':' + plate.dataset.seed + ':' + n;
+    if (!cache.has(key)) cache.set(key, Shapes.sample(plate.dataset.shape, n, +plate.dataset.seed || 1));
+    const { pts, spacing } = cache.get(key);
+    const s = (Math.min(w, h) / 1000) * 0.88 * zoom, cos = Math.cos(rot), sin = Math.sin(rot);
+    const base = COLOR[plate.closest('[data-t]').dataset.t] || COLOR.topo;
+    const r = Math.max(1.1, Math.min(2.6, spacing * 0.3 * s));
+    const g = canvas.getContext('2d');
+    g.setTransform(dpr, 0, 0, dpr, 0, 0);
+    for (let b = 0; b < 5; b++) {
+      const f = (b - 2) * 0.12;
+      const c = f >= 0 ? base.map((v) => v + (255 - v) * f) : base.map((v) => v * (1 + f));
+      g.fillStyle = `rgb(${c[0] | 0},${c[1] | 0},${c[2] | 0})`;
+      g.beginPath();
+      for (let i = b; i < n; i += 5) {
+        const dx = pts[2 * i] - fx, dy = pts[2 * i + 1] - fy;
+        const x = w / 2 + (dx * cos - dy * sin) * s, y = h / 2 + (dx * sin + dy * cos) * s;
+        if (x < -4 || y < -4 || x > w + 4 || y > h + 4) continue;
+        g.moveTo(x + r, y); g.arc(x, y, r, 0, 6.2832);
+      }
+      g.fill();
+    }
+  }
+
+  // Draw plates only when they approach the viewport, and again if their size changes.
+  const ro = 'ResizeObserver' in window ? new ResizeObserver((entries) => entries.forEach((en) => render(en.target))) : null;
+  const io = new IntersectionObserver((entries) => {
+    for (const en of entries) {
+      if (!en.isIntersecting) continue;
+      io.unobserve(en.target);
+      render(en.target);
+      if (ro) ro.observe(en.target);
+    }
+  }, { rootMargin: '600px 0px' });
+  plates.forEach((p) => io.observe(p));
+})();
+
+/* ---------- Filters: items glide to their new places (FLIP) ---------- */
+(() => {
+  'use strict';
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function flip(items, keep) {
+    const before = new Map(items.map((el) => [el, el.getBoundingClientRect()]));
+    items.forEach((el) => { el.hidden = !keep(el); });
+    if (reduce || !Element.prototype.animate) return;
+    for (const el of items) {
+      if (el.hidden) continue;
+      const a = before.get(el), b = el.getBoundingClientRect();
+      if (!a.width) { el.animate([{ opacity: 0, transform: 'scale(0.97)' }, { opacity: 1, transform: 'none' }], { duration: 320, easing: 'ease-out' }); continue; }
+      const dx = a.left - b.left, dy = a.top - b.top;
+      if (dx || dy) el.animate([{ transform: `translate(${dx}px, ${dy}px)` }, { transform: 'none' }], { duration: 420, easing: 'cubic-bezier(0.2, 0.7, 0.2, 1)' });
+    }
+  }
+
+  const setups = {
+    catalog: { list: document.getElementById('catalog'), test: (el, f) => el.dataset.themes.split(' ').includes(f), noun: ['project', 'projects'] },
+    pubs: { list: document.getElementById('pubs'), test: (el, f) => el.dataset.type === f, noun: ['item', 'items'] },
+  };
+  document.querySelectorAll('.chips[data-filter]').forEach((group) => {
+    const cfg = setups[group.dataset.filter];
+    if (!cfg || !cfg.list) return;
+    const items = [...cfg.list.children];
+    const status = document.createElement('p');
+    status.className = 'visually-hidden'; status.setAttribute('aria-live', 'polite');
+    group.after(status);
+    group.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-f]');
+      if (!btn) return;
+      group.querySelectorAll('button[data-f]').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+      const f = btn.dataset.f;
+      flip(items, (el) => f === 'all' || cfg.test(el, f));
+      const n = items.filter((el) => !el.hidden).length;
+      status.textContent = `Showing ${n} ${n === 1 ? cfg.noun[0] : cfg.noun[1]}`;
+    });
+  });
+})();
+
+/* ---------- Live demo: persistent homology of a point cloud ----------
    Vietoris–Rips filtration, H0 and H1 over Z/2, computed in the browser.
    Checked bar for bar against ripser on several samples. */
 (() => {
@@ -1149,7 +1730,7 @@ a.pub-title:hover { color: var(--teal-strong); text-decoration-color: currentCol
     };
   }
   const SERIF = '"STIX Two Text", "STIX Two", Georgia, serif';
-  const SANS = '"Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif';
+  const SANS = '"Archivo", system-ui, -apple-system, "Segoe UI", sans-serif';
 
   function drawCloud(P) {
     const { ctx, w, h } = prep(cloud);
@@ -1307,11 +1888,17 @@ a.pub-title:hover { color: var(--teal-strong); text-decoration-color: currentCol
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(requestDraw);
 
   load(FIRST_SEED);
-  if (reduceMotion) {
+  if (reduceMotion || !('IntersectionObserver' in window)) {
     setEps(START_EPS);
   } else {
+    // The intro sweep runs once, when the figure first comes into view.
     setEps(0);
-    setTimeout(() => { if (eps === 0 && !anim) sweep(0, START_EPS, 2600, easeOut); }, 450);
+    const seen = new IntersectionObserver((entries) => {
+      if (!entries.some((en) => en.isIntersecting)) return;
+      seen.disconnect();
+      setTimeout(() => { if (eps === 0 && !anim) sweep(0, START_EPS, 2600, easeOut); }, 250);
+    }, { threshold: 0.35 });
+    seen.observe(fig);
   }
 })();
 </script>
